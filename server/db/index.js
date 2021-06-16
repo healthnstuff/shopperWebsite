@@ -2,15 +2,19 @@
 
 const db = require('./db')
 
-// const User = require('./models/User')
-
 const OrderItem = require('./models/processed/orderItem')
-
 const OrderInfo = require('./models/processed/orderInfo')
-
 // const Product = require('./models/product')
+const User = require('./models/User')
+const CartItem = require('./models/CartItem');
+const Session = require('./models/Session');
 
 //associations could go here!
+Session.belongsTo(User);
+User.hasOne(Session);
+
+CartItem.belongsTo(Session);
+Session.hasMany(CartItem);
 
 /*
 Magic Methods
@@ -30,9 +34,11 @@ OrderInfo.hasMany(OrderItem)
 module.exports = {
   db,
   models: {
-    // User,
     // Product,
     OrderInfo,
-    OrderItem
+    OrderItem,
+    User,
+    CartItem,
+    Session
   },
 }
