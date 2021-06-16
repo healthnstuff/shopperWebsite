@@ -2,6 +2,23 @@ body {
   font-family: sans-serif;
 }
 
+#navBar {
+  box-sizing: content-box;
+  background-color: green;
+  color: white;
+  text-decoration: none;
+}
+
+#navLinks {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+#webName {
+  text-align: center;
+}
+
 a {
   text-decoration: none;
 }
