@@ -28,7 +28,7 @@ const roadTypes = [
 const countries = ["USA", "Canada", "Mexico"];
 const dummyText =
   "Curabitur quis ipsum leo. Proin malesuada nunc eget est ultricies volutpat. Pellentesque at urna luctus, volutpat nisi vitae, dapibus ipsum. Nam ullamcorper enim id ipsum porta interdum. Nullam laoreet, est id laoreet bibendum, justo tortor interdum erat, nec ullamcorper elit orci ut lorem. Mauris in vulputate metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis in dolor scelerisque, dignissim nunc et, dictum purus. Donec hendrerit laoreet nibh at varius. Nullam eleifend dignissim ante vitae rhoncus. Aliquam hendrerit tincidunt felis ut facilisis. Maecenas gravida eleifend felis, nec mollis ligula facilisis ut. Mauris dictum consectetur libero nec ullamcorper.".split('.');
-const productCategories = ['powder', 'pill', 'tonic', 'cbd', 'essential oil', 'skincare', 'haircare'];
+const productCategories = ['essential oil', 'supplement', 'vitamin', 'tonic', 'tea', 'probiotic', 'skincare', 'cdb', 'beverage', 'soap'];
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -55,7 +55,7 @@ const getUser = () => {
   const password = looper(alphaNumericChars, getRandomInt(5, 13));
   const firstName = looper(alphabet, getRandomInt(1, 10), true);
   const lastName = looper(alphabet, getRandomInt(1, 10), true);
-  const telephone = [looper(numbers, 10)];
+  const telephone = looper(numbers, 10);
   return {
     email,
     password,
@@ -66,6 +66,7 @@ const getUser = () => {
 };
 
 const getUserPayment = () => {
+  const user_id = _getRandomInt(100);
   const provider =
     creditCardCompanies[_getRandomInt(creditCardCompanies.length)];
   const cardNo = [looper(numbers, 16)];
@@ -75,6 +76,7 @@ const getUserPayment = () => {
     2030
   )}`;
   return {
+    user_id,
     provider,
     cardNo,
     expiry,
@@ -82,6 +84,7 @@ const getUserPayment = () => {
 };
 
 const getAddress = () => {
+  const user_id = _getRandomInt(100);
   const addressLine1 = `${looper(numbers, getRandomInt(1, 3))} ${looper(
     alphabet,
     getRandomInt(3, 10),
@@ -92,6 +95,7 @@ const getAddress = () => {
   const country = countries[_getRandomInt(countries.length)];
   const telephone = [looper(numbers, 10)];
   return {
+    user_id,
     addressLine1,
     city,
     postalCode,
@@ -101,11 +105,13 @@ const getAddress = () => {
 };
 
 const getProduct = () => {
+  const category_id = _getRandomInt(productCategories.length)
   const name = looper(alphabet, getRandomInt(2, 7), true);
   const description = dummyText[_getRandomInt(dummyText.length)];
   const price = parseFloat(`${looper(numbers, getRandomInt(1, 3))}.${looper(numbers, 2)}`);
   const inventory = getRandomInt(50, 2000);
   return {
+    category_id,
     name,
     description,
     price,
@@ -120,10 +126,19 @@ const getCategory = () => {
     }
 }
 
+const getSession = () => {
+  const user_id = _getRandomInt(100);
+  const total = getRandomInt(1, 1000)
+  return {
+    user_id,
+    total
+  }
+}
+
 // console.log(getAddress())
 // console.log(getUser())
 // console.log(getProduct())
-// console.log(getCategory())
+console.log(getCategory())
 
 module.exports = {
   getUser,
