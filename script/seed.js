@@ -45,7 +45,7 @@ async function seed() {
   const payments = await Promise.all([
     UserPayment.create({
       cardNum: "2930392758491728",
-      expirationDate: new Date(2024, 2, 17),
+      expirationDate: "2017-02-01",
       provider: "Bank of America",
       cvv: "290",
     }),

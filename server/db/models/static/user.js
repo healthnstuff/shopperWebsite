@@ -68,6 +68,10 @@ User.prototype.correctPassword = function (candidatePwd) {
   return bcrypt.compare(candidatePwd, this.password);
 };
 
+User.prototype.correctPhoneNum = function (phoneNum) {
+  return bcrypt.compare(phoneNum, this.phoneNum);
+};
+
 User.prototype.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT);
 };
@@ -75,10 +79,15 @@ User.prototype.generateToken = function () {
 /**
  * classMethods
  */
-User.authenticate = async function ({ email, password }) {
+User.authenticate = async function ({ email, password, phoneNum }) {
   const user = await this.findOne({ where: { email } });
-  if (!user || !(await user.correctPassword(password))) {
-    const error = Error("Incorrect email/password");
+  if (
+    !user ||
+    !(await user.correctPassword(password))
+    // ||
+    // !(await user.correctPhoneNum(phoneNum))
+  ) {
+    const error = Error("Incorrect email/password/phone number");
     error.status = 401;
     throw error;
   }
@@ -109,6 +118,12 @@ const hashPassword = async (user) => {
     user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
   }
 };
+
+// const hashPhoneNum = async (user) => {
+//   if (user.changed("phoneNum")) {
+//     user.phoneNum = await bcrypt.hash(user.phoneNum.SALT_ROUNDS);
+//   }
+// };
 
 User.beforeCreate(hashPassword);
 User.beforeUpdate(hashPassword);

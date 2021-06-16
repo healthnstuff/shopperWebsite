@@ -1,6 +1,7 @@
 const chai = require("chai");
 const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
+chai.use(require("chai-datetime"));
 
 const { expect } = require("chai");
 const {
@@ -21,6 +22,11 @@ describe("Payment Model", () => {
     });
     it("cannot be null", async () => {
       await expect(UserPayment.create({})).to.be.rejected;
+    });
+  });
+  describe("expirationDate", () => {
+    it("should be a date", () => {
+      expect(payments.cody.expirationDate).to.be.a("date");
     });
   });
 

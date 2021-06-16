@@ -20,7 +20,7 @@ const UserPayment = db.define("userPayment", {
     },
   },
   expirationDate: {
-    //Date format new Date(YYYY, MM, DD) where MONTH IS INDEXED --> January = 0, December = 11
+    //date format: "YYYY-MM-DD"
     type: Sequelize.DATE,
     //get rid of time?
     isDate: true,

@@ -161,7 +161,7 @@ describe("User model", () => {
               password: "looloo",
               firstName: "Lucy",
               lastName: "Liu",
-              phoneNum: "253 808 0634",
+              phoneNum: "255 808 0634",
             });
             throw "nooo";
           } catch (ex) {
