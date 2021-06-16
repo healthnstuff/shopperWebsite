@@ -20,21 +20,21 @@ describe("User model", () => {
 
   describe("Basic Fields: firstName and lastName", () => {
     describe("firstName", () => {
-      it("firstName is a string", () => {
+      it("is a string", () => {
         expect(users.cody.firstName).to.equal(
           "Cody",
           "Was not able to create a user with firstName Cody"
         );
       });
 
-      it("firstName cannot be null", async () => {
+      it("cannot be null", async () => {
         await expect(
           User.create({}),
           "We shouldn't be able to create a user with no firstName"
         ).to.be.rejected;
       });
 
-      it("firstName cannot be an empty string", async () => {
+      it("cannot be an empty string", async () => {
         await expect(
           User.create({
             firstName: "",
@@ -45,21 +45,21 @@ describe("User model", () => {
     });
 
     describe("lastName", () => {
-      it("lastName is a string", () => {
+      it("is a string", () => {
         expect(users.cody.lastName).to.equal(
           "Martin",
           "Was not able to create a user with lastName Martin"
         );
       });
 
-      it("lastName cannot be null", async () => {
+      it("cannot be null", async () => {
         await expect(
           User.create({}),
           "We shouldn't be able to create a user with no lastName"
         ).to.be.rejected;
       });
 
-      it("lastName cannot be an empty string", async () => {
+      it("cannot be an empty string", async () => {
         await expect(
           User.create({
             lastName: "",
@@ -70,53 +70,53 @@ describe("User model", () => {
     });
   });
 
-  describe("Test Email", () => {
-    it("email is a string", () => {
+  describe("email", () => {
+    it("is a string", () => {
       expect(users.cody.email).to.equal(
         "cody@gmail.com",
         "Was not able to create a user with email cody@gmail.com"
       );
     });
 
-    it("email should be unique", async () => {
+    it("should be unique", async () => {
       await expect(
         User.create({ email: "cody@gmail.com" }),
         "Shouldn't be able to create two users with the same email"
       ).to.be.rejected;
     });
 
-    it("email should not be null", async () => {
+    it("should not be null", async () => {
       await expect(
         User.create({}),
         "we shouldn't be able to create a user with no email"
       ).to.be.rejected;
     });
 
-    it("email should be in email format", async () => {
+    it("should be in email format", async () => {
       await expect(User.create({ email: "fdjkls" })).to.be.rejected;
     });
   });
 
-  describe("Test Phone Number", () => {
-    it("phone number should be in a string", () => {
+  describe("phoneNum", () => {
+    it("should be in a string", () => {
       expect(users.cody.phoneNum).to.equal("293 219 9906");
     });
 
-    it("phone number should be unique", async () => {
+    it("should be unique", async () => {
       await expect(User.create({ phoneNum: "293 219 9906" })).to.be.rejected;
     });
 
-    it("phone number should not be null", async () => {
+    it("should not be null", async () => {
       await expect(User.create({})).to.be.rejected;
     });
   });
 
-  describe("testAdmin", () => {
-    it("isAdmin should be false by default", () => {
+  describe("isAdmin", () => {
+    it("should be false by default", () => {
       expect(users.cody.isAdmin).to.equal(false);
     });
 
-    it("isAdmin should be true when specified", () => {
+    it("should be true when specified", () => {
       expect(users.murphy.isAdmin).to.equal(true);
     });
   });
