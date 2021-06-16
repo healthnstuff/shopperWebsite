@@ -31,12 +31,25 @@ async function seed() {
     }),
   ]);
 
+  const addresses = await Promise.all([
+    Address.create({
+      addressLine: "2108  Hanifan Lane",
+      city: "Roswell",
+      postalCode: 30913,
+      country: "USA",
+    }),
+  ]);
+
   console.log(`seeded ${users.length} users`);
+  console.log(`seeded ${addresses.length} addresses`);
   console.log(`seeded successfully`);
   return {
     users: {
       cody: users[0],
       murphy: users[1],
+    },
+    addresses: {
+      cody: addresses[0],
     },
   };
 }

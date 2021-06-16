@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const db = require("../../db");
 
+//to consider: should we make address required?
 const Address = db.define("address", {
   addressLine: {
     type: Sequelize.STRING,
@@ -10,6 +11,15 @@ const Address = db.define("address", {
   },
   postalCode: {
     type: Sequelize.INTEGER,
+    validate: {
+      isPostalCode: function (value) {
+        const regex = /^\d{5}$/;
+        if (!regex.test(value)) {
+          throw new Error("Wrong Postal Code Format");
+        }
+        return value;
+      },
+    },
   },
   country: {
     type: Sequelize.STRING,
