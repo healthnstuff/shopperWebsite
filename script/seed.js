@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, Address, UserPayment },
+  models: { User, Address, UserPayment, Product, Category },
 } = require("../server/db");
 
 /**
@@ -50,10 +50,33 @@ async function seed() {
     }),
   ]);
 
-  // console.log(`seeded ${users.length} users`);
-  // console.log(`seeded ${addresses.length} addresses`);
-  // console.log(`seeded ${payments.length} user payments`);
-  // console.log(`seeded successfully`);
+  const products = await Promise.all([
+    Product.create({
+      name: "Nature's Truth Lemongrass",
+      description:
+        "Nature's Truth 100% Pure Lemongrass Essential Oil, 0.51 Fluid Ounce",
+      price: 6.99,
+      inventory: 20,
+      imageUrl:
+        "https://images-na.ssl-images-amazon.com/images/I/414m7O5-FmL._AC_.jpg",
+    }),
+    Product.create({
+      name: "Nature's Truth Energy",
+      description: "Nature's Truth Energy Essential Oil, 0.51 Fluid Ounce",
+      price: 6.99,
+      inventory: 10,
+      imageUrl:
+        "https://images-na.ssl-images-amazon.com/images/I/61rSsFYOp4L._AC_SL1000_.jpg",
+    }),
+  ]);
+
+  const categories = await Promise.all([
+    Category.create({
+      name: "Essential Oils",
+    }),
+  ]);
+
+  console.log(`seeded successfully`);
   return {
     users: {
       cody: users[0],

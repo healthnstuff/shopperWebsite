@@ -7,7 +7,7 @@ chai.use(chaiAsPromised);
 const { expect } = require("chai");
 const {
   db,
-  models: { User },
+  models: { User, Address },
 } = require("../../index");
 const jwt = require("jsonwebtoken");
 const seed = require("../../../../script/seed");
