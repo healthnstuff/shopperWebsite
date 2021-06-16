@@ -7,7 +7,6 @@ const {
   db,
   models: { Product },
 } = require("../../index");
-const jwt = require("jsonwebtoken");
 const seed = require("../../../../script/seed");
 
 describe("Product model", () => {
