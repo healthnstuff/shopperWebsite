@@ -83,9 +83,8 @@ User.authenticate = async function ({ email, password, phoneNum }) {
   const user = await this.findOne({ where: { email } });
   if (
     !user ||
-    !(await user.correctPassword(password))
-    // ||
-    // !(await user.correctPhoneNum(phoneNum))
+    !(await user.correctPassword(password)) ||
+    !(await user.correctPhoneNum(phoneNum))
   ) {
     const error = Error("Incorrect email/password/phone number");
     error.status = 401;
@@ -119,12 +118,15 @@ const hashPassword = async (user) => {
   }
 };
 
-// const hashPhoneNum = async (user) => {
-//   if (user.changed("phoneNum")) {
-//     user.phoneNum = await bcrypt.hash(user.phoneNum.SALT_ROUNDS);
-//   }
-// };
+const hashPhoneNum = async (user) => {
+  if (user.changed("phoneNum")) {
+    user.phoneNum = await bcrypt.hash(user.phoneNum, SALT_ROUNDS);
+  }
+};
 
 User.beforeCreate(hashPassword);
+User.beforeCreate(hashPhoneNum);
 User.beforeUpdate(hashPassword);
+User.beforeUpdate(hashPhoneNum);
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
+User.beforeBulkCreate((users) => Promise.all(users.map(hashPhoneNum)));

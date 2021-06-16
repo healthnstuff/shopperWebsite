@@ -97,20 +97,6 @@ describe("User model", () => {
     });
   });
 
-  describe("phoneNum", () => {
-    it("should be in a string", () => {
-      expect(users.cody.phoneNum).to.equal("293 219 9906");
-    });
-
-    it("should be unique", async () => {
-      await expect(User.create({ phoneNum: "293 219 9906" })).to.be.rejected;
-    });
-
-    it("should not be null", async () => {
-      await expect(User.create({})).to.be.rejected;
-    });
-  });
-
   describe("isAdmin", () => {
     it("should be false by default", () => {
       expect(users.cody.isAdmin).to.equal(false);
