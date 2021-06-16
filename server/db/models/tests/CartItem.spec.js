@@ -3,7 +3,7 @@ const chaiAsPromised = require("chai-as-promised");
 const {
   db,
   models: { CartItem, Session },
-} = require("../index");
+} = require("../../index");
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
