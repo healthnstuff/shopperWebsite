@@ -40,8 +40,18 @@ async function seed() {
     }),
   ]);
 
+  const payments = await Promise.all([
+    UserPayment.create({
+      cardNum: 3029389202938181,
+      expirationDate: new Date(2024, 2, 17),
+      provider: "Bank of America",
+      cvv: 290,
+    }),
+  ]);
+
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${addresses.length} addresses`);
+  console.log(`seeded ${payments.length} user payments`);
   console.log(`seeded successfully`);
   return {
     users: {
@@ -50,6 +60,9 @@ async function seed() {
     },
     addresses: {
       cody: addresses[0],
+    },
+    payments: {
+      cody: payments[0],
     },
   };
 }
