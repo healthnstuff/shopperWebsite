@@ -65,8 +65,6 @@ describe("Payment Model", () => {
           try {
             await UserPayment.authenticate({
               cardNum: "1203927584911728",
-              expirationDate: new Date(2024, 2, 17),
-              provider: "Bank of America",
               cvv: "290",
             });
           } catch (ex) {

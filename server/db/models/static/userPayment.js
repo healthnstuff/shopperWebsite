@@ -49,13 +49,24 @@ UserPayment.prototype.correctCardNum = function (cardNum) {
   return bcrypt.compare(cardNum, this.cardNum);
 };
 
+// UserPayment.prototype.correctCvv = function (cvv) {
+//   console.log("here");
+//   console.log("CVV", cvv);
+//   return bcrypt.compare(cvv, this.cvv);
+// };
+
 UserPayment.prototype.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT);
 };
 
 UserPayment.authenticate = async function ({ cvv, cardNum }) {
   const payment = await this.findOne({ where: { cvv } });
-  if (!payment || !(await payment.correctCardNum(cardNum))) {
+  if (
+    !payment ||
+    !(await payment.correctCardNum(cardNum))
+    // ||
+    // !(await payment.correctCvv(cvv))
+  ) {
     const error = Error("Incorrect Card Number");
     error.status = 401;
     throw error;
@@ -83,8 +94,17 @@ const hashCardNum = async (payment) => {
   }
 };
 
+// const hashCvv = async (payment) => {
+//   if (payment.changed("cvv")) {
+//     payment.cvv = await bcrypt.hash(payment.cvv, SALT_ROUNDS);
+//   }
+// };
+
 UserPayment.beforeCreate(hashCardNum);
+// UserPayment.beforeCreate(hashCvv);
 UserPayment.beforeUpdate(hashCardNum);
+// UserPayment.beforeUpdate(hashCvv);
 UserPayment.beforeBulkCreate((payments) =>
   Promise.all(payments.map(hashCardNum))
 );
+// UserPayment.beforeBulkCreate((payments) => Promise.all(payments.map(hashCvv)));
