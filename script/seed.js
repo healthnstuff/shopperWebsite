@@ -38,6 +38,7 @@ async function seed() {
       city: "Roswell",
       postalCode: 30913,
       country: "USA",
+      state: "GA",
     }),
   ]);
 
@@ -76,7 +77,7 @@ async function seed() {
     }),
   ]);
 
-  console.log(`seeded successfully`);
+  // console.log(`seeded successfully`);
   return {
     users: {
       cody: users[0],

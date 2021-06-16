@@ -5,9 +5,13 @@ const db = require("../../db");
 const Address = db.define("address", {
   addressLine: {
     type: Sequelize.STRING,
+    allowNull: false,
+    isEmptyString: false,
   },
   city: {
     type: Sequelize.STRING,
+    allowNull: false,
+    isEmptyString: false,
   },
   postalCode: {
     type: Sequelize.INTEGER,
@@ -20,9 +24,17 @@ const Address = db.define("address", {
         return value;
       },
     },
+    allowNull: false,
   },
   country: {
     type: Sequelize.STRING,
+    allowNull: false,
+    isEmptyString: false,
+  },
+  state: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    isEmptyString: false,
   },
 });
 
