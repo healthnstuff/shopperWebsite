@@ -7,14 +7,24 @@ const Address = require("./models/static/userAddress");
 const UserPayment = require("./models/static/userPayment");
 const Product = require("./models/static/product");
 const Category = require("./models/static/category");
+const CartItem = require("./models/CartItem");
+const Session = require("./models/Session");
 
 //associations could go here!
 User.hasMany(Address);
 Address.belongsTo(User);
+
 User.hasMany(UserPayment);
 UserPayment.belongsTo(User);
+
 Category.hasMany(Product);
 Product.belongsTo(Category);
+
+Session.belongsTo(User);
+User.hasOne(Session);
+
+CartItem.belongsTo(Session);
+Session.hasMany(CartItem);
 
 module.exports = {
   db,
@@ -24,5 +34,7 @@ module.exports = {
     UserPayment,
     Product,
     Category,
+    CartItem,
+    Session,
   },
 };
