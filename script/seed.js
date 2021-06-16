@@ -44,10 +44,10 @@ async function seed() {
 
   const payments = await Promise.all([
     UserPayment.create({
-      cardNum: 3029389202938181,
+      cardNum: "2930392758491728",
       expirationDate: new Date(2024, 2, 17),
       provider: "Bank of America",
-      cvv: 290,
+      cvv: "290",
     }),
   ]);
 
@@ -88,6 +88,13 @@ async function seed() {
     },
     payments: {
       cody: payments[0],
+    },
+    products: {
+      product1: products[0],
+      product2: products[1],
+    },
+    categories: {
+      category1: categories[0],
     },
   };
 }

@@ -1,7 +1,6 @@
 const Sequelize = require("sequelize");
 const db = require("../../db");
 
-//to consider: should we make address required? state?
 const Address = db.define("address", {
   addressLine: {
     type: Sequelize.STRING,
