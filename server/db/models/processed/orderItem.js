@@ -8,4 +8,8 @@ const OrderItem = db.define('orderItem', {
     }
 })
 
+OrderItem.addItem = function (item) {
+    this.addOrderInfo(item)
+}
+
 module.exports = OrderItem
