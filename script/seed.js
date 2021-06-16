@@ -11,7 +11,7 @@ const {
  */
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
-  console.log("db synced!");
+  // console.log("db synced!");
 
   // Creating Users
   const users = await Promise.all([
@@ -28,6 +28,7 @@ async function seed() {
       firstName: "Murphy",
       lastName: "Jones",
       phoneNum: "809 346-9238",
+      isAdmin: true,
     }),
   ]);
 
@@ -49,10 +50,10 @@ async function seed() {
     }),
   ]);
 
-  console.log(`seeded ${users.length} users`);
-  console.log(`seeded ${addresses.length} addresses`);
-  console.log(`seeded ${payments.length} user payments`);
-  console.log(`seeded successfully`);
+  // console.log(`seeded ${users.length} users`);
+  // console.log(`seeded ${addresses.length} addresses`);
+  // console.log(`seeded ${payments.length} user payments`);
+  // console.log(`seeded successfully`);
   return {
     users: {
       cody: users[0],
