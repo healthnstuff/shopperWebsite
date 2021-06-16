@@ -157,8 +157,8 @@ describe("User model", () => {
         it("throws a 401", async () => {
           try {
             await User.authenticate({
-              email: "lucydfs@gmail.com",
-              password: "loo",
+              email: "lucy@gmail.com",
+              password: "looloo",
               firstName: "Lucy",
               lastName: "Liu",
               phoneNum: "253 808 0634",

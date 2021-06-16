@@ -50,10 +50,32 @@ UserPayment.prototype.correctCardNum = function (cardNum) {
 };
 
 UserPayment.prototype.generateToken = function () {
-  // return jwt.sign({ }, process.env.JWT)
+  return jwt.sign({ id: this.id }, process.env.JWT);
 };
 
-// UserPayment.authenticate = async function({})
+UserPayment.authenticate = async function ({ cvv, cardNum }) {
+  const payment = await this.findOne({ where: { cvv } });
+  if (!payment || !(await payment.correctCardNum(cardNum))) {
+    const error = Error("Incorrect Card Number");
+    error.status = 401;
+    throw error;
+  }
+  return payment.generateToken();
+};
+
+UserPayment.findByToken = async function (token) {
+  try {
+    const { id } = await jwt.verify(token, process.env.JWT);
+    const payment = UserPayment.findByPk(id);
+    if (!payment) {
+      throw "sad";
+    }
+  } catch (ex) {
+    const error = Error("bad token");
+    error.status = 401;
+    throw error;
+  }
+};
 
 const hashCardNum = async (payment) => {
   if (payment.changed("cardNum")) {
