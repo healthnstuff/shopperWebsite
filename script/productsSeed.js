@@ -1,10 +1,12 @@
-const db = require("./server/db");
-const Product = require("./server/db/models/product");
+const { db, models: { Product } } = require('../server/db')
 
-const seed = async () => {
-  try {
-    await db.sync({ force: true });
-    //Essential Oils category_id:1
+
+
+ 
+const productsSeed = async () => {
+    try {
+      await db.sync({ force: true });
+      //Essential Oils category_id:1
 
     await Product.create({
       category_id: 1,
@@ -1010,4 +1012,21 @@ const seed = async () => {
   }
 };
 
+<<<<<<< HEAD:seed.js
 module.exports = seed;
+=======
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+  async function runProductsSeed() {
+    try {
+     await productsSeed()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  runProductsSeed()
+  module.exports = productsSeed;
+>>>>>>> 176d2fee2c40bd1021ca382b83574adfdfb0a553:script/productsSeed.js

@@ -5,12 +5,16 @@ const Address = db.define("address", {
   addressLine: {
     type: Sequelize.STRING,
     allowNull: false,
-    isEmptyString: false,
+    validate: {
+      notEmpty: true
+    }
   },
   city: {
     type: Sequelize.STRING,
     allowNull: false,
-    isEmptyString: false,
+    validate: {
+      notEmpty: true
+    }
   },
   postalCode: {
     type: Sequelize.INTEGER,
@@ -22,18 +26,23 @@ const Address = db.define("address", {
         }
         return value;
       },
+      notEmpty: true
     },
     allowNull: false,
   },
   country: {
     type: Sequelize.STRING,
     allowNull: false,
-    isEmptyString: false,
+    validate: {
+      notEmpty: true
+    }
   },
   state: {
     type: Sequelize.STRING,
     allowNull: false,
-    isEmptyString: false,
+    validate: {
+      notEmpty: true
+    }
   },
 });
 

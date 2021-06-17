@@ -2,12 +2,15 @@
 
 const {
   db,
-  models: { User, Address, UserPayment, Product, Category },
+  models: { User, Address, UserPayment, Product, Category, CartItem },
 } = require("../server/db");
 const {
   usersArr,
   orderInfoArr
 } = require("./data.js/seedingFuncs");
+
+
+const { cartItemsData, categoriesData } = require('./data');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -75,11 +78,8 @@ async function seed() {
     }),
   ]);
 
-  const categories = await Promise.all([
-    Category.create({
-      name: "Essential Oils",
-    }),
-  ]);
+  await Category.bulkCreate(categoriesData, { validate: true });
+  // await CartItem.bulkCreate(cartItemsData, { validate: true });
 
   // console.log(`seeded successfully`);
   return {
@@ -96,10 +96,10 @@ async function seed() {
     products: {
       product1: products[0],
       product2: products[1],
-    },
-    categories: {
-      category1: categories[0],
-    },
+    }
+    // categories: {
+    //   category1: categories[0],
+    // },
   };
 }
 
