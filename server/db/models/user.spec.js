@@ -5,7 +5,7 @@ const { db, models: { User } } = require('../index')
 const jwt = require('jsonwebtoken');
 const seed = require('../../../script/seed');
 
-describe('User model', () => {
+describe.skip('User model', () => {
   let users;
   beforeEach(async() => {
     users = (await seed()).users;
