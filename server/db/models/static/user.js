@@ -12,6 +12,7 @@ const User = db.define("user", {
     unique: true,
     allowNull: false,
     isEmail: true, //how to test this
+    notEmpty: true,
   },
   password: {
     type: Sequelize.STRING,
@@ -38,6 +39,7 @@ const User = db.define("user", {
     // 075-63546725
     type: Sequelize.STRING,
     allowNull: false,
+    notEmpty: true,
     unique: true,
     validate: {
       isValidPhonNum: function (value) {
