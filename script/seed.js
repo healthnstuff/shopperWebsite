@@ -2,8 +2,11 @@
 
 const {
   db,
-  models: { User, Address, UserPayment, Product, Category },
+  models: { User, Address, UserPayment, Product, Category, CartItem },
 } = require("../server/db");
+
+
+const { cartItemsData, categoriesData } = require('./data');
 const {
   getUser,
   getUserPayment,
@@ -79,9 +82,11 @@ async function seed() {
   ]);
 
   const categories = await Promise.all([
-    Category.create({
-      name: "Essential Oils",
-    }),
+    Category.bulkCreate(categoriesData),
+  ]);
+
+  const cartItems = await Promise.all([
+    CartItem.bulkCreate(cartItemsData),
   ]);
 
   // console.log(`seeded successfully`);
@@ -102,7 +107,27 @@ async function seed() {
     },
     categories: {
       category1: categories[0],
+      category2: categories[1],
+      category3: categories[2],
+      category4: categories[3],
+      category5: categories[4]
     },
+    cartItems: {
+      cartItem1: cartItems[0],
+      cartItem2: cartItems[1],
+      cartItem3: cartItems[2],
+      cartItem4: cartItems[3],
+      cartItem5: cartItems[4],
+      cartItem6: cartItems[5],
+      cartItem7: cartItems[6],
+      cartItem8: cartItems[7],
+      cartItem9: cartItems[8],
+      cartItem10: cartItems[9],
+      cartItem11: cartItems[10],
+      cartItem12: cartItems[11],
+      cartItem13: cartItems[12],
+      cartItem14: cartItems[13]
+    }
   };
 }
 
