@@ -17,6 +17,7 @@ const UserPayment = db.define("userPayment", {
         }
         return value;
       },
+      notEmpty: true
     },
   },
   expirationDate: {
@@ -28,6 +29,9 @@ const UserPayment = db.define("userPayment", {
   provider: {
     type: Sequelize.STRING,
     allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   cvv: {
     type: Sequelize.STRING,
@@ -39,6 +43,7 @@ const UserPayment = db.define("userPayment", {
         }
         return value;
       },
+      notEmpty: true
     },
   },
 });
