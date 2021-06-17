@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+const Sequelize = require('sequelize')
+const db = require('../../db')
 
 const CartItem = db.define('cartItem', {
     quantity: {
@@ -8,4 +8,4 @@ const CartItem = db.define('cartItem', {
     }
 });
 
-module.exports = CartItem;
+module.exports = CartItem

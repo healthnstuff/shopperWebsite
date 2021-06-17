@@ -1,7 +1,7 @@
 /* global describe beforeEach it */
 
 const {expect} = require('chai')
-const { db, models: { OrderInfo, OrderItem} } = require('../../index');
+const { db, models: { OrderInfo } } = require('../../index');
 // const seed = require('../../../script/seed');
 
 describe('OrderInfo model', () => {
@@ -17,11 +17,4 @@ describe('OrderInfo model', () => {
       });
     });
   });
-  describe.skip('Association Fields: foreign keys', () => {
-    describe('user_id', () => {
-      it('is not empty', async () => {
-
-      })
-    })
-  })
 });
