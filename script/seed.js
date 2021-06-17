@@ -5,8 +5,7 @@ const {
   models: { User, Address, UserPayment, Product, Category, CartItem },
 } = require("../server/db");
 
-
-const { cartItemsData, categoriesData } = require('./data');
+const { cartItemsData, categoriesData, moreProductSeed } = require("./data");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -16,6 +15,7 @@ async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   // console.log("db synced!");
 
+  await Product.bulkCreate(moreProductSeed, { validate: true });
   // Creating Users
   const users = await Promise.all([
     User.create({
@@ -92,7 +92,7 @@ async function seed() {
     products: {
       product1: products[0],
       product2: products[1],
-    }
+    },
     // categories: {
     //   category1: categories[0],
     // },
