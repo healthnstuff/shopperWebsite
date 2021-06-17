@@ -26,9 +26,27 @@ User.hasOne(Session);
 CartItem.belongsTo(Session);
 Session.hasMany(CartItem);
 
+/*
+Magic Methods
+https://medium.com/@julianne.marik/sequelize-associations-magic-methods-c72008db91c9
+*/
+
+//processed model associations
+// OrderItem.belongsTo(Product)
+// Product.hasOne(OrderItem)
+
+OrderItem.belongsTo(OrderInfo)
+OrderInfo.hasMany(OrderItem)
+
+// OrderInfo.belongsTo(User)
+// User.hasMany(OrderInfo)
+
 module.exports = {
   db,
   models: {
+    // Product,
+    OrderInfo,
+    OrderItem,
     User,
     Address,
     UserPayment,
