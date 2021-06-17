@@ -5,12 +5,9 @@ const {
   models: { User, Address, UserPayment, Product, Category },
 } = require("../server/db");
 const {
-  getUser,
-  getUserPayment,
-  getAddress,
-  getProduct,
-  getCategory,
-} = require("./seedingFuncs");
+  usersArr,
+  orderInfoArr
+} = require("./data.js/seedingFuncs");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -41,7 +38,7 @@ async function seed() {
 
   const addresses = await Promise.all([
     Address.create({
-      addressLine: "2108  Hanifan Lane",
+      addressLine: "2108 Hanifan Lane",
       city: "Roswell",
       postalCode: 30913,
       country: "USA",

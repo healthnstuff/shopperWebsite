@@ -18,7 +18,7 @@ describe("Address Model", () => {
   describe("Basic Fields: addressLine, city, country, & state", () => {
     describe("addressLine", () => {
       it("should be a string", () => {
-        expect(addresses.cody.addressLine).to.equal("2108  Hanifan Lane");
+        expect(addresses.cody.addressLine).to.equal("2108 Hanifan Lane");
       });
       it("cannot be null", async () => {
         await expect(Address.create({})).to.be.rejected;
