@@ -1,8 +1,5 @@
 "use strict";
 
-<<<<<<< HEAD
-const {db, models: {User} } = require('../server/db')
-=======
 const {
   db,
   models: { User, Address, UserPayment, Product, Category },
@@ -14,7 +11,6 @@ const {
   getProduct,
   getCategory,
 } = require("./seedingFuncs");
->>>>>>> 65d52167691d804ab1ef2de7132fa465b1779339
 
 /**
  * seed - this function clears the database, updates tables to
