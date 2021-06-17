@@ -5,6 +5,9 @@ const Product = db.define("product", {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   description: {
     type: Sequelize.TEXT,
@@ -13,12 +16,17 @@ const Product = db.define("product", {
     type: Sequelize.FLOAT,
     validate: {
       min: 0.01,
+      notEmpty: true
     },
     allowNull: false,
   },
   inventory: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    validate: {
+      min: 0.01,
+      notEmpty: true
+    }
   },
   imageUrl: {
     type: Sequelize.STRING,
