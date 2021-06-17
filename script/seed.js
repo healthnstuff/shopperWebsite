@@ -21,7 +21,7 @@ async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   // console.log("db synced!");
 
-  Product.bulkCreate(product, { validate: true });
+  await Product.bulkCreate(product, { validate: true });
   // Creating Users
   const users = await Promise.all([
     User.create({
