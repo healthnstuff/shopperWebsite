@@ -11,21 +11,31 @@ const User = db.define("user", {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
-    isEmail: true, //how to test this
+    validate: {
+      notEmpty: true,
+      isEmail: true, //how to test this
+    },
   },
   password: {
     type: Sequelize.STRING,
     allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
   },
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
-    notEmpty: true,
+    validate: {
+      notEmpty: true,
+    },
   },
   lastName: {
     type: Sequelize.STRING,
     allowNull: false,
-    notEmpty: true,
+    validate: {
+      notEmpty: true,
+    },
   },
   phoneNum: {
     // Valid formats:
@@ -38,6 +48,7 @@ const User = db.define("user", {
     // 075-63546725
     type: Sequelize.STRING,
     allowNull: false,
+    notEmpty: true,
     unique: true,
     validate: {
       isValidPhonNum: function (value) {
@@ -49,12 +60,16 @@ const User = db.define("user", {
         }
         return value;
       },
+      notEmpty: true,
     },
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: false,
+    validate: {
+      notEmpty: true,
+    },
   },
 });
 
