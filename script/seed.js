@@ -2,10 +2,19 @@
 
 const {
   db,
-  models: { User, Address, UserPayment, Product, Category, CartItem },
+  models: {
+    User,
+    Address,
+    UserPayment,
+    Product,
+    Category,
+    CartItem,
+    OrderInfo,
+  },
 } = require("../server/db");
+const { usersArr, orderInfoArr } = require("./seedingFuncs");
 
-const { cartItemsData, categoriesData, moreProductSeed } = require("./data");
+const { cartItemsData, categoriesData, productData } = require("./data");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -36,7 +45,7 @@ async function seed() {
 
   const addresses = await Promise.all([
     Address.create({
-      addressLine: "2108  Hanifan Lane",
+      addressLine: "2108 Hanifan Lane",
       city: "Roswell",
       postalCode: 30913,
       country: "USA",
@@ -54,7 +63,6 @@ async function seed() {
   ]);
 
   await Category.bulkCreate(categoriesData, { validate: true });
-  await Product.bulkCreate(moreProductSeed, { validate: true });
   const products = await Promise.all([
     Product.create({
       name: "Nature's Truth Lemongrass",
@@ -78,6 +86,9 @@ async function seed() {
   ]);
 
   // await CartItem.bulkCreate(cartItemsData, { validate: true });
+  await User.bulkCreate(usersArr, { validate: true });
+  await OrderInfo.bulkCreate(orderInfoArr, { validate: true });
+  await Product.bulkCreate(productData, { validate: true });
 
   // console.log(`seeded successfully`);
   return {
