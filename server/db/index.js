@@ -23,16 +23,16 @@ OrderInfo.belongsTo(User);
 Category.hasMany(Product);
 Product.belongsTo(Category, { as: "category" });
 
-/*
-Magic Methods
-https://medium.com/@julianne.marik/sequelize-associations-magic-methods-c72008db91c9
-*/
-
 CartItem.belongsTo(OrderInfo);
 OrderInfo.hasMany(CartItem);
 
 OrderInfo.belongsToMany(Product, { through: CartItem });
 Product.belongsToMany(OrderInfo, { through: CartItem });
+
+/*
+Magic Methods
+https://medium.com/@julianne.marik/sequelize-associations-magic-methods-c72008db91c9
+*/
 
 module.exports = {
   db,
