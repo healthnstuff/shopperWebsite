@@ -1,11 +1,11 @@
 const moreProductSeed = [
   {
+    categoryId: 5,
     name: "California Gold Nutrition, Superfoods, Matcha Green Tea Powder",
     description: "4 oz (114 g) Powder",
     price: 24.01,
     inventory: 20,
     imageUrl: "https://s3.images-iherb.com/cgn/cgn01310/v/5.jpg",
-    category_id: 5,
   },
   {
     name: "Matcha Road, Matcha + Vitamin C",
@@ -14,7 +14,7 @@ const moreProductSeed = [
     price: 9.29,
     inventory: 20,
     imageUrl: "https://s3.images-iherb.com/mat/mat01484/v/0.jpg",
-    category_id: 5,
+    categoryId: 5,
   },
   {
     name: "Yogi Tea, Stress Relief",
@@ -22,7 +22,7 @@ const moreProductSeed = [
     price: 3.98,
     inventory: 30,
     imageUrl: "https://s3.images-iherb.com/ygt/ygt20454/v/35.jpg",
-    category_id: 5,
+    categoryId: 5,
   },
   {
     name: "Yogi Tea, Skin DeTox",
@@ -30,7 +30,7 @@ const moreProductSeed = [
     price: 3.98,
     inventory: 30,
     imageUrl: "https://s3.images-iherb.com/ygt/ygt20295/v/35.jpg",
-    category_id: 5,
+    categoryId: 5,
   },
   {
     name: "Traditional Medicinals, Herbal Teas, Organic Dandelion Leaf & Root Tea",
@@ -38,7 +38,7 @@ const moreProductSeed = [
     price: 4.62,
     inventory: 60,
     imageUrl: "https://s3.images-iherb.com/tra/tra00235/v/3.jpg",
-    category_id: 5,
+    categoryId: 5,
   },
   {
     name: "Traditional Medicinals, Organic Mother's Milk",
@@ -47,7 +47,7 @@ const moreProductSeed = [
     price: 9.28,
     inventory: 10,
     imageUrl: "https://s3.images-iherb.com/tra/tra00252/v/30.jpg",
-    category_id: 5,
+    categoryId: 5,
   },
   {
     name: "Traditional Medicinals, Organic Smooth Move",
@@ -56,7 +56,7 @@ const moreProductSeed = [
     price: 4.62,
     inventory: 30,
     imageUrl: "https://s3.images-iherb.com/tra/tra00009/v/27.jpg",
-    category_id: 5,
+    categoryId: 5,
   },
   {
     name: "21st Century, Herbal Slimming Tea, Honey Lemon",
@@ -64,7 +64,7 @@ const moreProductSeed = [
     price: 3.03,
     inventory: 20,
     imageUrl: "https://s3.images-iherb.com/cen/cen22361/v/23.jpg",
-    category_id: 5,
+    categoryId: 5,
   },
   {
     name: "21st Century, Herbal Slimming Tea, Peppermint",
@@ -72,7 +72,7 @@ const moreProductSeed = [
     price: 3.03,
     inventory: 20,
     imageUrl: "https://s3.images-iherb.com/cen/cen22691/v/13.jpg",
-    category_id: 5,
+    categoryId: 5,
   },
   {
     name: "Dynamic Health Laboratories, Certified Organic Apple Cider Vinegar Detox Tonic",
@@ -80,7 +80,7 @@ const moreProductSeed = [
     price: 10.29,
     inventory: 20,
     imageUrl: "https://s3.images-iherb.com/dnh/dnh65664/v/1.jpg",
-    category_id: 4,
+    categoryId: 4,
   },
   {
     name: "Wedderspoon, Raw Apple Cider Vinegar with Monofloral, Manuka Honey",
@@ -88,7 +88,7 @@ const moreProductSeed = [
     price: 10.12,
     inventory: 20,
     imageUrl: "https://s3.images-iherb.com/wsp/wsp02264/v/21.jpg",
-    category_id: 4,
+    categoryId: 4,
   },
   {
     name: "Dr. Mercola, Organic Keto Cider, Spicy",
@@ -96,7 +96,7 @@ const moreProductSeed = [
     price: 21.51,
     inventory: 20,
     imageUrl: "https://s3.images-iherb.com/mcl/mcl01822/v/20.jpg",
-    category_id: 4,
+    categoryId: 4,
   },
   {
     name: "Hyland's, Nerve Tonic, Stress Relief",
@@ -104,7 +104,7 @@ const moreProductSeed = [
     price: 7.98,
     inventory: 20,
     imageUrl: "https://s3.images-iherb.com/hyl/hyl30142/v/7.jpg",
-    category_id: 4,
+    categoryId: 4,
   },
   {
     name: "Bioray, Liver Life, Revitalizing Liver Tonic",
@@ -112,7 +112,7 @@ const moreProductSeed = [
     price: 52.31,
     inventory: 20,
     imageUrl: "https://s3.images-iherb.com/bry/bry39511/v/7.jpg",
-    category_id: 4,
+    categoryId: 4,
   },
   {
     name: "Swisse, Chlorophyll, Mixed Berry Flavor Liquid Tonic",
@@ -120,7 +120,7 @@ const moreProductSeed = [
     price: 14.39,
     inventory: 20,
     imageUrl: "https://s3.images-iherb.com/sww/sww14823/v/3.jpg",
-    category_id: 4,
+    categoryId: 4,
   },
   {
     name: "Gaia Herbs, Kids, Tummy Tonic with Chamomile",
@@ -128,7 +128,7 @@ const moreProductSeed = [
     price: 10.39,
     inventory: 20,
     imageUrl: "https://s3.images-iherb.com/gai/gai39023/v/5.jpg",
-    category_id: 4,
+    categoryId: 4,
   },
   {
     name: "Bioray, CytoFlora, Probiotic Immunity Tonic",
@@ -136,7 +136,7 @@ const moreProductSeed = [
     price: 78.39,
     inventory: 20,
     imageUrl: "https://s3.images-iherb.com/bry/bry00004/v/11.jpg",
-    category_id: 4,
+    categoryId: 4,
   },
   {
     name: "Cheong Kwan Jang, Korean Red Ginseng Vital Tonic",
@@ -144,7 +144,7 @@ const moreProductSeed = [
     price: 27.88,
     inventory: 20,
     imageUrl: "https://s3.images-iherb.com/krg/krg01197/v/2.jpg",
-    category_id: 4,
+    categoryId: 4,
   },
   {
     name: "Cheong Kwan Jang, Koreselect, Energy",
@@ -152,7 +152,7 @@ const moreProductSeed = [
     price: 15.39,
     inventory: 20,
     imageUrl: "https://s3.images-iherb.com/krg/krg01232/v/1.jpg",
-    category_id: 4,
+    categoryId: 4,
   },
   {
     name: "Dragon Herbs, Return to Youth",
@@ -160,7 +160,7 @@ const moreProductSeed = [
     price: 22.39,
     inventory: 20,
     imageUrl: "https://s3.images-iherb.com/dra/dra00320/v/6.jpg",
-    category_id: 4,
+    categoryId: 4,
   },
 ];
 //CartItem Data

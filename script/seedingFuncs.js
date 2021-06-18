@@ -27,8 +27,21 @@ const roadTypes = [
 ];
 const countries = ["USA", "Canada", "Mexico"];
 const dummyText =
-  "Curabitur quis ipsum leo. Proin malesuada nunc eget est ultricies volutpat. Pellentesque at urna luctus, volutpat nisi vitae, dapibus ipsum. Nam ullamcorper enim id ipsum porta interdum. Nullam laoreet, est id laoreet bibendum, justo tortor interdum erat, nec ullamcorper elit orci ut lorem. Mauris in vulputate metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis in dolor scelerisque, dignissim nunc et, dictum purus. Donec hendrerit laoreet nibh at varius. Nullam eleifend dignissim ante vitae rhoncus. Aliquam hendrerit tincidunt felis ut facilisis. Maecenas gravida eleifend felis, nec mollis ligula facilisis ut. Mauris dictum consectetur libero nec ullamcorper.".split('.');
-const productCategories = ['essential oil', 'supplement', 'vitamin', 'tonic', 'tea', 'probiotic', 'skincare', 'cdb', 'beverage', 'soap'];
+  "Curabitur quis ipsum leo. Proin malesuada nunc eget est ultricies volutpat. Pellentesque at urna luctus, volutpat nisi vitae, dapibus ipsum. Nam ullamcorper enim id ipsum porta interdum. Nullam laoreet, est id laoreet bibendum, justo tortor interdum erat, nec ullamcorper elit orci ut lorem. Mauris in vulputate metus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis in dolor scelerisque, dignissim nunc et, dictum purus. Donec hendrerit laoreet nibh at varius. Nullam eleifend dignissim ante vitae rhoncus. Aliquam hendrerit tincidunt felis ut facilisis. Maecenas gravida eleifend felis, nec mollis ligula facilisis ut. Mauris dictum consectetur libero nec ullamcorper.".split(
+    "."
+  );
+const productCategories = [
+  "essential oil",
+  "supplement",
+  "vitamin",
+  "tonic",
+  "tea",
+  "probiotic",
+  "skincare",
+  "cdb",
+  "beverage",
+  "soap",
+];
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -105,13 +118,15 @@ const getAddress = () => {
 };
 
 const getProduct = () => {
-  const category_id = _getRandomInt(productCategories.length)
+  const categoryId = _getRandomInt(productCategories.length);
   const name = looper(alphabet, getRandomInt(2, 7), true);
   const description = dummyText[_getRandomInt(dummyText.length)];
-  const price = parseFloat(`${looper(numbers, getRandomInt(1, 3))}.${looper(numbers, 2)}`);
+  const price = parseFloat(
+    `${looper(numbers, getRandomInt(1, 3))}.${looper(numbers, 2)}`
+  );
   const inventory = getRandomInt(50, 2000);
   return {
-    category_id,
+    categoryId,
     name,
     description,
     price,
@@ -120,30 +135,30 @@ const getProduct = () => {
 };
 
 const getCategory = () => {
-    const name = productCategories[_getRandomInt(productCategories.length)];
-    return {
-        name
-    }
-}
+  const name = productCategories[_getRandomInt(productCategories.length)];
+  return {
+    name,
+  };
+};
 
 const getSession = () => {
   const user_id = _getRandomInt(100);
-  const total = getRandomInt(1, 1000)
+  const total = getRandomInt(1, 1000);
   return {
     user_id,
-    total
-  }
-}
+    total,
+  };
+};
 
 // console.log(getAddress())
 // console.log(getUser())
 // console.log(getProduct())
-console.log(getCategory())
+console.log(getCategory());
 
 module.exports = {
   getUser,
   getUserPayment,
   getAddress,
   getProduct,
-  getCategory
+  getCategory,
 };

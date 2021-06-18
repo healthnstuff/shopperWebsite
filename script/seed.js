@@ -15,7 +15,6 @@ async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   // console.log("db synced!");
 
-  await Product.bulkCreate(moreProductSeed, { validate: true });
   // Creating Users
   const users = await Promise.all([
     User.create({
@@ -54,6 +53,9 @@ async function seed() {
     }),
   ]);
 
+  await Category.bulkCreate(categoriesData, { validate: true });
+  // await CartItem.bulkCreate(cartItemsData, { validate: true });
+  await Product.bulkCreate(moreProductSeed, { validate: true });
   const products = await Promise.all([
     Product.create({
       name: "Nature's Truth Lemongrass",
@@ -73,9 +75,6 @@ async function seed() {
         "https://images-na.ssl-images-amazon.com/images/I/61rSsFYOp4L._AC_SL1000_.jpg",
     }),
   ]);
-
-  await Category.bulkCreate(categoriesData, { validate: true });
-  // await CartItem.bulkCreate(cartItemsData, { validate: true });
 
   // console.log(`seeded successfully`);
   return {
