@@ -83,9 +83,9 @@ User.prototype.correctPassword = function (candidatePwd) {
   return bcrypt.compare(candidatePwd, this.password);
 };
 
-User.prototype.correctPhoneNum = function (phoneNum) {
-  return bcrypt.compare(phoneNum, this.phoneNum);
-};
+// User.prototype.correctPhoneNum = function (phoneNum) {
+//   return bcrypt.compare(phoneNum, this.phoneNum);
+// };
 
 User.prototype.generateToken = function () {
   return jwt.sign({ id: this.id }, process.env.JWT);
@@ -98,8 +98,8 @@ User.authenticate = async function ({ email, password, phoneNum }) {
   const user = await this.findOne({ where: { email } });
   if (
     !user ||
-    !(await user.correctPassword(password)) ||
-    !(await user.correctPhoneNum(phoneNum))
+    !(await user.correctPassword(password))
+    // !(await user.correctPhoneNum(phoneNum))
   ) {
     const error = Error("Incorrect email/password/phone number");
     error.status = 401;
@@ -133,15 +133,15 @@ const hashPassword = async (user) => {
   }
 };
 
-const hashPhoneNum = async (user) => {
-  if (user.changed("phoneNum")) {
-    user.phoneNum = await bcrypt.hash(user.phoneNum, SALT_ROUNDS);
-  }
-};
+// const hashPhoneNum = async (user) => {
+//   if (user.changed("phoneNum")) {
+//     user.phoneNum = await bcrypt.hash(user.phoneNum, SALT_ROUNDS);
+//   }
+// };
 
 User.beforeCreate(hashPassword);
-User.beforeCreate(hashPhoneNum);
+// User.beforeCreate(hashPhoneNum);
 User.beforeUpdate(hashPassword);
-User.beforeUpdate(hashPhoneNum);
+// User.beforeUpdate(hashPhoneNum);
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));
-User.beforeBulkCreate((users) => Promise.all(users.map(hashPhoneNum)));
+// User.beforeBulkCreate((users) => Promise.all(users.map(hashPhoneNum)));
