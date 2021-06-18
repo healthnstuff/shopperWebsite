@@ -2,9 +2,91 @@ const alphaNumericChars =
   "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 const numbers = "0123456789";
 const emailProviders = ["@gmail.com", "@yahoo.com", "@outlook.com", "@aol.com"];
-const firstNames = ['Liam', 'Olivia', 'Noah', 'Emma', 'Oliver', 'Ava', 'Elijah', 'Charlotte', 'William', 'Sophia', 'James', 'Amelia', 'Benjamin', 'Isabella', 'Lucas', 'Mia', 'Henry', 'Evelyn', 'Alexander', 'Harper', 'Hayden', 'Finn', 'Enzo', 'Theo', 'Lily', 'Ella', 'Gianna', 'Chloe', 'Maya', 'Abigail', 'Penelope', 'Lila', 'Isla', 'Ellie', 'Charles', 'Avery', 'Mila', 'Riley', 'Ethan', 'Miles', 'Ezra'];
-const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Miller', 'Davis', 'Garcia', 'Rodriguez', 'Wilson', 'Martinez', 'Anderson', 'Taylor', 'Thomas', 'Hernandez', 'Moore', 'Martin', 'Jackson', 'Thompson', 'White', 'Lopez', 'Lee', 'Gonzales', 'Harris', 'Clark', 'Lewis', 'Walker', 'Perez', 'Hall', 'Robinson', 'Young', 'King', 'Wright', 'Torres', 'Nguyen', 'Rivera', 'Cruz', 'Turner', 'Ward'];
-const statusArr = ['open', 'closed']
+const firstNames = [
+  "Liam",
+  "Olivia",
+  "Noah",
+  "Emma",
+  "Oliver",
+  "Ava",
+  "Elijah",
+  "Charlotte",
+  "William",
+  "Sophia",
+  "James",
+  "Amelia",
+  "Benjamin",
+  "Isabella",
+  "Lucas",
+  "Mia",
+  "Henry",
+  "Evelyn",
+  "Alexander",
+  "Harper",
+  "Hayden",
+  "Finn",
+  "Enzo",
+  "Theo",
+  "Lily",
+  "Ella",
+  "Gianna",
+  "Chloe",
+  "Maya",
+  "Abigail",
+  "Penelope",
+  "Lila",
+  "Isla",
+  "Ellie",
+  "Charles",
+  "Avery",
+  "Mila",
+  "Riley",
+  "Ethan",
+  "Miles",
+  "Ezra",
+];
+const lastNames = [
+  "Smith",
+  "Johnson",
+  "Williams",
+  "Brown",
+  "Jones",
+  "Miller",
+  "Davis",
+  "Garcia",
+  "Rodriguez",
+  "Wilson",
+  "Martinez",
+  "Anderson",
+  "Taylor",
+  "Thomas",
+  "Hernandez",
+  "Moore",
+  "Martin",
+  "Jackson",
+  "Thompson",
+  "White",
+  "Lopez",
+  "Lee",
+  "Gonzales",
+  "Harris",
+  "Clark",
+  "Lewis",
+  "Walker",
+  "Perez",
+  "Hall",
+  "Robinson",
+  "Young",
+  "King",
+  "Wright",
+  "Torres",
+  "Nguyen",
+  "Rivera",
+  "Cruz",
+  "Turner",
+  "Ward",
+];
+const statusArr = ["open", "closed"];
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -24,10 +106,14 @@ const looper = (charType, length, isProperNoun = false) => {
   return isProperNoun ? ret[0].toUpperCase().concat(ret.slice(1)) : ret;
 };
 
-function getUser () {
+function getUser() {
   const firstName = firstNames[_getRandomInt(firstNames.length)];
   const lastName = lastNames[_getRandomInt(lastNames.length)];
-  const email = firstName.toLowerCase().concat(lastName.toLowerCase()).concat(looper(numbers, 3)).concat(emailProviders[_getRandomInt(emailProviders.length)])
+  const email = firstName
+    .toLowerCase()
+    .concat(lastName.toLowerCase())
+    .concat(looper(numbers, 3))
+    .concat(emailProviders[_getRandomInt(emailProviders.length)]);
   const password = looper(alphaNumericChars, getRandomInt(5, 13));
   const phoneNum = looper(numbers, 10);
   return {
@@ -36,23 +122,23 @@ function getUser () {
     firstName,
     lastName,
     phoneNum,
-  }
+  };
 }
 
-function getOrderInfo () {
-  const userId = _getRandomInt(50)
-  const total = _getRandomInt(100000000)
-  const status = statusArr[Math.floor(Math.random() * 2)]
+function getOrderInfo() {
+  const userId = _getRandomInt(50);
+  const total = _getRandomInt(100000000);
+  const status = statusArr[Math.floor(Math.random() * 2)];
   return {
     userId,
     total,
-    status
-  }
+    status,
+  };
 }
 
-function getArrayOfInstances (array, num, callback) {
+function getArrayOfInstances(array, num, callback) {
   for (let i = 0; i < num; i++) {
-    array.push(callback())
+    array.push(callback());
   }
   return array;
 }
@@ -62,7 +148,7 @@ const orderInfoArr = getArrayOfInstances([], 50, getOrderInfo);
 
 module.exports = {
   usersArr,
-  orderInfoArr
+  orderInfoArr,
 };
 
 // DUMMY-DATA GENERATING FUNCTIONS
@@ -142,13 +228,13 @@ module.exports = {
 // };
 
 // const getProduct = () => {
-//   const category_id = _getRandomInt(productCategories.length)
+//   const categoryId = _getRandomInt(productCategories.length)
 //   const name = looper(alphabet, getRandomInt(2, 7), true);
 //   const description = dummyText[_getRandomInt(dummyText.length)];
 //   const price = parseFloat(`${looper(numbers, getRandomInt(1, 3))}.${looper(numbers, 2)}`);
 //   const inventory = getRandomInt(50, 2000);
 //   return {
-//     category_id,
+//     categoryId,
 //     name,
 //     description,
 //     price,
@@ -156,8 +242,5 @@ module.exports = {
 //   };
 // };
 
-
 // console.log(getOrderInfo())
 // console.log(getUser())
-
-
