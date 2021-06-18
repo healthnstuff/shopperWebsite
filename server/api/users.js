@@ -14,4 +14,28 @@ router.get('/', async (req, res, next) => {
   } catch (err) {
     next(err)
   }
-})
+});
+
+router.post('/', async (req, res, next) => {
+  try {
+    console.log("DID WE MAKE IT HERE")
+    let alreadyExists = await User.findOne({
+      where: {
+        email: req.body.email
+      }
+    });
+    if(alreadyExists) {
+      res.status(409).send('User with email already exists')
+    } else {
+        const NEW = req.body;
+        console.log(">>>>>>>>>>>>>>>", NEW)
+        let newUser = await User.create({
+          email: NEW.email, 
+          password: NEW.password, 
+          firstName: NEW.firstName, 
+          lastName: NEW.lastName, 
+          phoneNum: NEW.phoneNum});
+        res.status(201).json(newUser)
+    }
+  } catch(error) { next(error) }
+});
