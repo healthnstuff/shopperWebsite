@@ -3,12 +3,19 @@ const db = require('../../db')
 
 const OrderInfo = db.define('orderInfo', {
     total: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.INTEGER,
         allowNull: false,
         validate: {
-            notEmpty: true
+            isNumeric: true,
+            min: 0
+        }
+    },
+    status: {
+        type: Sequelize.ENUM('open', 'closed'),
+        validate: {
+            isIn: [['open', 'closed']]
         }
     }
-})
+});
 
 module.exports = OrderInfo
