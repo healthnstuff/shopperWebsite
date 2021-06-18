@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
       // explicitly select only the id and username fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ['id', 'username']
+      attributes: ['id', 'firstName']
     })
     res.json(users)
   } catch (err) {
@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log("DID WE MAKE IT HERE")
+    console.log("DID WE MAKE IT HERE", req.body)
     let alreadyExists = await User.findOne({
       where: {
         email: req.body.email
