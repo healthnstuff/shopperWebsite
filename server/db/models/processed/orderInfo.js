@@ -4,8 +4,8 @@ const db = require('../../db')
 const OrderInfo = db.define('orderInfo', {
     total: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         validate: {
-            allowNull: false,
             isNumeric: true,
             min: 0
         }

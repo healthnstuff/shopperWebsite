@@ -40,9 +40,11 @@ function getUser () {
 }
 
 function getOrderInfo () {
-  const total = _getRandomInt(10000000000)
+  const userId = _getRandomInt(50)
+  const total = _getRandomInt(100000000)
   const status = statusArr[Math.floor(Math.random() * 2)]
   return {
+    userId,
     total,
     status
   }

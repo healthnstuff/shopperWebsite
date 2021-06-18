@@ -2,15 +2,15 @@
 
 const {
   db,
-  models: { User, Address, UserPayment, Product, Category, CartItem },
+  models: { User, Address, UserPayment, Product, Category, CartItem, OrderInfo },
 } = require("../server/db");
 const {
   usersArr,
   orderInfoArr
-} = require("./data.js/seedingFuncs");
+} = require("./seedingFuncs");
 
 
-const { cartItemsData, categoriesData } = require('./data');
+const { cartItemsData, categoriesData, productData } = require('./data');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -80,6 +80,9 @@ async function seed() {
 
   await Category.bulkCreate(categoriesData, { validate: true });
   // await CartItem.bulkCreate(cartItemsData, { validate: true });
+  await User.bulkCreate(usersArr, { validate: true });
+  await OrderInfo.bulkCreate(orderInfoArr, { validate: true });
+  await Product.bulkCreate(productData, { validate: true });
 
   // console.log(`seeded successfully`);
   return {
