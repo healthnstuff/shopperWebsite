@@ -51,16 +51,17 @@ const User = db.define("user", {
     notEmpty: true,
     unique: true,
     validate: {
-      isValidPhonNum: function (value) {
-        const regex =
-          /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+      // isValidPhonNum: function (value) {
+      //   const regex =
+      //     /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
-        if (!regex.test(value)) {
-          throw new Error("Phone Number Wrong Format");
-        }
-        return value;
-      },
-      notEmpty: true,
+
+      //   if (!regex.test(value)) {
+      //     throw new Error("Phone Number Wrong Format");
+      //   }
+      //   return value;
+      // },
+      notEmpty: true
     },
   },
   isAdmin: {
