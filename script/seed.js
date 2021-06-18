@@ -2,15 +2,19 @@
 
 const {
   db,
-  models: { User, Address, UserPayment, Product, Category, CartItem, OrderInfo },
+  models: {
+    User,
+    Address,
+    UserPayment,
+    Product,
+    Category,
+    CartItem,
+    OrderInfo,
+  },
 } = require("../server/db");
-const {
-  usersArr,
-  orderInfoArr
-} = require("./seedingFuncs");
+const { usersArr, orderInfoArr } = require("./seedingFuncs");
 
-const { cartItemsData, categoriesData, productData } = require('./data');
-
+const { cartItemsData, categoriesData, productData } = require("./data");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -58,6 +62,7 @@ async function seed() {
     }),
   ]);
 
+  await Category.bulkCreate(categoriesData, { validate: true });
   const products = await Promise.all([
     Product.create({
       name: "Nature's Truth Lemongrass",
@@ -67,6 +72,7 @@ async function seed() {
       inventory: 20,
       imageUrl:
         "https://images-na.ssl-images-amazon.com/images/I/414m7O5-FmL._AC_.jpg",
+      categoryId: 1,
     }),
     Product.create({
       name: "Nature's Truth Energy",
@@ -75,6 +81,7 @@ async function seed() {
       inventory: 10,
       imageUrl:
         "https://images-na.ssl-images-amazon.com/images/I/61rSsFYOp4L._AC_SL1000_.jpg",
+      categoryId: 1,
     }),
   ]);
 
