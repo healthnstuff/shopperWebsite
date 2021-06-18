@@ -17,6 +17,9 @@ Address.belongsTo(User);
 User.hasMany(UserPayment);
 UserPayment.belongsTo(User);
 
+User.hasMany(OrderInfo);
+OrderInfo.belongsTo(User);
+
 Category.hasMany(Product);
 Product.belongsTo(Category, { as: "category" });
 
