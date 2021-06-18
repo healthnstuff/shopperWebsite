@@ -28,8 +28,8 @@ https://medium.com/@julianne.marik/sequelize-associations-magic-methods-c72008db
 CartItem.belongsTo(OrderInfo);
 OrderInfo.hasMany(CartItem);
 
-// OrderInfo.belongsToMany(Product, { through: CartItem, foreignKey:  });
-// Product.belongsToMany(OrderInfo, { through: CartItem });
+OrderInfo.belongsToMany(Product, { through: CartItem });
+Product.belongsToMany(OrderInfo, { through: CartItem });
 
 module.exports = {
   db,

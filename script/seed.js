@@ -54,7 +54,6 @@ async function seed() {
   ]);
 
   await Category.bulkCreate(categoriesData, { validate: true });
-  // await CartItem.bulkCreate(cartItemsData, { validate: true });
   await Product.bulkCreate(moreProductSeed, { validate: true });
   const products = await Promise.all([
     Product.create({
@@ -65,6 +64,7 @@ async function seed() {
       inventory: 20,
       imageUrl:
         "https://images-na.ssl-images-amazon.com/images/I/414m7O5-FmL._AC_.jpg",
+      categoryId: 1,
     }),
     Product.create({
       name: "Nature's Truth Energy",
@@ -73,8 +73,11 @@ async function seed() {
       inventory: 10,
       imageUrl:
         "https://images-na.ssl-images-amazon.com/images/I/61rSsFYOp4L._AC_SL1000_.jpg",
+      categoryId: 1,
     }),
   ]);
+
+  // await CartItem.bulkCreate(cartItemsData, { validate: true });
 
   // console.log(`seeded successfully`);
   return {

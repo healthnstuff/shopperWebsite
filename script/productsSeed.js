@@ -509,25 +509,6 @@ const productsSeed = async () => {
 
     await Product.create({
       categoryId: 1,
-      name: "Nature's Truth Lemongrass",
-      description:
-        "Nature's Truth 100% Pure Lemongrass Essential Oil, 0.51 Fluid Ounce",
-      price: 6.99,
-      inventory: 10,
-      imageURL:
-        "https://images-na.ssl-images-amazon.com/images/I/414m7O5-FmL._AC_.jpg",
-    });
-    await Product.create({
-      categoryId: 1,
-      name: "Nature's Truth Energy",
-      description: "Nature's Truth Energy Essential Oil, 0.51 Fluid Ounce",
-      price: 6.99,
-      inventory: 10,
-      imageURL:
-        "https://images-na.ssl-images-amazon.com/images/I/61rSsFYOp4L._AC_SL1000_.jpg",
-    });
-    await Product.create({
-      categoryId: 1,
       name: "Nature's Truth Mental Clarity",
       description:
         "Nature's Truth Essential Oil, Mental Clarity, 0.51 Fluid Ounce, Clear",
