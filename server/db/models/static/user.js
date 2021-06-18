@@ -20,22 +20,22 @@ const User = db.define("user", {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true
-    }
+      notEmpty: true,
+    },
   },
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true
-    }
+      notEmpty: true,
+    },
   },
   lastName: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true
-    }
+      notEmpty: true,
+    },
   },
   phoneNum: {
     // Valid formats:
@@ -48,11 +48,13 @@ const User = db.define("user", {
     // 075-63546725
     type: Sequelize.STRING,
     allowNull: false,
+    notEmpty: true,
     unique: true,
     validate: {
       // isValidPhonNum: function (value) {
       //   const regex =
       //     /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
 
       //   if (!regex.test(value)) {
       //     throw new Error("Phone Number Wrong Format");
@@ -67,8 +69,8 @@ const User = db.define("user", {
     allowNull: false,
     defaultValue: false,
     validate: {
-      notEmpty: true
-    }
+      notEmpty: true,
+    },
   },
 });
 
