@@ -17,18 +17,22 @@ Address.belongsTo(User);
 User.hasMany(UserPayment);
 UserPayment.belongsTo(User);
 
+User.hasMany(OrderInfo);
+OrderInfo.belongsTo(User);
+
 Category.hasMany(Product);
-Product.belongsTo(Category);
+Product.belongsTo(Category, { as: "category" });
 
 /*
 Magic Methods
 https://medium.com/@julianne.marik/sequelize-associations-magic-methods-c72008db91c9
 */
 
-CartItem.belongsTo(OrderInfo)
-OrderInfo.hasMany(CartItem)
+CartItem.belongsTo(OrderInfo);
+OrderInfo.hasMany(CartItem);
 
-OrderInfo.belongsToMany(Product, { through: CartItem })
+OrderInfo.belongsToMany(Product, { through: CartItem });
+Product.belongsToMany(OrderInfo, { through: CartItem });
 
 module.exports = {
   db,

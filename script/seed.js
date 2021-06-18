@@ -2,12 +2,19 @@
 
 const {
   db,
-  models: { User, Address, UserPayment, Product, Category },
+  models: {
+    User,
+    Address,
+    UserPayment,
+    Product,
+    Category,
+    CartItem,
+    OrderInfo,
+  },
 } = require("../server/db");
-const {
-  usersArr,
-  orderInfoArr
-} = require("./data.js/seedingFuncs");
+const { usersArr, orderInfoArr } = require("./seedingFuncs");
+
+const { cartItemsData, categoriesData, productData } = require("./data");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -55,6 +62,7 @@ async function seed() {
     }),
   ]);
 
+  await Category.bulkCreate(categoriesData, { validate: true });
   const products = await Promise.all([
     Product.create({
       name: "Nature's Truth Lemongrass",
@@ -64,6 +72,7 @@ async function seed() {
       inventory: 20,
       imageUrl:
         "https://images-na.ssl-images-amazon.com/images/I/414m7O5-FmL._AC_.jpg",
+      categoryId: 1,
     }),
     Product.create({
       name: "Nature's Truth Energy",
@@ -72,14 +81,15 @@ async function seed() {
       inventory: 10,
       imageUrl:
         "https://images-na.ssl-images-amazon.com/images/I/61rSsFYOp4L._AC_SL1000_.jpg",
+      categoryId: 1,
     }),
   ]);
 
-  const categories = await Promise.all([
-    Category.create({
-      name: "Essential Oils",
-    }),
-  ]);
+  await Category.bulkCreate(categoriesData, { validate: true });
+  await User.bulkCreate(usersArr, { validate: true });
+  await Product.bulkCreate(productData, { validate: true });
+  await OrderInfo.bulkCreate(orderInfoArr, { validate: true });
+  await CartItem.bulkCreate(cartItemsData, { validate: true });
 
   // console.log(`seeded successfully`);
   return {
@@ -97,9 +107,9 @@ async function seed() {
       product1: products[0],
       product2: products[1],
     },
-    categories: {
-      category1: categories[0],
-    },
+    // categories: {
+    //   category1: categories[0],
+    // },
   };
 }
 
