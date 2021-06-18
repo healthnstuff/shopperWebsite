@@ -126,7 +126,7 @@ function getUser() {
 }
 
 function getOrderInfo() {
-  const userId = _getRandomInt(50);
+  const userId = getRandomInt(1, 50);
   const total = _getRandomInt(100000000);
   const status = statusArr[Math.floor(Math.random() * 2)];
   return {

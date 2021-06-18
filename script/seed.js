@@ -85,7 +85,6 @@ async function seed() {
     }),
   ]);
 
-  await Category.bulkCreate(categoriesData, { validate: true });
   await User.bulkCreate(usersArr, { validate: true });
   await Product.bulkCreate(productData, { validate: true });
   await OrderInfo.bulkCreate(orderInfoArr, { validate: true });
