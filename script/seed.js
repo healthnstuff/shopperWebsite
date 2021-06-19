@@ -61,30 +61,30 @@ async function seed() {
       cvv: "290",
     }),
   ]);
+  
+  // const products = await Promise.all([
+  //   Product.create({
+  //     name: "Nature's Truth Lemongrass",
+  //     description:
+  //       "Nature's Truth 100% Pure Lemongrass Essential Oil, 0.51 Fluid Ounce",
+  //     price: 6.99,
+  //     inventory: 20,
+  //     imageUrl:
+  //       "https://images-na.ssl-images-amazon.com/images/I/414m7O5-FmL._AC_.jpg",
+  //     categoryId: 1,
+  //   }),
+  //   Product.create({
+  //     name: "Nature's Truth Energy",
+  //     description: "Nature's Truth Energy Essential Oil, 0.51 Fluid Ounce",
+  //     price: 6.99,
+  //     inventory: 10,
+  //     imageUrl:
+  //       "https://images-na.ssl-images-amazon.com/images/I/61rSsFYOp4L._AC_SL1000_.jpg",
+  //     categoryId: 1,
+  //   }),
+  // ]);
 
   await Category.bulkCreate(categoriesData, { validate: true });
-  const products = await Promise.all([
-    Product.create({
-      name: "Nature's Truth Lemongrass",
-      description:
-        "Nature's Truth 100% Pure Lemongrass Essential Oil, 0.51 Fluid Ounce",
-      price: 6.99,
-      inventory: 20,
-      imageUrl:
-        "https://images-na.ssl-images-amazon.com/images/I/414m7O5-FmL._AC_.jpg",
-      categoryId: 1,
-    }),
-    Product.create({
-      name: "Nature's Truth Energy",
-      description: "Nature's Truth Energy Essential Oil, 0.51 Fluid Ounce",
-      price: 6.99,
-      inventory: 10,
-      imageUrl:
-        "https://images-na.ssl-images-amazon.com/images/I/61rSsFYOp4L._AC_SL1000_.jpg",
-      categoryId: 1,
-    }),
-  ]);
-
   await User.bulkCreate(usersArr, { validate: true });
   await Product.bulkCreate(productData, { validate: true });
   await OrderInfo.bulkCreate(orderInfoArr, { validate: true });
