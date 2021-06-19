@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const { models: { User }} = require('../db')
+const { body,validationResult } = require('express-validator');
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -18,24 +19,42 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log("DID WE MAKE IT HERE", req.body)
-    let alreadyExists = await User.findOne({
-      where: {
-        email: req.body.email
-      }
-    });
-    if(alreadyExists) {
-      res.status(409).send('User with email already exists')
+    //form entry validations
+    body('firstName', 'Empty name').trim().isLength({ min: 1 }).escape()
+      .isAlpha().withMessage('First name must be alphabet letters.')
+    body('lastName', 'Empty name').trim().isLength({ min: 1 }).escape()
+      .isAlpha().withMessage('Last name must be alphabet letters.')
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+      return errors.array()
     } else {
-        const NEW = req.body;
-        console.log(">>>>>>>>>>>>>>>", NEW)
-        let newUser = await User.create({
-          email: NEW.email, 
-          password: NEW.password, 
-          firstName: NEW.firstName, 
-          lastName: NEW.lastName, 
-          phoneNum: NEW.phoneNum});
-        res.status(201).json(newUser)
-    }
+      let alreadyExists = await User.findOne({
+        where: {
+          email: req.body.email
+        }
+      });
+      if(alreadyExists) {
+        res.status(409).send('User with email already exists')
+      } else {
+          let newUser = await User.create(req.body);
+          res.status(201).json(newUser)
+        }
+      }
   } catch(error) { next(error) }
 });
+
+router.patch('/:id', async (req, res, next) => {
+  try {
+    //validations HERE
+    let user = await User.findByPk(req.params.id);
+    let updatedUser = await user.update({
+      email: req.body.email || user.email,
+      firstName: req.body.firstName || user.firstName,
+      lastName: req.body.lastName || user.lastName,
+      phoneNum: req.body.phoneNum || user.phoneNum,
+      password: req.body.password || user.password})
+    res.json(updatedUser);
+  } catch (error) {
+    next(error);
+  }
+})
