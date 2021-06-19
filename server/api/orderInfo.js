@@ -33,7 +33,7 @@ router.get("/:userId", async (req, res, next) => {
 //guests
 router.post("/", async (req, res, next) => {
   try {
-    const newOrder = OrderInfo.create({ total: 0, status: "open" });
+    const newOrder = await OrderInfo.create({ total: 0, status: "open" });
     res.json(newOrder);
   } catch (err) {
     next(err);
@@ -44,7 +44,7 @@ router.post("/", async (req, res, next) => {
 router.post("/:userId", async (req, res, next) => {
   try {
     const user = req.params.userId;
-    const newOrder = OrderInfo.create({
+    const newOrder = await OrderInfo.create({
       total: 0,
       status: "open",
       userId: user,
@@ -55,23 +55,42 @@ router.post("/:userId", async (req, res, next) => {
   }
 });
 
-//later when a user times out
-//needs more specification, haven't tested
-router.delete("/:userId", async (req, res, next) => {
+//when user checks out
+router.put("/:userId", async (req, res, next) => {
   try {
     const user = req.params.userId;
-    const deletedOrder = OrderInfo.delete({
+    const order = await OrderInfo.findOne({
       where: {
         userId: user,
         status: "open",
       },
     });
+    await order.update({ status: "closed" });
+    res.json(order);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//later when a user times out
+//needs more specification?
+router.delete("/:userId", async (req, res, next) => {
+  try {
+    const user = req.params.userId;
+    const deletedOrder = await OrderInfo.findOne({
+      where: {
+        userId: user,
+        status: "open",
+      },
+    });
+    await deletedOrder.destroy();
     res.json(deletedOrder);
   } catch (err) {
     next(err);
   }
 });
-router.use((err, req, res, next) => {
+
+router.use((err, req, res) => {
   console.error(err.stack);
   res.status(500).json("error");
 });
