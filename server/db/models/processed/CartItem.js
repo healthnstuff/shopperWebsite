@@ -11,4 +11,16 @@ const CartItem = db.define('cartItem', {
     }
 });
 
+CartItem.prototype.increaseQuantity = async function (num) {
+    await this.increment({
+        inventory: num
+    });
+}
+
+CartItem.prototype.decreaseQuantity = async function (num) {
+    await this.decrement({
+        inventory: num
+    });
+}
+
 module.exports = CartItem
