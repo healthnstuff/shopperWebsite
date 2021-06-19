@@ -20,11 +20,12 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     //form entry validations
-    body('firstName', 'Empty name').trim().isLength({ min: 1 }).escape()
+    body('firstName', 'Empty name')
       .isAlpha().withMessage('First name must be alphabet letters.')
     body('lastName', 'Empty name').trim().isLength({ min: 1 }).escape()
       .isAlpha().withMessage('Last name must be alphabet letters.')
     const errors = validationResult(req);
+    console.log(errors)
     if(!errors.isEmpty()) {
       return errors.array()
     } else {
@@ -43,7 +44,7 @@ router.post('/', async (req, res, next) => {
   } catch(error) { next(error) }
 });
 
-router.patch('/:id', async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
     //validations HERE
     let user = await User.findByPk(req.params.id);
