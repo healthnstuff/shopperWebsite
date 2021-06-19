@@ -20,7 +20,7 @@ router.put("/:id", isLoggedIn, isAdmin, async (req, res, next) => {
     const [n] = await Product.update(req.body, {
       where: { id: req.params.id },
     });
-    // n is the number of affected case (will always be 1 for this route)
+    // n is the number of affected rows (will be 1 as long as the id is valid)
     res.json(n);
   } catch (err) {
     next(err);
@@ -41,17 +41,27 @@ router.put("/", isLoggedIn, isAdmin, async (req, res, next) => {
   }
 });
 
+// DELETE /api/products/:id (deletes a single product; admin only)
 router.delete("/:id", isLoggedIn, isAdmin, async (req, res, next) => {
   try {
     const n = await Product.destroy({
       where: { id: req.params.id },
     });
-    if (!n) {
-      res.json("Product not found");
-    } else {
-      res.json(n);
-    }
+    res.json(n);
   } catch (err) {
     next(err);
   }
+});
+
+// DELETE /api/products (bulk delete; admin only)
+router.delete("/", isLoggedIn, isAdmin, async (req, res, next) => {
+    try {
+        const query = req.body;
+        const n = await Product.destroy({
+            where: query
+        });
+        res.json(n);
+    } catch (err) {
+        next(err);
+    }
 });
