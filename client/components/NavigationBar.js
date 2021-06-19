@@ -10,6 +10,7 @@ const NavigationBar = () => {
         <nav>
           <h1 id="webName">Health N Stuff</h1>
           <div id="navLinks">
+            <img src="./public/healthnstuff_logo.png" />
             <Link to="/" className="link"> Home </Link>
             <Link to="/products" className="link"> Products </Link>
           </div>
