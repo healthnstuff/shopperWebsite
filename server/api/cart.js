@@ -1,38 +1,43 @@
 const router = require("express").Router();
 const {
-  models: { CartItem, Product, OrderInfo },
+  models: { CartItem, OrderInfo },
 } = require("../db");
+const { isLoggedIn, isAdmin } = require("../api/gateKeepingMiddleware");
 const axios = require("axios");
 module.exports = router;
 
-//not sure if this will be necessary, since can't serve products
-router.get("/", async (req, res, next) => {
+//not sure if this will be necessary
+// router.get("/", async (req, res, next) => {
+//   try {
+//     const cart = await CartItem.findAll();
+//     res.json(cart);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+router.get("/:userId", async (req, res, next) => {
   try {
-    const cart = await CartItem.findAll();
+    const user = req.params.userId;
+    const session = await OrderInfo.findOne({
+      where: {
+        userId: user,
+        status: "open",
+      },
+    });
+    const sessionId = session.id;
+    const cart = await CartItem.findAll({
+      where: {
+        orderInfoId: sessionId,
+      },
+    });
     res.json(cart);
   } catch (err) {
     next(err);
   }
 });
 
-router.get("/:userId", async (req, res, next) => {
-  try {
-    //find orderInfo
-  } catch (err) {
-    next(err);
-  }
-});
-
-//how will we find the orderInfo route for this
-// router.post("/", async (req, res, next) => {
-//   try {
-//       const product = req.body.productId;
-//       const session = await OrderInfo.findOne
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
+//adds item to cart
 router.post("/:userId", async (req, res, next) => {
   try {
     const user = req.params.userId;
