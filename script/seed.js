@@ -61,7 +61,6 @@ async function seed() {
   //     cvv: "290",
   //   }),
   // ]);
-
   
   // const products = await Promise.all([
   //   Product.create({
@@ -92,25 +91,26 @@ async function seed() {
   await CartItem.bulkCreate(cartItemsData, { validate: true });
 
   console.log(`seeded successfully`);
-  // return {
-  //   users: {
-  //     cody: users[0],
-  //     murphy: users[1],
-  //   },
-  //   addresses: {
-  //     cody: addresses[0],
-  //   },
-  //   payments: {
-  //     cody: payments[0],
-  //   },
-  //   products: {
-  //     product1: products[0],
-  //     product2: products[1],
-  //   },
-  //   // categories: {
-  //   //   category1: categories[0],
-  //   // },
-  // };
+  return {
+    users: {
+      cody: users[0],
+      murphy: users[1],
+    // },
+    // addresses: {
+    //   cody: addresses[0],
+    // },
+    // payments: {
+    //   cody: payments[0],
+    // },
+    // products: {
+    //   product1: products[0],
+    //   product2: products[1],
+    // },
+    // categories: {
+    //   category1: categories[0],
+    // },
+    }
+  }
 }
 
 /*

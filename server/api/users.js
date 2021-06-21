@@ -65,16 +65,13 @@ router.put("/:id", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-<<<<<<< HEAD
-});
-=======
 });
 // GET /api/users/:id (serves up a single user; admin only)
 router.get("/:id", isLoggedIn, isAdmin, async (req, res, next) => {
   try {
-    const { firstName, lastName, email, phoneNum, isAdmin } =
-      await User.findByPk(req.params.id);
+    const { id, firstName, lastName, email, phoneNum, isAdmin } = await User.findByPk(req.params.id);
     res.json({
+      id,
       firstName,
       lastName,
       email,
@@ -85,4 +82,3 @@ router.get("/:id", isLoggedIn, isAdmin, async (req, res, next) => {
     next(err);
   }
 });
->>>>>>> main
