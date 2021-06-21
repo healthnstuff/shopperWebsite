@@ -18,10 +18,10 @@ router.post("/login", async (req, res, next) => {
 //POST /auth/signup new user signup assign JWT token
 router.post('/signup', async (req, res, next) => {
   try {
-    body('firstName', 'Empty name')
-      .isAlpha().withMessage('First name must be alphabet letters.')
-    body('lastName', 'Empty name').trim().isLength({ min: 1 }).escape()
-      .isAlpha().withMessage('Last name must be alphabet letters.')
+    // body('firstName', 'Empty name')
+    //   .isAlpha().withMessage('First name must be alphabet letters.')
+    // body('lastName', 'Empty name').trim().isLength({ min: 1 }).escape()
+    //   .isAlpha().withMessage('Last name must be alphabet letters.')
     const user = await User.create(req.body)
     res.send({token: await user.generateToken()})
   } catch (err) {
@@ -33,30 +33,22 @@ router.post('/signup', async (req, res, next) => {
   }
 });
 
-//GET using JWT token
-router.get('/me', async (req, res, next) => {
-  try {
-    res.send(await User.findByToken(req.headers.authorization))
-  } catch (ex) {
-    next(ex)
-  }
-})
 
 
 // GET /auth/me (serves up a user's profile info; protects isAdmin and id fields)
-// router.get("/me", isLoggedIn, async (req, res, next) => {
-//   if (req.user) {
-//     const { email, password, firstName, lastName, phoneNum } = req.user;
-//     res.json({
-//       email,
-//       password,
-//       firstName,
-//       lastName,
-//       phoneNum,
-//     });
-//   } else {
-//     next();
-//   }
-// });
+router.get("/me", isLoggedIn, async (req, res, next) => {
+  if (req.user) {
+    const { email, password, firstName, lastName, phoneNum } = req.user;
+    res.json({
+      email,
+      password,
+      firstName,
+      lastName,
+      phoneNum,
+    });
+  } else {
+    next();
+  }
+});
 
 

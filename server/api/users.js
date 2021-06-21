@@ -33,7 +33,7 @@ router.get("/:id", isLoggedIn, isAdmin, async (req, res, next) => {
 });
 
 //update user: logged in or admin only
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', isLoggedIn, isAdmin, async (req, res, next) => {
   try {
     //validations HERE
     let user = await User.findByPk(req.params.id);

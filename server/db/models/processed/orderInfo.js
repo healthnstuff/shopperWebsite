@@ -3,7 +3,7 @@ const db = require('../../db')
 
 const OrderInfo = db.define('orderInfo', {
     total: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
         allowNull: false,
         validate: {
             isNumeric: true,

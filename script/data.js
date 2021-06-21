@@ -1244,4 +1244,6 @@ const productData = [
   },
 ];
 
+
+
 module.exports = { categoriesData, productData, cartItemsData };
