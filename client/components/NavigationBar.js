@@ -15,7 +15,7 @@ const NavigationBar = () => {
             </a>
             <Routes />
             {/* <Link to="/" className="link"> Home </Link> */}
-            {/* <Link to="/products" className="link"> Products </Link> */}
+            <Link to="/products" className="link"> Products </Link>
           </div>
         </nav>
       </div>
