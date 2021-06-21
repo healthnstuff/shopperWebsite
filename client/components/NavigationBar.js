@@ -1,9 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+<<<<<<< HEAD
 import HomePage from "./HomePage";
 import Products from "./Products";
 import Cart from "./Cart";
 import { FaShoppingCart } from "react-icons/fa";
+=======
+import HomePage from './HomePage'
+import Products from './Products'
+import Routes from '../Routes'
+>>>>>>> navBarComponent
 
 const NavigationBar = () => {
   return (
@@ -31,6 +37,9 @@ const NavigationBar = () => {
               {" "}
               <FaShoppingCart />
             </Link>
+            <Routes />
+            {/* <Link to="/" className="link"> Home </Link> */}
+            {/* <Link to="/products" className="link"> Products </Link> */}
           </div>
         </nav>
       </div>

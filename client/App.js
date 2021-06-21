@@ -1,15 +1,17 @@
 import React from 'react'
 
-import Routes from './Routes'
+
 // import Navbar from './components/Navbar'
+import HomePage from './components/HomePage'
 import NavigationBar from './components/NavigationBar'
 
 const App = () => {
   return (
     <div>
       {/* <Navbar /> */}
-      <Routes />
+      {/* <Routes /> */}
       <NavigationBar />
+      <HomePage />
       
     </div>
   )
