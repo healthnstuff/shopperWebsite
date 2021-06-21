@@ -84,13 +84,13 @@ const categoriesData = [
   },
 ];
 
-const productData = [
+let productData = [
   {
     categoryId: 1,
     name: "Nature's Truth Lemongrass",
     description:
       "Nature's Truth 100% Pure Lemongrass Essential Oil, 0.51 Fluid Ounce",
-    price: 6990,
+    price: 6.99,
     inventory: 10,
     imageUrl:
       "https://images-na.ssl-images-amazon.com/images/I/414m7O5-FmL._AC_.jpg",
@@ -99,7 +99,7 @@ const productData = [
     categoryId: 1,
     name: "Nature's Truth Energy",
     description: "Nature's Truth Energy Essential Oil, 0.51 Fluid Ounce",
-    price: 6990,
+    price: 6.99,
     inventory: 10,
     imageUrl:
       "https://images-na.ssl-images-amazon.com/images/I/61rSsFYOp4L._AC_SL1000_.jpg",
@@ -109,7 +109,7 @@ const productData = [
     name: "Nature's Truth Mental Clarity",
     description:
       "Nature's Truth Essential Oil, Mental Clarity, 0.51 Fluid Ounce, Clear",
-    price: 6990,
+    price: 6.99,
     inventory: 10,
     imageUrl:
       "https://images-na.ssl-images-amazon.com/images/I/61BhkA1QrdL._AC_SL1000_.jpg",
@@ -1243,5 +1243,13 @@ const productData = [
     categoryId: 4,
   },
 ];
+
+// modifies the price to be in pennies
+productData = productData.map((product) => {
+  return {
+    ...product,
+    price: Math.ceil(product.price * 100)
+  }
+});
 
 module.exports = { categoriesData, productData, cartItemsData };

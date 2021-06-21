@@ -43,70 +43,74 @@ async function seed() {
     }),
   ]);
 
-  const addresses = await Promise.all([
-    Address.create({
-      addressLine: "2108 Hanifan Lane",
-      city: "Roswell",
-      postalCode: 30913,
-      country: "USA",
-      state: "GA",
-    }),
-  ]);
+  // const addresses = await Promise.all([
+  //   Address.create({
+  //     addressLine: "2108 Hanifan Lane",
+  //     city: "Roswell",
+  //     postalCode: 30913,
+  //     country: "USA",
+  //     state: "GA",
+  //   }),
+  // ]);
 
-  const payments = await Promise.all([
-    UserPayment.create({
-      cardNum: "2930392758491728",
-      expirationDate: "2017-02-01",
-      provider: "Bank of America",
-      cvv: "290",
-    }),
-  ]);
+  // const payments = await Promise.all([
+  //   UserPayment.create({
+  //     cardNum: "2930392758491728",
+  //     expirationDate: "2017-02-01",
+  //     provider: "Bank of America",
+  //     cvv: "290",
+  //   }),
+  // ]);
+  
+  // const products = await Promise.all([
+  //   Product.create({
+  //     name: "Nature's Truth Lemongrass",
+  //     description:
+  //       "Nature's Truth 100% Pure Lemongrass Essential Oil, 0.51 Fluid Ounce",
+  //     price: 6.99,
+  //     inventory: 20,
+  //     imageUrl:
+  //       "https://images-na.ssl-images-amazon.com/images/I/414m7O5-FmL._AC_.jpg",
+  //     categoryId: 1,
+  //   }),
+  //   Product.create({
+  //     name: "Nature's Truth Energy",
+  //     description: "Nature's Truth Energy Essential Oil, 0.51 Fluid Ounce",
+  //     price: 6.99,
+  //     inventory: 10,
+  //     imageUrl:
+  //       "https://images-na.ssl-images-amazon.com/images/I/61rSsFYOp4L._AC_SL1000_.jpg",
+  //     categoryId: 1,
+  //   }),
+  // ]);
 
   await Category.bulkCreate(categoriesData, { validate: true });
-  const products = await Promise.all([
-    Product.create({
-      name: "Nature's Truth Lemongrass",
-      description:
-        "Nature's Truth 100% Pure Lemongrass Essential Oil, 0.51 Fluid Ounce",
-      price: 6.99,
-      inventory: 20,
-      imageUrl:
-        "https://images-na.ssl-images-amazon.com/images/I/414m7O5-FmL._AC_.jpg",
-      categoryId: 1,
-    }),
-    Product.create({
-      name: "Nature's Truth Energy",
-      description: "Nature's Truth Energy Essential Oil, 0.51 Fluid Ounce",
-      price: 6.99,
-      inventory: 10,
-      imageUrl:
-        "https://images-na.ssl-images-amazon.com/images/I/61rSsFYOp4L._AC_SL1000_.jpg",
-      categoryId: 1,
-    }),
-  ]);
-
   await User.bulkCreate(usersArr, { validate: true });
   await Product.bulkCreate(productData, { validate: true });
   await OrderInfo.bulkCreate(orderInfoArr, { validate: true });
   await CartItem.bulkCreate(cartItemsData, { validate: true });
 
-  // console.log(`seeded successfully`);
+  console.log(`seeded successfully`);
   return {
     users: {
       cody: users[0],
       murphy: users[1],
-    },
-    addresses: {
-      cody: addresses[0],
-    },
-    payments: {
-      cody: payments[0],
-    },
-    products: {
-      product1: products[0],
-      product2: products[1],
-    },
-  };
+    // },
+    // addresses: {
+    //   cody: addresses[0],
+    // },
+    // payments: {
+    //   cody: payments[0],
+    // },
+    // products: {
+    //   product1: products[0],
+    //   product2: products[1],
+    // },
+    // categories: {
+    //   category1: categories[0],
+    // },
+    }
+  }
 }
 
 /*

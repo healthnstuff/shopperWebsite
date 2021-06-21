@@ -1,14 +1,14 @@
 import React from 'react'
 
-// import Navbar from './components/Navbar'
 import Routes from './Routes'
+// import Navbar from './components/Navbar'
 import NavigationBar from './components/NavigationBar'
 
 const App = () => {
   return (
     <div>
-      {/* <Navbar />
-      <Routes /> */}
+      {/* <Navbar /> */}
+      <Routes />
       <NavigationBar />
       
     </div>
