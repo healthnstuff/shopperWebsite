@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import HomePage from './HomePage'
 import AllProducts from './AllProducts'
+import Routes from '../Routes'
 
 const NavigationBar = () => {
   return (
@@ -12,8 +13,9 @@ const NavigationBar = () => {
             <a href="/">
              <img src="healthnstuff_finalLogo.png" alt="Logo" width="200px" heigh="100px" />
             </a>
-            <Link to="/" className="link"> Home </Link>
-            <Link to="/products" className="link"> Products </Link>
+            <Routes />
+            {/* <Link to="/" className="link"> Home </Link> */}
+            {/* <Link to="/products" className="link"> Products </Link> */}
           </div>
         </nav>
       </div>
