@@ -16,6 +16,8 @@ module.exports = router;
 //   }
 // });
 
+//ROUTE NO LONGER IN USE
+
 router.get("/:userId", async (req, res, next) => {
   try {
     const user = req.params.userId;

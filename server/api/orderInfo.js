@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { OrderInfo },
+  models: { OrderInfo, CartItem },
 } = require("../db");
 const { isLoggedIn, isAdmin } = require("../api/gateKeepingMiddleware");
 module.exports = router;
@@ -87,6 +87,100 @@ router.delete("/:userId", isAdmin, async (req, res, next) => {
     });
     await deletedOrder.destroy();
     res.json(deletedOrder);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//cart --> /api/orderInfo/cart/:userId
+router.get("/cart/:userId", async (req, res, next) => {
+  try {
+    const user = req.params.userId;
+    const session = await OrderInfo.findOne({
+      where: {
+        userId: user,
+        status: "open",
+      },
+    });
+    const sessionId = session.id;
+    const cart = await CartItem.findAll({
+      where: {
+        orderInfoId: sessionId,
+      },
+    });
+    res.json(cart);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//adds item to cart
+router.post("/cart/:userId", async (req, res, next) => {
+  try {
+    const user = req.params.userId;
+    const product = req.body.productId; //product id
+    const quantity = req.body.quantity; //optional
+    const session = await OrderInfo.findOne({
+      where: {
+        userId: user,
+        status: "open",
+      },
+    });
+    const sessionId = session.id;
+    const item = await CartItem.create({
+      quantity: quantity,
+      productId: product,
+      orderInfoId: sessionId,
+    });
+    res.json(item);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/cart/:userId", async (req, res, next) => {
+  try {
+    const user = req.params.userId;
+    const product = req.body.productId;
+    const session = await OrderInfo.findOne({
+      where: {
+        userId: user,
+        status: "open",
+      },
+    });
+    const sessionId = session.id;
+    const productInCart = await CartItem.findOne({
+      where: {
+        orderInfoId: sessionId,
+        productId: product,
+      },
+    });
+    // await productInCart.increaseQuantity(productInCart.quantity);
+    await productInCart.update(req.body); //may edit this line later
+    res.send(productInCart);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//when emptying cart, delete cartItem first
+router.delete("/cart/:userId", async (req, res, next) => {
+  try {
+    const user = req.params.userId;
+    const session = await OrderInfo.findOne({
+      where: {
+        userId: user,
+        status: "open",
+      },
+    });
+    const sessionId = session.id;
+    const productsInCart = await CartItem.findAll({
+      where: {
+        orderInfoId: sessionId,
+      },
+    });
+    await productsInCart.destroy();
+    res.json(productsInCart);
   } catch (err) {
     next(err);
   }
