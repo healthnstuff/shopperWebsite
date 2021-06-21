@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import HomePage from './HomePage'
-import Products from './Products'
+import AllProducts from './AllProducts'
 
 const NavigationBar = () => {
   return (
@@ -19,7 +19,7 @@ const NavigationBar = () => {
       </div>
       <div>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/products" component={Products} />
+        <Route exact path="/products" component={AllProducts} />
           {/* <Route exact path="/products/:productId" component={} /> */}
       </div>
     </Router>
