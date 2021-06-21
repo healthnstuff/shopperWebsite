@@ -8,7 +8,7 @@ module.exports = router;
 //if admin wants to check all orders
 //q: add check for closed orders only?
 //add isAdmin
-router.get("/", async (req, res, next) => {
+router.get("/", isAdmin, async (req, res, next) => {
   try {
     const orders = await OrderInfo.findAll();
     res.json(orders);
@@ -77,7 +77,7 @@ router.put("/:userId", async (req, res, next) => {
 
 //later when a user times out
 //needs more specification?
-router.delete("/:userId", async (req, res, next) => {
+router.delete("/:userId", isAdmin, async (req, res, next) => {
   try {
     const user = req.params.userId;
     const deletedOrder = await OrderInfo.findOne({
