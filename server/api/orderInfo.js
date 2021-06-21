@@ -8,7 +8,7 @@ module.exports = router;
 //if admin wants to check all orders
 //q: add check for closed orders only?
 //add isAdmin
-router.get("/", isAdmin, async (req, res, next) => {
+router.get("/", isLoggedIn, isAdmin, async (req, res, next) => {
   try {
     const orders = await OrderInfo.findAll();
     res.json(orders);
@@ -16,8 +16,9 @@ router.get("/", isAdmin, async (req, res, next) => {
     next(err);
   }
 });
+
 // get a user's past orders
-router.get("/:userId", async (req, res, next) => {
+router.get("/:userId", isLoggedIn, async (req, res, next) => {
   try {
     const user = req.params.userId;
     const pastOrders = await OrderInfo.findAll({
@@ -32,11 +33,11 @@ router.get("/:userId", async (req, res, next) => {
   }
 });
 
-//guests
+//only when guests check out
 router.post("/", async (req, res, next) => {
   try {
     //add guest id
-    const newOrder = await OrderInfo.create({ total: 0, status: "open" });
+    const newOrder = await OrderInfo.create({ total: 0, status: "closed" });
     res.json(newOrder);
   } catch (err) {
     next(err);
@@ -77,7 +78,7 @@ router.put("/:userId", async (req, res, next) => {
 
 //later when a user times out
 //needs more specification?
-router.delete("/:userId", isAdmin, async (req, res, next) => {
+router.delete("/:userId", isLoggedIn, isAdmin, async (req, res, next) => {
   try {
     const user = req.params.userId;
     const deletedOrder = await OrderInfo.findOne({
@@ -141,6 +142,7 @@ router.post("/cart/:userId", async (req, res, next) => {
 
 router.put("/cart/:userId", async (req, res, next) => {
   try {
+    //req.body = { product: productId, change: increase or decrease, quantity: quantity of change}
     const user = req.params.userId;
     const product = req.body.productId;
     const session = await OrderInfo.findOne({
@@ -156,8 +158,13 @@ router.put("/cart/:userId", async (req, res, next) => {
         productId: product,
       },
     });
-    // await productInCart.increaseQuantity(productInCart.quantity);
-    await productInCart.update(req.body); //may edit this line later
+    const change = req.body.change;
+    if (change === "increase") {
+      await productInCart.increaseQuantity(req.body.quantity);
+    } else {
+      await productInCart.decreaseQuantity(req.body.quantity);
+    }
+    // await productInCart.update(req.body); //may edit this line later
     res.send(productInCart);
   } catch (err) {
     next(err);
