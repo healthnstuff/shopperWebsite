@@ -4,7 +4,7 @@ body {
 
 #navBar {
   box-sizing: content-box;
-  background-color: #E0841E;
+  background-color: #e0841e;
   color: white;
   text-decoration: none;
 }
@@ -35,4 +35,8 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.cartIcon {
+  color: white;
 }
