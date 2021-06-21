@@ -1,22 +1,16 @@
-const router = require("express").Router();
-const {
-  models: { User },
-} = require("../db");
-const { body, validationResult } = require("express-validator");
+const router = require('express').Router()
+const { models: { User }} = require('../db')
 const { isLoggedIn, isAdmin } = require("./gateKeepingMiddleware");
+
 module.exports = router;
 
 // GET /api/users (serves up all users; admin only)
 router.get("/", isLoggedIn, isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
-      // explicitly select only the id and username fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ["id", "firstName"],
+      attributes: ["id", "email", "firstName", "lastName"],
     });
     res.json(users);
-    // attributes: ["id", "email", "firstName", "lastName"],
   } catch (err) {
     next(err);
   }
@@ -25,15 +19,15 @@ router.get("/", isLoggedIn, isAdmin, async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     //form entry validations
-    body("firstName", "Empty name")
-      .isAlpha()
-      .withMessage("First name must be alphabet letters.");
-    body("lastName", "Empty name")
-      .trim()
-      .isLength({ min: 1 })
-      .escape()
-      .isAlpha()
-      .withMessage("Last name must be alphabet letters.");
+    // body("firstName", "Empty name")
+    //   .isAlpha()
+    //   .withMessage("First name must be alphabet letters.");
+    // body("lastName", "Empty name")
+    //   .trim()
+    //   .isLength({ min: 1 })
+    //   .escape()
+    //   .isAlpha()
+    //   .withMessage("Last name must be alphabet letters.");
     const errors = validationResult(req);
     console.log(errors);
     if (!errors.isEmpty()) {

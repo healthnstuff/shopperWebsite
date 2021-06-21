@@ -24,24 +24,24 @@ async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   // console.log("db synced!");
 
-  // Creating Users
-  const users = await Promise.all([
-    User.create({
-      email: "cody@gmail.com",
-      password: "123",
-      firstName: "Cody",
-      lastName: "Martin",
-      phoneNum: "293 219 9906",
-    }),
-    User.create({
-      email: "murphy@gmail.com",
-      password: "123",
-      firstName: "Murphy",
-      lastName: "Jones",
-      phoneNum: "809 346-9238",
-      isAdmin: true,
-    }),
-  ]);
+  // // Creating Users
+  // const users = await Promise.all([
+  //   User.create({
+  //     email: "cody@gmail.com",
+  //     password: "123",
+  //     firstName: "Cody",
+  //     lastName: "Martin",
+  //     phoneNum: "293 219 9906",
+  //   }),
+  //   User.create({
+  //     email: "murphy@gmail.com",
+  //     password: "123",
+  //     firstName: "Murphy",
+  //     lastName: "Jones",
+  //     phoneNum: "809 346-9238",
+  //     isAdmin: true,
+  //   }),
+  // ]);
 
   // const addresses = await Promise.all([
   //   Address.create({

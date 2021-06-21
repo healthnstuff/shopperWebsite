@@ -5,6 +5,7 @@ const {
 const { isLoggedIn } = require("../api/gateKeepingMiddleware");
 module.exports = router;
 
+//POST /auth/login assigns JWT token
 router.post("/login", async (req, res, next) => {
   try {
     res.send({ token: await User.authenticate(req.body) });
@@ -13,18 +14,26 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.post("/signup", async (req, res, next) => {
+
+//POST /auth/signup new user signup assign JWT token
+router.post('/signup', async (req, res, next) => {
   try {
-    const user = await User.create(req.body);
-    res.send({ token: await user.generateToken() });
+    // body('firstName', 'Empty name')
+    //   .isAlpha().withMessage('First name must be alphabet letters.')
+    // body('lastName', 'Empty name').trim().isLength({ min: 1 }).escape()
+    //   .isAlpha().withMessage('Last name must be alphabet letters.')
+    const user = await User.create(req.body)
+    res.send({token: await user.generateToken()})
   } catch (err) {
-    if (err.name === "SequelizeUniqueConstraintError") {
-      res.status(401).send("User already exists");
+    if (err.email === 'SequelizeUniqueConstraintError') {
+      res.status(401).send('User already exists')
     } else {
       next(err);
     }
   }
 });
+
+
 
 // GET /auth/me (serves up a user's profile info; protects isAdmin and id fields)
 router.get("/me", isLoggedIn, async (req, res, next) => {
@@ -41,3 +50,5 @@ router.get("/me", isLoggedIn, async (req, res, next) => {
     next();
   }
 });
+
+

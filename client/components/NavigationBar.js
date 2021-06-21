@@ -8,9 +8,10 @@ const NavigationBar = () => {
     <Router>
       <div id="navBar">
         <nav>
-          <h1 id="webName">Health N Stuff</h1>
           <div id="navLinks">
-            <img src="./public/healthnstuff_logo.png" />
+            <a href="/">
+             <img src="healthnstuff_finalLogo.png" alt="Logo" width="200px" heigh="100px" />
+            </a>
             <Link to="/" className="link"> Home </Link>
             <Link to="/products" className="link"> Products </Link>
           </div>
