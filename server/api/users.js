@@ -16,24 +16,41 @@ router.get("/", isLoggedIn, isAdmin, async (req, res, next) => {
   }
 });
 
-// GET /api/users/:id (serves up a single user; admin only)
-router.get("/:id", isLoggedIn, isAdmin, async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
-    const { firstName, lastName, email, phoneNum, isAdmin } = await User.findByPk(req.params.id);
-    res.json({
-      firstName,
-      lastName,
-      email,
-      phoneNum,
-      isAdmin
-    });
-  } catch (err) {
-    next(err);
+    //form entry validations
+    // body("firstName", "Empty name")
+    //   .isAlpha()
+    //   .withMessage("First name must be alphabet letters.");
+    // body("lastName", "Empty name")
+    //   .trim()
+    //   .isLength({ min: 1 })
+    //   .escape()
+    //   .isAlpha()
+    //   .withMessage("Last name must be alphabet letters.");
+    const errors = validationResult(req);
+    console.log(errors);
+    if (!errors.isEmpty()) {
+      return errors.array();
+    } else {
+      let alreadyExists = await User.findOne({
+        where: {
+          email: req.body.email,
+        },
+      });
+      if (alreadyExists) {
+        res.status(409).send("User with email already exists");
+      } else {
+        let newUser = await User.create(req.body);
+        res.status(201).json(newUser);
+      }
+    }
+  } catch (error) {
+    next(error);
   }
 });
 
-//update user: logged in or admin only
-router.put('/:id', isLoggedIn, isAdmin, async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
     //validations HERE
     let user = await User.findByPk(req.params.id);
@@ -42,9 +59,30 @@ router.put('/:id', isLoggedIn, isAdmin, async (req, res, next) => {
       firstName: req.body.firstName || user.firstName,
       lastName: req.body.lastName || user.lastName,
       phoneNum: req.body.phoneNum || user.phoneNum,
-      password: req.body.password || user.password})
+      password: req.body.password || user.password,
+    });
     res.json(updatedUser);
   } catch (error) {
     next(error);
   }
+<<<<<<< HEAD
 });
+=======
+});
+// GET /api/users/:id (serves up a single user; admin only)
+router.get("/:id", isLoggedIn, isAdmin, async (req, res, next) => {
+  try {
+    const { firstName, lastName, email, phoneNum, isAdmin } =
+      await User.findByPk(req.params.id);
+    res.json({
+      firstName,
+      lastName,
+      email,
+      phoneNum,
+      isAdmin,
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+>>>>>>> main
