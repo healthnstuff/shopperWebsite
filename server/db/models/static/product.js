@@ -33,4 +33,18 @@ const Product = db.define("product", {
   },
 });
 
+// Adds num to the instance's current inventory value
+Product.prototype.increaseInventory = async function (num) {
+  await this.increment({
+    inventory: num
+  });
+}
+
+// Subtracts num from the instance's current inventory value
+Product.prototype.decreaseInventory = async function (num) {
+  await this.decrement({
+    inventory: num
+  });
+}
+
 module.exports = Product;
