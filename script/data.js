@@ -1244,7 +1244,7 @@ let productData = [
   },
 ];
 
-// edits the price to be in pennies
+// modifies the price to be in pennies
 productData = productData.map((product) => {
   return {
     ...product,
