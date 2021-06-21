@@ -106,9 +106,6 @@ async function seed() {
       product1: products[0],
       product2: products[1],
     },
-    // categories: {
-    //   category1: categories[0],
-    // },
   };
 }
 
