@@ -14,15 +14,17 @@ describe("Category model", () => {
   beforeEach(async () => {
     categories = (await seed()).categories;
   });
+  console.log(categories);
 
   describe("Basic Fields: name", () => {
-        describe("name", () => {
-            it("is a string", () => {
-                expect(categories.category1.name).to.equal(
-                "Essential Oils",
-                "Was not able to create a category with name Essential Oils"
-                );
-            });
-        });
+    describe("name", () => {
+      it("is a string", async () => {
+        const category = await Category.create({ name: "Test Category" });
+        expect(category.name).to.equal(
+          "Test Category",
+          "Was not able to create a category with name Essential Oils"
+        );
+      });
     });
+  });
 });
