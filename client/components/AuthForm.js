@@ -12,13 +12,8 @@ const AuthForm = (props) => {
     <div>
       <form onSubmit={handleSubmit} name={name}>
         <div>
-<<<<<<< HEAD
           <label htmlFor="email">
-            <small>Username</small>
-=======
-          <label htmlFor="username">
             <small>Email</small>
->>>>>>> navBarComponent
           </label>
           <input name="email" type="text" />
         </div>
@@ -63,25 +58,14 @@ const mapSignup = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
-<<<<<<< HEAD
       evt.preventDefault();
       const formName = evt.target.name;
-      const username = evt.target.username.value;
+      const email = evt.target.email.value;
       const password = evt.target.password.value;
-      dispatch(authenticate(username, password, formName));
+      dispatch(authenticate(email, password, formName));
     },
   };
 };
-=======
-      evt.preventDefault()
-      const formName = evt.target.name
-      const email = evt.target.email.value
-      const password = evt.target.password.value
-      dispatch(authenticate(email, password, formName))
-    }
-  }
-}
->>>>>>> navBarComponent
 
 export const Login = connect(mapLogin, mapDispatch)(AuthForm);
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm);
