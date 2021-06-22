@@ -13,12 +13,12 @@ class AllUsers extends React.Component {
                     {this.props.users.map(user => {
                         return ( 
                             <div key={user.id}>
-                                    <div>
-                                        <p>First Name: {user.firstName}</p>
-                                        <p>Last Name: {user.lastName}</p>
-                                        <p>Email: {user.email}</p>
-                                        <p>Phone Number: {user.phoneNum}</p>
-                                    </div>
+                                <div>
+                                    <p>First Name: {user.firstName}</p>
+                                    <p>Last Name: {user.lastName}</p>
+                                    <p>Email: {user.email}</p>
+                                    <p>Phone Number: {user.phoneNum}</p>
+                                </div>
                             </div>
                         )
                     })}
