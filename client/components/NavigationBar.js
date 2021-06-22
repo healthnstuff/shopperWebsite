@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import AllProducts from './AllProducts'
 import Routes from '../Routes'
 import SingleProduct from './SingleProduct'
+import Users from './Users'
+import SingleUser from './SingleUser';
 
 const NavigationBar = () => {
   return (
@@ -17,6 +19,7 @@ const NavigationBar = () => {
             <Routes />
             {/* <Link to="/" className="link"> Home </Link> */}
             <Link to="/products" className="link"> Products </Link>
+            <Link to="/users" className="link"> Users </Link>
           </div>
         </nav>
       </div>
@@ -24,6 +27,8 @@ const NavigationBar = () => {
         {/* <Route exact path="/" component={HomePage} /> */}
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
+        <Route exact path ="/users" component={Users} />
+        <Route exact path="/users/:id" component={SingleUser} />
       </div>
     </Router>
   );
