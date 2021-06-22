@@ -12,7 +12,7 @@ const getCart = (products) => {
 export const fetchCart = (id) => async (dispatch, getState) => {
   try {
     const { data } = await axios.get(`/api/orderInfo/cart/${id}`);
-    dispatch(getCart(data));
+    return dispatch(getCart(data));
   } catch (err) {
     console.log("error in fetchCart thunk");
     // console.error(error);

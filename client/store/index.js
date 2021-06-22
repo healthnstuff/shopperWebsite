@@ -9,9 +9,9 @@ import singleProductReducer from "./singleProduct";
 
 const reducer = combineReducers({
   auth,
-  cart: cartReducer,
   products: productsReducer,
   singleProduct: singleProductReducer,
+  cart: cartReducer,
 });
 
 const middleware = composeWithDevTools(
