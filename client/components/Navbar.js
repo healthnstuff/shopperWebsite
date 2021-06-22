@@ -1,13 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, Route} from 'react-router-dom'
 import {logout} from '../store'
+import { Login } from './AuthForm';
+import Routes from "../Routes"
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>Health N Stuff</h1>
+  <div id="navBar">
+    <h1>Health N Stuff {JSON.stringify(isLoggedIn)} val</h1>
     <nav>
-            
+        <a href="/">
+            <img src="healthnstuff_finalLogo.png" alt="Logo" width="200px" heigh="100px" />
+        </a> 
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
@@ -19,8 +23,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Routes />
         </div>
       )}
     </nav>
@@ -32,8 +35,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
  * CONTAINER
  */
 const mapState = state => {
+    console.log("map state is being called", JSON.stringify(state))
   return {
-    isLoggedIn: !!state.auth.id
+    isLoggedIn: !!state.auth.firstName
   }
 }
 

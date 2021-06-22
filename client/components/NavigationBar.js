@@ -1,31 +1,29 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import HomePage from './HomePage'
-import Products from './Products'
-import Routes from '../Routes'
+// import React from "react";
+// import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+// import HomePage from './HomePage'
+// import Products from './Products'
+// import Routes from '../Routes'
 
-const NavigationBar = () => {
-  return (
-    <Router>
-      <div id="navBar">
-        <nav>
-          <div id="navLinks">
-            <a href="/">
-             <img src="healthnstuff_finalLogo.png" alt="Logo" width="200px" heigh="100px" />
-            </a>
-            <Routes />
-            {/* <Link to="/" className="link"> Home </Link> */}
-            {/* <Link to="/products" className="link"> Products </Link> */}
-          </div>
-        </nav>
-      </div>
-      <div>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/products" component={Products} />
-          {/* <Route exact path="/products/:productId" component={} /> */}
-      </div>
-    </Router>
-  );
-};
+// const NavigationBar = () => {
+//   return (
+//     <Router>
+//       <div id="navBar">
+//         <nav>
+//           <div id="navLinks">
+           
+//             <Routes />
+//             {/* <Link to="/" className="link"> Home </Link> */}
+//             {/* <Link to="/products" className="link"> Products </Link> */}
+//           </div>
+//         </nav>
+//       </div>
+//       <div>
+//         <Route exact path="/" component={HomePage} />
+//         <Route exact path="/products" component={Products} />
+//           {/* <Route exact path="/products/:productId" component={} /> */}
+//       </div>
+//     </Router>
+//   );
+// };
 
-export default NavigationBar;
+// export default NavigationBar;
