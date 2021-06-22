@@ -40,3 +40,28 @@ form div {
 .link {
   color: white;
 }
+
+.products {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.product {
+  padding: 10px;
+  background-color: #a55093;
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+  color: white;
+}
+
+.allProductsButton {
+  padding: 10px;
+  color: white;
+  background-color: #537c07;
+  text-align: center;
+  width: 100%;
+  font-size: 20px;
+}

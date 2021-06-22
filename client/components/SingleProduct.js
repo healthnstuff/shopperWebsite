@@ -11,9 +11,9 @@ class SingleProduct extends React.Component {
         const product = this.props.singleProduct
         return ( 
             <div key={product.id}>
-                <img src={product.imageUrl} width="200" height="200"/>
+                <img src={product.imageUrl} width="200" height="400"/>
                     <p>Name: {product.name}</p>
-                    <p>Price: {product.price}</p>
+                    <p>Price: ${product.price}</p>
                     <p>Description: {product.description}</p>
                     <span>Quantity: </span> 
                     <select>
