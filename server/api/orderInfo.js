@@ -117,6 +117,7 @@ router.get("/cart/:userId", async (req, res, next) => {
 });
 
 //adds item to cart
+// /api/orderInfo/cart/:userId
 router.post("/cart/:userId", async (req, res, next) => {
   try {
     const user = req.params.userId;
@@ -143,8 +144,9 @@ router.post("/cart/:userId", async (req, res, next) => {
 router.put("/cart/:userId", async (req, res, next) => {
   try {
     //req.body = { product: productId, change: increase or decrease, quantity: quantity of change}
+    console.log("BODY ODY", req.body);
     const user = req.params.userId;
-    const product = req.body.productId;
+    const product = req.body.product;
     const session = await OrderInfo.findOne({
       where: {
         userId: user,
@@ -164,7 +166,6 @@ router.put("/cart/:userId", async (req, res, next) => {
     } else {
       await productInCart.decreaseQuantity(req.body.quantity);
     }
-    // await productInCart.update(req.body); //may edit this line later
     res.send(productInCart);
   } catch (err) {
     next(err);
