@@ -84,7 +84,7 @@ router.get('/', async (req, res, next) => {
 //api/products/:id
 router.get('/:id', async (req, res, next) => {
   try {
-    const productById = await Product.findAll({
+    const productById = await Product.findOne({
         where: {
             id: req.params.id
         },

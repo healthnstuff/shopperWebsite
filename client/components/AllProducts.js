@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from '../store/products'
+import { Link } from 'react-router-dom'
 
 class AllProducts extends React.Component {
     componentDidMount() {
@@ -10,15 +11,19 @@ class AllProducts extends React.Component {
         return (
             <div>
                 <div>
-                {this.props.products.map(product => {
-                    return ( 
+                    {this.props.products.map(product => {
+                        return ( 
                             <div key={product.id}>
-                                <img src={product.imageUrl} width="200" height="200"/>
-                                <p>Name: {product.name}</p>
-                                <p>Price: {product.price}</p>
+                                <Link to={`/products/${product.id}`}>
+                                    <div>
+                                        <img src={product.imageUrl} width="200" height="200"/>
+                                        <p>Name: {product.name}</p>
+                                        <p>Price: {product.price}</p>
+                                    </div>
+                                 </Link>   
                                 <button>ADD TO CART</button>
                             </div>
-                           )
+                        )
                     })}
                 </div>
             </div>
@@ -38,4 +43,4 @@ const mapDispatch = (dispatch) => {
     }
 };
   
-  export default connect(mapState, mapDispatch)(AllProducts);
+export default connect(mapState, mapDispatch)(AllProducts);
