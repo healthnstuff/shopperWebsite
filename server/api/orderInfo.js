@@ -173,10 +173,10 @@ router.put("/cart/:userId", async (req, res, next) => {
 });
 
 //delete single item
-router.delete("/cart/:userId/:productId", async (req, res, next) => {
+router.delete("/cart/:userId", async (req, res, next) => {
   try {
     const user = req.params.userId;
-    const product = req.params.productId;
+    const product = req.body.productId;
     const session = await OrderInfo.findOne({
       where: {
         userId: user,
