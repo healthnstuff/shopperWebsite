@@ -40,3 +40,7 @@ form div {
 .cartIcon {
   color: white;
 }
+
+.cartItem {
+  margin: auto;
+}

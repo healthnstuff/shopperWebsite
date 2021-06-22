@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchCart } from "../store/cart";
 import { fetchSingleProduct } from "../store/singleProduct";
+import { Link } from "react-router-dom";
 
 class Cart extends React.Component {
   constructor() {
@@ -20,10 +21,21 @@ class Cart extends React.Component {
   }
 
   render() {
-    console.log("STATE", this.state);
+    const products = this.state.products;
+    console.log(products);
     return (
       <div>
-        <h1>this is the cart</h1>
+        {products.map((product) => {
+          return (
+            <div key={product.id} className="cartItem">
+              <img src={product.imageUrl} width="100" height="100"></img>
+              <Link to={`/products/${product.id}`}>
+                <p>{product.name}</p>
+              </Link>
+              <p>{`$ ${product.price}`}</p>
+            </div>
+          );
+        })}
         <button type="button" className="checkoutBtn">
           Check Out!{" "}
         </button>
