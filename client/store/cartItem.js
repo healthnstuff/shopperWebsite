@@ -20,7 +20,7 @@ const delete_item = (product) => {
 
 export const updateCartItem = (id, body) => async (dispatch) => {
   try {
-    const { data } = axios.put(`/api/orderInfo/cart/${id}`, body);
+    const { data } = await axios.put(`/api/orderInfo/cart/${id}`, body);
     dispatch(update_item(data));
   } catch (err) {
     ("error in updateCart thunk");
@@ -29,10 +29,15 @@ export const updateCartItem = (id, body) => async (dispatch) => {
 
 export const deleteCartItem = (id, body) => async (dispatch) => {
   try {
-    const { data } = axios.delete(`/api/orderInfo/cart/${id}`, body);
+    const { data } = await axios.delete(`/api/orderInfo/cart/${id}`, body, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     dispatch(delete_item(data));
   } catch (err) {
-    ("error in deleteCartItem thunk");
+    console.error(err);
+    console.log("error in deleteCartItem thunk");
   }
 };
 

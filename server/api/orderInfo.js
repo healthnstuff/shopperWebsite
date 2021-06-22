@@ -144,7 +144,6 @@ router.post("/cart/:userId", async (req, res, next) => {
 router.put("/cart/:userId", async (req, res, next) => {
   try {
     //req.body = { product: productId, change: increase or decrease, quantity: quantity of change}
-    console.log("BODY ODY", req.body);
     const user = req.params.userId;
     const product = req.body.product;
     const session = await OrderInfo.findOne({
@@ -175,8 +174,10 @@ router.put("/cart/:userId", async (req, res, next) => {
 //delete single item
 router.delete("/cart/:userId", async (req, res, next) => {
   try {
+    console.log(req.headers);
+    console.log(req.body);
     const user = req.params.userId;
-    const product = req.body.productId;
+    const product = req.body.product;
     const session = await OrderInfo.findOne({
       where: {
         userId: user,
@@ -191,8 +192,9 @@ router.delete("/cart/:userId", async (req, res, next) => {
       },
     });
     await productInCart.destroy();
+    res.json(productInCart);
   } catch (err) {
-    next(error);
+    next(err);
   }
 });
 
