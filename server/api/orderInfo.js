@@ -171,6 +171,30 @@ router.put("/cart/:userId", async (req, res, next) => {
   }
 });
 
+//delete single item
+router.delete("/cart/:userId/:productId", async (req, res, next) => {
+  try {
+    const user = req.params.userId;
+    const product = req.params.productId;
+    const session = await OrderInfo.findOne({
+      where: {
+        userId: user,
+        status: "open",
+      },
+    });
+    const sessionId = session.id;
+    const productInCart = await CartItem.findOne({
+      where: {
+        orderInfoId: sessionId,
+        productId: product,
+      },
+    });
+    await productInCart.destroy();
+  } catch (err) {
+    next(error);
+  }
+});
+
 //when emptying cart, delete cartItem first
 router.delete("/cart/:userId", async (req, res, next) => {
   try {

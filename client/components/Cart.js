@@ -12,10 +12,13 @@ class Cart extends React.Component {
   }
 
   render() {
-    console.log("FUCK", this.props);
+    console.log("PROPS", this.props);
     return (
       <div>
         <h1>this is the cart</h1>
+        <button type="button" className="checkoutBtn">
+          Check Out!{" "}
+        </button>
       </div>
     );
   }
@@ -23,7 +26,7 @@ class Cart extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products,
+    cart: state.cart,
   };
 };
 
