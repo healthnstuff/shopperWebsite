@@ -38,8 +38,9 @@ router.post('/signup', async (req, res, next) => {
 // GET /auth/me (serves up a user's profile info; protects isAdmin and id fields)
 router.get("/me", isLoggedIn, async (req, res, next) => {
   if (req.user) {
-    const { email, password, firstName, lastName, phoneNum } = req.user;
+    const { id, email, password, firstName, lastName, phoneNum } = req.user;
     res.json({
+      id,
       email,
       password,
       firstName,
