@@ -5,13 +5,10 @@ import {logout} from '../store'
 import { Login } from './AuthForm';
 import Routes from "../Routes"
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div id="navBar">
-    <h1>Health N Stuff {JSON.stringify(isLoggedIn)} val</h1>
+const LoggingIn = ({handleClick, isLoggedIn}) => (
+  <div id="LoggingIn">
+    <h1>{JSON.stringify(isLoggedIn)} val</h1>
     <nav>
-        <a href="/">
-            <img src="healthnstuff_finalLogo.png" alt="Logo" width="200px" heigh="100px" />
-        </a> 
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
@@ -19,6 +16,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <a href="#" onClick={handleClick}>
             Logout
           </a>
+          {/* <Link to="/singleUser">Profile</Link> */}
+          <button>Profile</button>
         </div>
       ) : (
         <div>
@@ -49,4 +48,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(mapState, mapDispatch)(LoggingIn)

@@ -24,24 +24,24 @@ async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
   // console.log("db synced!");
 
-  // // Creating Users
-  // const users = await Promise.all([
-  //   User.create({
-  //     email: "cody@gmail.com",
-  //     password: "123",
-  //     firstName: "Cody",
-  //     lastName: "Martin",
-  //     phoneNum: "293 219 9906",
-  //   }),
-  //   User.create({
-  //     email: "murphy@gmail.com",
-  //     password: "123",
-  //     firstName: "Murphy",
-  //     lastName: "Jones",
-  //     phoneNum: "809 346-9238",
-  //     isAdmin: true,
-  //   }),
-  // ]);
+  // Creating Users
+  const users = await Promise.all([
+    User.create({
+      email: "cody@gmail.com",
+      password: "123",
+      firstName: "Cody",
+      lastName: "Martin",
+      phoneNum: "293 219 9906",
+    }),
+    User.create({
+      email: "murphy@gmail.com",
+      password: "123",
+      firstName: "Murphy",
+      lastName: "Jones",
+      phoneNum: "809 346-9238",
+      isAdmin: true,
+    }),
+  ]);
 
   // const addresses = await Promise.all([
   //   Address.create({
@@ -61,7 +61,7 @@ async function seed() {
   //     cvv: "290",
   //   }),
   // ]);
-  
+
   // const products = await Promise.all([
   //   Product.create({
   //     name: "Nature's Truth Lemongrass",
@@ -95,22 +95,22 @@ async function seed() {
     users: {
       cody: users[0],
       murphy: users[1],
-    // },
-    // addresses: {
-    //   cody: addresses[0],
-    // },
-    // payments: {
-    //   cody: payments[0],
-    // },
-    // products: {
-    //   product1: products[0],
-    //   product2: products[1],
-    // },
-    // categories: {
-    //   category1: categories[0],
-    // },
-    }
-  }
+      // },
+      // addresses: {
+      //   cody: addresses[0],
+      // },
+      // payments: {
+      //   cody: payments[0],
+      // },
+      // products: {
+      //   product1: products[0],
+      //   product2: products[1],
+      // },
+      // categories: {
+      //   category1: categories[0],
+      // },
+    },
+  };
 }
 
 /*
