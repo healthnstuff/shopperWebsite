@@ -24,7 +24,7 @@ export const fetchUsers = () => async (dispatch) => {
 //initial state
 const initialState = []
 
-//campusesreducer
+//users reducer
 export default function usersReducer(state = initialState, action) {
   switch (action.type) {
     case SET_USERS:

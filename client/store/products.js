@@ -24,7 +24,7 @@ export const fetchProducts = () => async (dispatch) => {
 //initial state
 const initialState = []
 
-//campusesreducer
+//products reducer
 export default function productsReducer(state = initialState, action) {
   switch (action.type) {
     case SET_PRODUCTS:
