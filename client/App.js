@@ -28,9 +28,9 @@ class App extends React.Component {
       <div>
         {/* <Navbar /> */}
         {/* <Routes /> */}
-        <NavigationBar />
+        <NavigationBar props={this.localAdapter} />
         <Navbar />
-        <HomePage props={this.localAdapter} />
+        <HomePage />
       </div>
     );
   }
