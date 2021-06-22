@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, NavLink, Link } from "react-router-dom";
 import Routes from "../Routes";
-import { FaShoppingCart } from "react-icons/fa";
+
 
 import HomePage from "./HomePage";
 import Cart from "./Cart";
@@ -14,13 +14,6 @@ const NavigationBar = () => {
       <div id="navBar">
         <nav>
           <div id="navLinks">
-            <NavLink to="/" className="logo">
-              <img src="healthnstuff_finalLogo.png" />
-            </NavLink>
-            <Link to="/orderInfo/cart/:userId" className="cartIcon">
-              {" "}
-              <FaShoppingCart />
-            </Link>
             <div id="categories">
               <NavLink to="/products" className="navLink">
                 <button className="categoryButton" type="button">All Products</button>

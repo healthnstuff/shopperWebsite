@@ -3,11 +3,15 @@ import {connect} from 'react-redux'
 import {Link, Route, NavLink} from 'react-router-dom'
 import {logout} from '../store'
 import { Login } from './AuthForm';
+import { FaShoppingCart } from "react-icons/fa";
 import Routes from "../Routes"
 
 const LoggingIn = ({handleClick, isLoggedIn, name, id}) => (
   <div id="LoggingIn">
     <nav>
+      <NavLink to="/" className="logo">
+        <img src="healthnstuff_finalLogo.png" />
+      </NavLink>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
@@ -17,6 +21,10 @@ const LoggingIn = ({handleClick, isLoggedIn, name, id}) => (
           <NavLink className="navLink" exact to={`/users/${id}`}>
             <button>Profile</button>
           </NavLink>
+          <Link to="/orderInfo/cart/:userId" className="cartIcon">
+              {" "}
+              <FaShoppingCart />
+            </Link>
         </div>
       ) : (
         <div>
