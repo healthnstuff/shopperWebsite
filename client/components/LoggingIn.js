@@ -1,23 +1,22 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link, Route} from 'react-router-dom'
+import {Link, Route, NavLink} from 'react-router-dom'
 import {logout} from '../store'
 import { Login } from './AuthForm';
 import Routes from "../Routes"
 
-const LoggingIn = ({handleClick, isLoggedIn}) => (
+const LoggingIn = ({handleClick, isLoggedIn, name, id}) => (
   <div id="LoggingIn">
-    <h1>{JSON.stringify(isLoggedIn)} val</h1>
     <nav>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
+          <h1>Welcome, {name}! </h1>
+          <button className="navLink" onClick={handleClick}>Logout</button>
           {/* <Link to="/singleUser">Profile</Link> */}
-          <button>Profile</button>
+          <NavLink className="navLink" exact to={`/users/${id}`}>
+            <button>Profile</button>
+          </NavLink>
         </div>
       ) : (
         <div>
@@ -34,9 +33,11 @@ const LoggingIn = ({handleClick, isLoggedIn}) => (
  * CONTAINER
  */
 const mapState = state => {
-    console.log("map state is being called", JSON.stringify(state))
+    // console.log("map state is being called", JSON.stringify(state))
   return {
-    isLoggedIn: !!state.auth.firstName
+    isLoggedIn: !!state.auth.firstName,
+    name: state.auth.firstName || '',
+    id: state.auth.id || null
   }
 }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, NavLink, Link } from "react-router-dom";
 import Routes from "../Routes";
 import { FaShoppingCart } from "react-icons/fa";
 
@@ -14,24 +14,17 @@ const NavigationBar = () => {
       <div id="navBar">
         <nav>
           <div id="navLinks">
-            <a href="/">
-              <img
-                src="healthnstuff_finalLogo.png"
-                alt="Logo"
-                width="200px"
-                heigh="100px"
-              />
-            </a>
-            <Link to="/products" className="link">
-              {" "}
-              Products{" "}
-            </Link>
+            <NavLink to="/" className="logo">
+              <img src="healthnstuff_finalLogo.png" />
+            </NavLink>
             <Link to="/orderInfo/cart/:userId" className="cartIcon">
               {" "}
               <FaShoppingCart />
             </Link>
             <div id="categories">
-                <button>All Products</button>
+              <NavLink to="/products" className="navLink">
+                <button className="categoryButton" type="button">All Products</button>
+              </NavLink>
                 <button>Essential Oils</button>
                 <button>Supplements</button>
                 <button>Vitamins</button>
