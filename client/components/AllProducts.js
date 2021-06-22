@@ -5,8 +5,17 @@ import { createOrder } from "../store/orderInfo";
 import { Link } from "react-router-dom";
 
 class AllProducts extends React.Component {
+  constructor() {
+    super();
+    this.addToCart = this.addToCart.bind(this);
+  }
   componentDidMount() {
     this.props.getProducts();
+  }
+
+  addToCart(evt) {
+    const product = evt.target.value;
+    this.props.cartAdapter.addToCart(product);
   }
 
   render() {
@@ -23,9 +32,13 @@ class AllProducts extends React.Component {
                     <p>Price: {product.price}</p>
                   </div>
                 </Link>
-                <Link to="/orderInfo/:userId" className="addCartBtn">
+                <button
+                  type="button"
+                  onClick={this.addToCart}
+                  value={product.id}
+                >
                   ADD TO CART
-                </Link>
+                </button>
               </div>
             );
           })}

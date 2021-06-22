@@ -1,6 +1,5 @@
 import React from "react";
-
-import Navbar from "./components/Navbar";
+import LoggingIn from "./components/LoggingIn";
 import HomePage from "./components/HomePage";
 import NavigationBar from "./components/NavigationBar";
 
@@ -21,16 +20,18 @@ class App extends React.Component {
     clearCart: function () {
       localStorage.removeItem("cart");
     },
+    addToCart: function (id) {
+      let array = this.getCart();
+      let newArray = [...array, id];
+      this.saveCart(newArray);
+    },
   };
 
   render() {
     return (
-      <div>
-        {/* <Navbar /> */}
-        {/* <Routes /> */}
+      <div id="app">
+        <LoggingIn />
         <NavigationBar props={this.localAdapter} />
-        <Navbar />
-        <HomePage />
       </div>
     );
   }
