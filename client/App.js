@@ -11,7 +11,7 @@ const App = () => {
       {/* <Navbar /> */}
       {/* <Routes /> */}
       <NavigationBar />
-      <HomePage />
+      {/* <HomePage /> */}
       
     </div>
   )

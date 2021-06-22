@@ -1,10 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import HomePage from "./HomePage";
-import Products from "./Products";
-import Cart from "./Cart";
-import { FaShoppingCart } from "react-icons/fa";
 import Routes from "../Routes";
+import { FaShoppingCart } from "react-icons/fa";
+
+import HomePage from "./HomePage";
+import Cart from "./Cart";
+import AllProducts from "./AllProducts";
+import SingleProduct from "./SingleProduct";
 
 const NavigationBar = () => {
   return (
@@ -33,16 +35,14 @@ const NavigationBar = () => {
               <FaShoppingCart />
             </Link>
             <Routes />
-            {/* <Link to="/" className="link"> Home </Link> */}
-            {/* <Link to="/products" className="link"> Products </Link> */}
           </div>
         </nav>
       </div>
       <div>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/products" component={Products} />
         <Route exact path="/orderInfo/cart/:userId" component={Cart} />
-        {/* <Route exact path="/products/:productId" component={} /> */}
+        <Route exact path="/products" component={AllProducts} />
+        <Route exact path="/products/:productId" component={SingleProduct} />
       </div>
     </Router>
   );
