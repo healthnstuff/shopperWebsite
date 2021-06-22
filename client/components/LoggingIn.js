@@ -7,10 +7,10 @@ import { FaShoppingCart } from "react-icons/fa";
 import Routes from "../Routes"
 
 const LoggingIn = ({handleClick, isLoggedIn, name, id}) => (
-  <div id="LoggingIn">
-    <nav>
-      <NavLink to="/" className="logo">
-        <img src="healthnstuff_finalLogo.png" />
+  <div>
+    <nav id="loggingIn">
+      <NavLink to="/" >
+        <img src="healthnstuff_finalLogo.png" className="logo"/>
       </NavLink>
       {isLoggedIn ? (
         <div>

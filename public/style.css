@@ -2,12 +2,28 @@ body {
   font-family: sans-serif;
 }
 
+
+
+#loggingIn {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 60%;
+}
+
 #navBar {
+  display: flex;
+  justify-content: space-between;
   box-sizing: content-box;
   background-color: #e0841e;
   color: white;
   text-decoration: none;
 }
+
+
+
 
 #navLinks {
   display: flex;

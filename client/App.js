@@ -7,7 +7,7 @@ import NavigationBar from './components/NavigationBar'
 
 const App = () => {
   return (
-    <div>
+    <div id="app">
       <LoggingIn />
       <NavigationBar />
     </div>
