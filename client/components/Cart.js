@@ -40,6 +40,7 @@ class Cart extends React.Component {
       quantity: 1,
     };
     this.props.updateItem(this.props.match.params.userId, body);
+    //get it to rerender
   }
 
   decrement(evt) {
