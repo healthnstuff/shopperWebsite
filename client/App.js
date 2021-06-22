@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
 
-
-// import Navbar from './components/Navbar'
-import HomePage from './components/HomePage'
-import NavigationBar from './components/NavigationBar'
+import Navbar from "./components/Navbar";
+import HomePage from "./components/HomePage";
+import NavigationBar from "./components/NavigationBar";
 
 const App = () => {
   return (
@@ -11,10 +10,10 @@ const App = () => {
       {/* <Navbar /> */}
       {/* <Routes /> */}
       <NavigationBar />
-      {/* <HomePage /> */}
-      
+      <Navbar />
+      <HomePage />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
