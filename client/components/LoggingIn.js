@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { Link, Route, NavLink } from "react-router-dom";
 import { logout } from "../store";
 import { Login } from "./AuthForm";
-import { FaShoppingCart } from "react-icons/fa";
 import Routes from "../Routes";
+import CartIcon from "./CartIcon";
 
 const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
   <div>
@@ -23,9 +23,8 @@ const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
           <NavLink className="navLink" exact to={`/users/${id}`}>
             <button>Profile</button>
           </NavLink>
-          <Link to={`/orderInfo/cart/${id}`} className="cartIcon">
-            {" "}
-            <FaShoppingCart />
+          <Link to={`/orderInfo/cart/${id}`}>
+            <CartIcon />
           </Link>
         </div>
       ) : (

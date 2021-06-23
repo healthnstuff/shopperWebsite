@@ -9,7 +9,7 @@ const cartFromLocalStorage = localStorage.getItem("cart") || "[]";
 class AllProducts extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { cart: cartFromLocalStorage }
+    this.state = { cart: cartFromLocalStorage };
     this.addToCart = this.addToCart.bind(this);
   }
   componentDidMount() {
@@ -21,16 +21,16 @@ class AllProducts extends React.Component {
   }
 
   addToCart(product) {
-    let newCart = [ ...this.state.cart ];
+    let newCart = [...this.state.cart];
     let cartItem = newCart.find((item) => item.id === product.id);
-    console.log('cartItem = ', cartItem)
+    // console.log('cartItem = ', cartItem)
     if (cartItem) {
       cartItem.quantity++;
     } else {
       cartItem = {
         ...product,
-        quantity: 1
-      }
+        quantity: 1,
+      };
       newCart.push(cartItem);
     }
     this.setState({ cart: newCart });
@@ -50,10 +50,7 @@ class AllProducts extends React.Component {
                     <p>Price: {product.price}</p>
                   </div>
                 </Link>
-                <button
-                  type="button"
-                  onClick={() => this.addToCart(product)}
-                >
+                <button type="button" onClick={() => this.addToCart(product)}>
                   ADD TO CART
                 </button>
               </div>

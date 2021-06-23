@@ -12,11 +12,10 @@ import Cart from "./Cart";
 import AllProducts from "./AllProducts";
 import SingleProduct from "./SingleProduct";
 import { connect } from "react-redux";
-import Users from './Users';
-import SingleUser from './SingleUser';
+import Users from "./Users";
+import SingleUser from "./SingleUser";
 
 const NavigationBar = (props) => {
-  // console.log(props);
   return (
     <Router>
       <div id="navBar">
@@ -50,7 +49,7 @@ const NavigationBar = (props) => {
           render={() => <AllProducts cartAdapter={props.props} />}
         />
         <Route exact path="/products/:productId" component={SingleProduct} />
-        <Route exact path ="/users" component={Users} />
+        <Route exact path="/users" component={Users} />
         <Route exact path="/users/:id" component={SingleUser} />
       </div>
     </Router>

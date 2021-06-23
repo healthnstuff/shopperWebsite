@@ -5,17 +5,18 @@ import NavigationBar from "./components/NavigationBar";
 
 class App extends React.Component {
   componentDidMount() {
-    this.localAdapter.saveCart([]);
+    // this.localAdapter.saveCart([]);
   }
 
   render() {
     return (
       <div id="app">
         <LoggingIn />
-        <NavigationBar props={this.localAdapter} />
+        <NavigationBar />
       </div>
     );
   }
 }
+//props={this.localAdapter}
 
 export default App;
