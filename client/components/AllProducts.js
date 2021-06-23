@@ -4,12 +4,13 @@ import { fetchProducts } from "../store/products";
 import { createOrder } from "../store/orderInfo";
 import { Link } from "react-router-dom";
 
-const cartFromLocalStorage = localStorage.getItem("cart") || "[]";
+// const cartFromLocalStorage = localStorage.getItem("cart") || [];
 
 class AllProducts extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { cart: cartFromLocalStorage }
+    const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+    this.state = { cart }
     this.addToCart = this.addToCart.bind(this);
   }
   componentDidMount() {
@@ -23,7 +24,6 @@ class AllProducts extends React.Component {
   addToCart(product) {
     let newCart = [ ...this.state.cart ];
     let cartItem = newCart.find((item) => item.id === product.id);
-    console.log('cartItem = ', cartItem)
     if (cartItem) {
       cartItem.quantity++;
     } else {
