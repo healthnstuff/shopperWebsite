@@ -30,8 +30,8 @@ const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
             Logout
           </button>
           {/* <Link to="/singleUser">Profile</Link> */}
-          <NavLink className="navLink" exact to="/auth/me">
-            <button>Profile</button>
+          <NavLink exact to="/auth/me">
+            <button className="navLink">Profile</button>
           </NavLink>
           <Route exact path={`/orderInfo/cart/${id}`} component={Cart} />
           <Route exact path="/" component={HomePage} />
