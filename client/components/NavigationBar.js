@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import Users from './Users';
 import SingleUser from './SingleUser';
 
+
 const NavigationBar = (props) => {
   // console.log(props);
   return (
