@@ -2,8 +2,6 @@ body {
   font-family: sans-serif;
 }
 
-
-
 #loggingIn {
   display: flex;
   justify-content: center;
@@ -21,9 +19,6 @@ body {
   color: white;
   text-decoration: none;
 }
-
-
-
 
 #navLinks {
   display: flex;
@@ -54,7 +49,7 @@ form div {
 }
 
 .cartIcon {
-  color: white;
+  color: orange;
 }
 
 .cartItem {

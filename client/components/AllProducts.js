@@ -5,11 +5,26 @@ import { createOrder } from "../store/orderInfo";
 import { Link } from "react-router-dom";
 
 class AllProducts extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { cart: [] }
+    this.addToCart = this.addToCart.bind(this);
+  }
   componentDidMount() {
     this.props.getProducts();
+    // console.log(this.state.cart[0])
+    this.setState({ cart: this.props.cartAdapter.getCart() }); 
+  }
+
+  addToCart(evt) {
+    const product = evt.target.value;
+    this.props.cartAdapter.addToCart(product);
+    console.log(this.props.cartAdapter.getCart())
   }
 
   render() {
+    // console.log('cart in render', this.props.cartAdapter.getCart())
+    console.log('data type of cart[0] from state in render ', typeof (this.state.cart[1]))
     return (
       <div>
         <div>
@@ -23,9 +38,13 @@ class AllProducts extends React.Component {
                     <p>Price: {product.price}</p>
                   </div>
                 </Link>
-                <Link to="/orderInfo/:userId" className="addCartBtn">
+                <button
+                  type="button"
+                  onClick={this.addToCart}
+                  value={product}
+                >
                   ADD TO CART
-                </Link>
+                </button>
               </div>
             );
           })}
