@@ -25,8 +25,6 @@ class AllProducts extends React.Component {
   addToCart(product) {
     let newCart = [...this.state.cart];
     let cartItem = newCart.find((item) => item.id === product.id);
-    //first cartItem is undefined
-    // console.log("cartItem = ", cartItem);
     if (cartItem) {
       cartItem.quantity++;
     } else {

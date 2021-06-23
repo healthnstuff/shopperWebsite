@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 import Users from "./Users";
 import SingleUser from "./SingleUser";
 
-const NavigationBar = (props) => {
+const NavigationBar = ({ user }) => {
   return (
     <Router>
       <div id="navLinks">
@@ -32,16 +32,8 @@ const NavigationBar = (props) => {
       </div>
       <div>
         <Route exact path="/" component={HomePage} />
-        <Route
-          exact
-          path={`/orderInfo/cart/${props.user.id}`}
-          render={() => <Cart cartAdapter={props.props} />}
-        />
-        <Route
-          exact
-          path="/products"
-          render={() => <AllProducts cartAdapter={props.props} />}
-        />
+        <Route exact path={`/orderInfo/cart/${user.id}`} component={Cart} />
+        <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/users" component={Users} />
         <Route exact path="/users/:id" component={SingleUser} />
