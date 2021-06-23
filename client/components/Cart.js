@@ -34,14 +34,27 @@ class Cart extends React.Component {
     //make backend request
   }
 
-  increment(evt) {
-    evt.preventDefault();
+  increment(product) {
+    let newCart = [...this.state.cart];
+    let cartItem = newCart.find((item) => item.id === product.id);
+    cartItem.quantity++;
+    this.setState({ cart: newCart });
   }
 
-  decrement(evt) {}
+  decrement(product) {
+    let newCart = [...this.state.cart];
+    let cartItem = newCart.find((item) => item.id === product.id);
+    if (cartItem.quantity === 0) return;
+    cartItem.quantity--;
+    this.setState({ cart: newCart });
+  }
 
-  handleDelete(evt) {
-    evt.preventDefault();
+  handleDelete(product) {
+    let newCart = [...this.state.cart];
+    newCart = newCart.filter((item) => {
+      return item.id !== product.id;
+    });
+    this.setState({ cart: newCart });
   }
 
   render() {
@@ -62,13 +75,16 @@ class Cart extends React.Component {
                   </Link>
                   <p>{`$ ${product.price}`}</p>
                   <p>{`Quantity: ${product.quantity}`}</p>
-                  <button type="button" onClick={this.increment}>
+                  <button type="button" onClick={() => this.increment(product)}>
                     +
                   </button>
-                  <button type="button" onClick={this.decrement}>
+                  <button type="button" onClick={() => this.decrement(product)}>
                     -
                   </button>
-                  <button type="button" onClick={this.handleDelete}>
+                  <button
+                    type="button"
+                    onClick={() => this.handleDelete(product)}
+                  >
                     {" "}
                     DELETE ITEM
                   </button>
