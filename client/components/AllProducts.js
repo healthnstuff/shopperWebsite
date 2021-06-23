@@ -1,54 +1,65 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
-import { createOrder } from "../store/orderInfo";
 import { Link } from "react-router-dom";
+
+// const cartFromLocalStorage = localStorage.getItem("cart") || [];
 
 class AllProducts extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { cart: [] }
+    const cart = localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
+    this.state = { cart };
     this.addToCart = this.addToCart.bind(this);
   }
   componentDidMount() {
     this.props.getProducts();
-    // console.log(this.state.cart[0])
-    this.setState({ cart: this.props.cartAdapter.getCart() }); 
   }
 
-  addToCart(evt) {
-    const product = evt.target.value;
-    this.props.cartAdapter.addToCart(product);
-    console.log(this.props.cartAdapter.getCart())
+  componentDidUpdate() {
+    localStorage.setItem("cart", JSON.stringify(this.state.cart));
+  }
+
+  addToCart(product) {
+    let newCart = [...this.state.cart];
+    let cartItem = newCart.find((item) => item.id === product.id);
+    if (cartItem) {
+      cartItem.quantity++;
+    } else {
+      cartItem = {
+        ...product,
+        quantity: 1,
+      };
+      newCart.push(cartItem);
+    }
+    this.setState({ cart: newCart });
   }
 
   render() {
-    // console.log('cart in render', this.props.cartAdapter.getCart())
-    console.log('data type of cart[0] from state in render ', typeof (this.state.cart[1]))
     return (
-      <div>
-        <div>
-          {this.props.products.map((product) => {
-            return (
-              <div key={product.id}>
-                <Link to={`/products/${product.id}`}>
-                  <div>
-                    <img src={product.imageUrl} width="200" height="200" />
-                    <p>Name: {product.name}</p>
-                    <p>Price: {product.price}</p>
-                  </div>
-                </Link>
-                <button
-                  type="button"
-                  onClick={this.addToCart}
-                  value={product}
-                >
-                  ADD TO CART
-                </button>
-              </div>
-            );
-          })}
-        </div>
+      <div className="allProducts">
+        {this.props.products.map((product) => {
+          return (
+            <div key={product.id} className="product">
+              <Link to={`/products/${product.id}`}>
+                <div>
+                  <img src={product.imageUrl} width="200" height="200" />
+                  <p>Name: {product.name}</p>
+                  <p>Price: {product.price}</p>
+                </div>
+              </Link>
+              <button
+                type="button"
+                className="addToCartBtn"
+                onClick={() => this.addToCart(product)}
+              >
+                ADD TO CART
+              </button>
+            </div>
+          );
+        })}
       </div>
     );
   }
@@ -57,14 +68,12 @@ class AllProducts extends React.Component {
 const mapState = (state) => {
   return {
     products: state.products,
-    order: state.order,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     getProducts: () => dispatch(fetchProducts()),
-    createOrder: (id) => dispatch(createOrder(id)),
   };
 };
 

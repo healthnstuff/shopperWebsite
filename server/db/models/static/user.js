@@ -55,13 +55,12 @@ const User = db.define("user", {
       //   const regex =
       //     /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
-
       //   if (!regex.test(value)) {
       //     throw new Error("Phone Number Wrong Format");
       //   }
       //   return value;
       // },
-      notEmpty: true
+      notEmpty: true,
     },
   },
   isAdmin: {
@@ -112,7 +111,6 @@ User.authenticate = async function ({ email, password, phoneNum }) {
 User.findByToken = async function (token) {
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
-    console.log("id", id)
     const user = User.findByPk(id);
     if (!user) {
       throw "nooo";

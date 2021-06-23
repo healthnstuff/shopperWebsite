@@ -1,29 +1,100 @@
-body {
+* {
   font-family: sans-serif;
+  margin: 0px;
+}
+
+.header {
+  background: #659999; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #659999,
+    #f4791f
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #659999, #f4791f);
+  height: 190px;
 }
 
 #loggingIn {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .logo {
-  width: 60%;
+  max-width: 80%;
 }
 
-#navBar {
+.postLogIn {
   display: flex;
-  justify-content: space-between;
-  box-sizing: content-box;
-  background-color: #e0841e;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.navLink {
+  margin: 10px;
+  margin-bottom: 30px;
+  align-self: center;
+  cursor: pointer;
+  background-color: #537c07;
   color: white;
-  text-decoration: none;
 }
 
 #navLinks {
+  background-color: #edd19a;
+  padding: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.categoryButton {
+  background-color: #e0841e;
+  padding: 10px;
+  font-size: 15px;
+  color: black;
+  width: 120px;
+  cursor: pointer;
+  border-radius: 40%;
+  transition: background-color 0.5s;
+}
+
+.categoryButton:hover {
+  background-color: #d9c077;
+}
+.allProducts {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: auto;
+}
+
+.product {
+  padding: 35px;
+  border: 1px solid gray;
+}
+
+.addToCartBtn {
+  background-color: #537c07;
+  color: white;
+  cursor: pointer;
+  transition: padding 0px;
+  transition-duration: 0.5s;
+}
+
+.addToCartBtn:hover {
+  padding: 1px;
+}
+
+.productContainer {
   display: flex;
   justify-content: center;
-  color: white;
+  padding: 40px;
+  margin: 50px;
+  margin-left: 80px;
+  margin-right: 80px;
+  background-color: #cead41;
+}
+
+.productDescription {
+  align-self: flex-end;
+  margin: 20px;
 }
 
 #webName {
@@ -46,12 +117,4 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
-}
-
-.cartIcon {
-  color: orange;
-}
-
-.cartItem {
-  margin: auto;
 }
