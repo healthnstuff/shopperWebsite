@@ -3,12 +3,15 @@ import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
 import { Link } from "react-router-dom";
 
-const cartFromLocalStorage = localStorage.getItem("cart") || "[]";
+// const cartFromLocalStorage = localStorage.getItem("cart") || [];
 
 class AllProducts extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { cart: cartFromLocalStorage };
+    const cart = localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
+    this.state = { cart };
     this.addToCart = this.addToCart.bind(this);
   }
   componentDidMount() {

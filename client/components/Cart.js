@@ -6,12 +6,13 @@ import { updateOrder } from "../store/orderInfo";
 // import { updateCartItem, deleteCartItem } from "../store/cartItem";
 import { Link } from "react-router-dom";
 
-const cartFromLocalStorage = localStorage.getItem("cart") || "[]";
-
 class Cart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { products: [], status: false, cart: cartFromLocalStorage };
+    const cart = localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
+    this.state = { products: [], status: false, cart };
     this.handleCheckout = this.handleCheckout.bind(this);
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
@@ -29,55 +30,38 @@ class Cart extends React.Component {
   handleCheckout() {
     this.props.checkout(this.props.user.id);
     this.setState({ status: true });
+    //clear localStorage
+    //make backend request
   }
 
   increment(evt) {
     evt.preventDefault();
   }
 
-  decrement(evt) {
-    evt.preventDefault();
-    const parent = evt.target.parentElement;
-    const productId = Number(parent.getAttribute("accessiblekey"));
-    const body = {
-      product: productId,
-      change: "decrease",
-      quantity: 1,
-    };
-    this.props.updateItem(this.props.match.params.userId, body);
-  }
+  decrement(evt) {}
 
   handleDelete(evt) {
     evt.preventDefault();
-    const parent = evt.target.parentElement;
-    const productId = Number(parent.getAttribute("accessiblekey"));
-    const body = { product: productId };
-    this.props.deleteItem(this.props.match.params.userId, body);
   }
 
   render() {
-    console.log("STATE", this.state);
     const products = this.state.products;
-    console.log(this.state.products);
     const isCheckedOut = this.state.status;
     return (
       <div>
-        {/* {isCheckedOut ? (
+        {isCheckedOut ? (
           <h1>Your Order Is All Set! Come Again Next Time ~~</h1>
         ) : (
           <div>
-            {products.map((product, index) => {
+            {products.map((product) => {
               return (
-                <div
-                  key={product.id}
-                  className="cartItem"
-                >
+                <div key={product.id} className="cartItem">
                   <img src={product.imageUrl} width="100" height="100"></img>
                   <Link to={`/products/${product.id}`}>
                     <p>{product.name}</p>
                   </Link>
                   <p>{`$ ${product.price}`}</p>
-                  <p>{`Quantity: ${this.props.cart[index].quantity}`}</p>
+                  <p>{`Quantity: ${product.quantity}`}</p>
                   <button type="button" onClick={this.increment}>
                     +
                   </button>
@@ -99,7 +83,7 @@ class Cart extends React.Component {
               Check Out!{" "}
             </button>
           </div>
-        )} */}
+        )}
       </div>
     );
   }
