@@ -17,17 +17,16 @@ router.get("/", isLoggedIn, isAdmin, async (req, res, next) => {
   }
 });
 
-// get a user's past orders
+///api/orderInfo/:userId
 router.get("/:userId", isLoggedIn, async (req, res, next) => {
   try {
-    const user = req.params.userId;
-    const pastOrders = await OrderInfo.findAll({
+    const user = req.user;
+    const orders = await OrderInfo.findAll({
       where: {
-        userId: user,
-        status: "closed",
+        userId: user.id,
       },
     });
-    res.json(pastOrders);
+    res.json(orders);
   } catch (err) {
     next(err);
   }

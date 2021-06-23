@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateOrder } from "../store/orderInfo";
+import { updateOrder, createOrder, getOrder } from "../store/orderInfo";
 import { Link } from "react-router-dom";
 
 class Cart extends React.Component {
@@ -18,6 +18,7 @@ class Cart extends React.Component {
 
   componentDidMount() {
     this.setState({ products: [...this.state.cart] });
+    this.props.getOrder(this.props.user.id);
   }
 
   componentDidUpdate() {
@@ -52,10 +53,10 @@ class Cart extends React.Component {
       return item.id !== product.id;
     });
     this.setState({ cart: newCart });
+    //only one that doesn't rerender
   }
 
   render() {
-    console.log(this.props);
     const products = this.state.products;
     const isCheckedOut = this.state.status;
     return (
@@ -129,6 +130,12 @@ const mapDispatchToProps = (dispatch) => {
     // fetchProduct: (productId) => dispatch(fetchSingleProduct(productId)),
     checkout: (id) => {
       dispatch(updateOrder(id));
+    },
+    createOrder: (id) => {
+      dispatch(createOrder(id));
+    },
+    getOrder: (id) => {
+      dispatch(getOrder(id));
     },
   };
 };
