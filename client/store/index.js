@@ -13,10 +13,8 @@ const reducer = combineReducers({
   auth,
   products: productsReducer,
   singleProduct: singleProductReducer,
-  users,
-  cart: cartReducer,
-  cartItem: cartItemReducer,
-});
+  users
+})
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
