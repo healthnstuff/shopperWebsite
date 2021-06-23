@@ -3,9 +3,11 @@ import {
   BrowserRouter as Router,
   Route,
   NavLink,
-  Link,
+  Switch,
+  Link
 } from "react-router-dom";
 import Routes from "../Routes";
+import CartIcon from "./CartIcon";
 
 import HomePage from "./HomePage";
 import Cart from "./Cart";
@@ -19,6 +21,13 @@ const NavigationBar = ({ user }) => {
   return (
     <Router>
       <div id="navLinks">
+      <NavLink to="/">
+        <img src="healthnstuff_finalLogo.png" className="logo" />
+      </NavLink>
+      <Link to={`/orderInfo/cart/${user.id}`} className="cartIcon">
+        {" "}
+        <CartIcon />
+      </Link>
         <NavLink to="/products">
           <button className="categoryButton" type="button">
             All Products
@@ -31,12 +40,14 @@ const NavigationBar = ({ user }) => {
         <button className="categoryButton">Tea</button>
       </div>
       <div>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path={`/orderInfo/cart/${user.id}`} component={Cart} />
-        <Route exact path="/products" component={AllProducts} />
-        <Route exact path="/products/:productId" component={SingleProduct} />
+        <Switch>
+         <Route exact path="/" component={HomePage} />
+         <Route exact path={`/orderInfo/cart/${user.id}`} component={Cart} />
+         <Route exact path="/products" component={AllProducts} />
+         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/users" component={Users} />
-        <Route exact path="/users/:id" component={SingleUser} />
+         <Route exact path="/users/:id" component={SingleUser} />
+        </Switch>
       </div>
     </Router>
   );
