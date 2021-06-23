@@ -1,9 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-// import { fetchCart } from "../store/cart";
-// import { fetchSingleProduct } from "../store/singleProduct";
 import { updateOrder } from "../store/orderInfo";
-// import { updateCartItem, deleteCartItem } from "../store/cartItem";
 import { Link } from "react-router-dom";
 
 class Cart extends React.Component {
