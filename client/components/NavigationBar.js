@@ -16,7 +16,7 @@ import Users from './Users';
 import SingleUser from './SingleUser';
 
 const NavigationBar = ({ user }) => {
-  // console.log(props);
+
   return (
     <Router>
       <div id="navBar">

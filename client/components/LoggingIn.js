@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link, Route, NavLink } from "react-router-dom";
 import { logout } from "../store";
-import { Login } from "./AuthForm";
+import { Login, Signup } from "./AuthForm";
 import { FaShoppingCart } from "react-icons/fa";
 import Routes from "../Routes";
 
@@ -12,6 +12,10 @@ const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
       <NavLink to="/">
         <img src="healthnstuff_finalLogo.png" className="logo" />
       </NavLink>
+      <Link to={`/orderInfo/cart/${id}`} className="cartIcon">
+            {" "}
+            <FaShoppingCart />
+          </Link>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
@@ -20,18 +24,15 @@ const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
             Logout
           </button>
           {/* <Link to="/singleUser">Profile</Link> */}
-          <NavLink className="navLink" exact to={`/users/${id}`}>
+          <NavLink className="navLink" exact to="/auth/me">
             <button>Profile</button>
           </NavLink>
-          <Link to={`/orderInfo/cart/${id}`} className="cartIcon">
-            {" "}
-            <FaShoppingCart />
-          </Link>
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Routes />
+          <Route path="/" component={Login} />
+          <Route path="/" component={Signup} />
         </div>
       )}
     </nav>
