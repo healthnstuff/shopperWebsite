@@ -3,26 +3,28 @@ import { connect } from "react-redux";
 import { fetchCart } from "../store/cart";
 import { fetchSingleProduct } from "../store/singleProduct";
 import { updateOrder } from "../store/orderInfo";
-import { updateCartItem } from "../store/cartItem";
+import { updateCartItem, deleteCartItem } from "../store/cartItem";
 import { Link } from "react-router-dom";
 
 class Cart extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { products: [], status: false };
     this.handleCheckout = this.handleCheckout.bind(this);
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
-    this.props.loadCart(this.props.match.params.userId).then((res) =>
-      res.map((item) =>
-        item.then((item) => {
-          this.setState({ products: [...this.state.products, item] });
-        })
-      )
-    );
+    console.log(this.props.cartAdapter.getCart())
+    // this.props.loadCart(this.props.match.params.userId).then((res) =>
+    //   res.map((item) =>
+    //     item.then((item) => {
+    //       this.setState({ products: [...this.state.products, item] });
+    //     })
+    //   )
+    // );
   }
 
   handleCheckout() {
@@ -55,6 +57,14 @@ class Cart extends React.Component {
     this.props.updateItem(this.props.match.params.userId, body);
   }
 
+  handleDelete(evt) {
+    evt.preventDefault();
+    const parent = evt.target.parentElement;
+    const productId = Number(parent.getAttribute("accessiblekey"));
+    const body = { product: productId };
+    this.props.deleteItem(this.props.match.params.userId, body);
+  }
+
   render() {
     const products = this.state.products;
     const isCheckedOut = this.state.status;
@@ -82,6 +92,10 @@ class Cart extends React.Component {
                   </button>
                   <button type="button" onClick={this.decrement}>
                     -
+                  </button>
+                  <button type="button" onClick={this.handleDelete}>
+                    {" "}
+                    DELETE ITEM
                   </button>
                 </div>
               );
@@ -128,6 +142,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateItem: (id, body) => {
       dispatch(updateCartItem(id, body));
+    },
+    deleteItem: (id, body) => {
+      dispatch(deleteCartItem(id, body));
     },
   };
 };
