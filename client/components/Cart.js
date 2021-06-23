@@ -19,7 +19,7 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ products: [...this.state.cart] });
+    this.setState({ products: [...this.state.cart] }); //could be optional
   }
 
   componentDidUpdate() {
@@ -58,8 +58,7 @@ class Cart extends React.Component {
   render() {
     console.log("STATE", this.state);
     const products = this.state.products;
-    console.log(products.find((item) => item.id === 1));
-
+    console.log(this.state.products);
     const isCheckedOut = this.state.status;
     return (
       <div>

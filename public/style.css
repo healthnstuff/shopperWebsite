@@ -11,6 +11,7 @@
     #f4791f
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #659999, #f4791f);
+  height: 190px;
 }
 
 #loggingIn {
