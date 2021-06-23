@@ -2,6 +2,7 @@ import axios from "axios";
 import history from "../history";
 
 const TOKEN = "token";
+const CART = "cart";
 
 /**
  * ACTION TYPES
@@ -18,7 +19,7 @@ const setAuth = (auth) => ({ type: SET_AUTH, auth });
  */
 export const me = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
-  console.log("token", token)
+  console.log("token from local storage in me thunk = ", token)
   if (token) {
     const res = await axios.get("/auth/me", {
       headers: {
@@ -33,6 +34,7 @@ export const authenticate = (email, password, method) => async (dispatch) => {
   try {
     const res = await axios.post(`/auth/${method}`, { email, password });
     window.localStorage.setItem(TOKEN, res.data.token);
+    console.log('token from res.data in authenticate thunk = ', res.data.token)
     dispatch(me());
   } catch (authError) {
     return dispatch(setAuth({ error: authError }));
@@ -42,7 +44,8 @@ export const authenticate = (email, password, method) => async (dispatch) => {
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
-  history.push("/login");
+  window.localStorage.removeItem("cart");
+  history.push("/");
   return {
     type: SET_AUTH,
     auth: {},

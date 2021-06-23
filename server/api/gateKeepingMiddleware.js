@@ -5,6 +5,7 @@ const {
 const isLoggedIn = async (req, res, next) => {
   try {
     req.user = await User.findByToken(req.headers.authorization);
+    console.log('req.user in isLoggedIn middleware = ', req.user)
     next();
   } catch (err) {
     next(err);

@@ -8,7 +8,8 @@ import Routes from "../Routes";
 import SingleUser from "./SingleUser";
 import Cart from "./Cart";
 
-const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
+const LoggingIn = ({ logout, isLoggedIn, name, id }) => {
+  return (
   <Router>
     <div className="header">
     <nav id="loggingIn">
@@ -18,7 +19,7 @@ const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
           <h1 style={{ color: "#A55093", fontSize: "40px", margin: "10px" }}>
             Welcome, {name}!{" "}
           </h1>
-          <button className="navLink" onClick={handleClick}>
+          <button className="navLink" onClick={logout}>
             Logout
           </button>
           {/* <Link to="/singleUser">Profile</Link> */}
@@ -42,7 +43,7 @@ const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
   </div>
   </Router>
   
-);
+)};
 
 /**
  * CONTAINER
@@ -58,9 +59,10 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleClick() {
-      dispatch(logout());
-    },
+    // handleClick() {
+    //   dispatch(logout());
+    // },
+    logout: () => dispatch(logout())
   };
 };
 

@@ -8,7 +8,10 @@ module.exports = router;
 //POST /auth/login assigns JWT token
 router.post("/login", async (req, res, next) => {
   try {
-    res.send({ token: await User.authenticate(req.body) });
+    console.log('req.body in /auth/login route ', req.body)
+    const user = await User.authenticate(req.body)
+    console.log('user in /auth/login route')
+    res.send({ token: user });
   } catch (err) {
     next(err);
   }
@@ -37,7 +40,10 @@ router.post('/signup', async (req, res, next) => {
 
 // GET /auth/me (serves up a user's profile info; protects isAdmin and id fields)
 router.get("/me", isLoggedIn, async (req, res, next) => {
+  console.log('outside if block in /auth/me')
   if (req.user) {
+    console.log('req.user in /auth/me route = ', req.user)
+    console.log('req.headers in /auth/me = ', req.headers)
     const { id, email, password, firstName, lastName, phoneNum } = req.user;
     res.json({
       id,
