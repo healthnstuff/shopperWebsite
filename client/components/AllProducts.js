@@ -38,25 +38,27 @@ class AllProducts extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
-          {this.props.products.map((product) => {
-            return (
-              <div key={product.id}>
-                <Link to={`/products/${product.id}`}>
-                  <div>
-                    <img src={product.imageUrl} width="200" height="200" />
-                    <p>Name: {product.name}</p>
-                    <p>Price: {product.price}</p>
-                  </div>
-                </Link>
-                <button type="button" onClick={() => this.addToCart(product)}>
-                  ADD TO CART
-                </button>
-              </div>
-            );
-          })}
-        </div>
+      <div className="allProducts">
+        {this.props.products.map((product) => {
+          return (
+            <div key={product.id} className="product">
+              <Link to={`/products/${product.id}`}>
+                <div>
+                  <img src={product.imageUrl} width="200" height="200" />
+                  <p>Name: {product.name}</p>
+                  <p>Price: {product.price}</p>
+                </div>
+              </Link>
+              <button
+                type="button"
+                className="addToCartBtn"
+                onClick={() => this.addToCart(product)}
+              >
+                ADD TO CART
+              </button>
+            </div>
+          );
+        })}
       </div>
     );
   }

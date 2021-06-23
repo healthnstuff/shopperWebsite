@@ -58,6 +58,28 @@
 .categoryButton:hover {
   background-color: #d9c077;
 }
+.allProducts {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: auto;
+}
+
+.product {
+  padding: 35px;
+  border: 1px solid gray;
+}
+
+.addToCartBtn {
+  background-color: #2b780a;
+  color: white;
+  cursor: pointer;
+  transition: padding 0px;
+  transition-duration: 0.5s;
+}
+
+.addToCartBtn:hover {
+  padding: 1px;
+}
 
 #webName {
   text-align: center;
