@@ -20,7 +20,7 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ products: [...this.state.cart] }); //could be optional
+    this.setState({ products: [...this.state.cart] });
   }
 
   componentDidUpdate() {
@@ -107,28 +107,28 @@ class Cart extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart,
-    products: state.products,
+    // cart: state.cart,
+    // products: state.products,
     order: state.order,
-    cartItem: state.product,
-    user: state.auth,
+    // cartItem: state.product,
+    // user: state.auth,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadCart: (id) => {
-      return dispatch(fetchCart(id)).then((res) => {
-        return Promise.all(res.payload).then((payload) => {
-          return payload.map((item) => {
-            return dispatch(fetchSingleProduct(item.productId)).then((res) => {
-              return res.product;
-            });
-          });
-        });
-      });
-    },
-    fetchProduct: (productId) => dispatch(fetchSingleProduct(productId)),
+    // loadCart: (id) => {
+    //   return dispatch(fetchCart(id)).then((res) => {
+    //     return Promise.all(res.payload).then((payload) => {
+    //       return payload.map((item) => {
+    //         return dispatch(fetchSingleProduct(item.productId)).then((res) => {
+    //           return res.product;
+    //         });
+    //       });
+    //     });
+    //   });
+    // },
+    // fetchProduct: (productId) => dispatch(fetchSingleProduct(productId)),
     checkout: (id) => {
       dispatch(updateOrder(id));
     },
