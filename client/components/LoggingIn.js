@@ -15,7 +15,7 @@ const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
       {isLoggedIn ? (
         <div className="postLogIn">
           {/* The navbar will show these links after you log in */}
-          <h1 style={{ color: "#963b94", fontSize: "40px", margin: "10px" }}>
+          <h1 style={{ color: "#A55093", fontSize: "40px", margin: "10px" }}>
             Welcome, {name}!{" "}
           </h1>
           <button className="navLink" onClick={handleClick}>
@@ -36,7 +36,6 @@ const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
         </div>
       )}
     </nav>
-    <hr />
   </div>
 );
 

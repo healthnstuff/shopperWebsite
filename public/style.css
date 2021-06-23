@@ -34,19 +34,19 @@
   margin-bottom: 30px;
   align-self: center;
   cursor: pointer;
-  background-color: #2b780a;
+  background-color: #537c07;
   color: white;
 }
 
 #navLinks {
-  background-color: #dbb07f;
+  background-color: #edd19a;
   padding: 20px;
   display: flex;
   justify-content: space-around;
 }
 
 .categoryButton {
-  background-color: #ad691a;
+  background-color: #e0841e;
   padding: 10px;
   font-size: 15px;
   color: black;
@@ -71,7 +71,7 @@
 }
 
 .addToCartBtn {
-  background-color: #2b780a;
+  background-color: #537c07;
   color: white;
   cursor: pointer;
   transition: padding 0px;
