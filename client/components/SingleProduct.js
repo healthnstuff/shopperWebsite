@@ -7,9 +7,11 @@ import { fetchSingleProduct } from "../store/singleProduct";
 class SingleProduct extends React.Component {
   constructor(props) {
     super(props);
-    const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
-    this.state = { cart }
-    this.selectedValue = ""
+    const cart = localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
+    this.state = { cart };
+    this.selectedValue = "";
     this.handleChange = this.handleChange.bind(this);
     this.addToCart = this.addToCart.bind(this);
   }
@@ -21,21 +23,21 @@ class SingleProduct extends React.Component {
     localStorage.setItem("cart", JSON.stringify(this.state.cart));
   }
   handleChange(e) {
-      this.selectedValue = e.target.value; 
+    this.selectedValue = e.target.value;
   }
   addToCart(product) {
-    let newCart = [ ...this.state.cart ];
+    let newCart = [...this.state.cart];
     let cartItem = newCart.find((item) => item.id === product.id);
     if (cartItem) {
-        cartItem.quantity += parseInt(this.selectedValue)
+      cartItem.quantity += parseInt(this.selectedValue);
     } else {
-        cartItem = {
-            ...product,
-            quantity: parseInt(this.selectedValue)
-        }
-        newCart.push(cartItem);
+      cartItem = {
+        ...product,
+        quantity: parseInt(this.selectedValue),
+      };
+      newCart.push(cartItem);
     }
-    this.setState({ ...this.state, cart: newCart })
+    this.setState({ ...this.state, cart: newCart });
   }
   render() {
     const product = this.props.singleProduct;

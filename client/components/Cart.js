@@ -1,15 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCart } from "../store/cart";
-import { fetchSingleProduct } from "../store/singleProduct";
+// import { fetchCart } from "../store/cart";
+// import { fetchSingleProduct } from "../store/singleProduct";
 import { updateOrder } from "../store/orderInfo";
-import { updateCartItem, deleteCartItem } from "../store/cartItem";
+// import { updateCartItem, deleteCartItem } from "../store/cartItem";
 import { Link } from "react-router-dom";
 
 class Cart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { products: [], status: false };
+    const cart = localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : [];
+    this.state = { products: [], status: false, cart };
     this.handleCheckout = this.handleCheckout.bind(this);
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
@@ -17,52 +20,41 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.cartAdapter.getCart())
-    // this.props.loadCart(this.props.match.params.userId).then((res) =>
-    //   res.map((item) =>
-    //     item.then((item) => {
-    //       this.setState({ products: [...this.state.products, item] });
-    //     })
-    //   )
-    // );
+    this.setState({ products: [...this.state.cart] });
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem("cart", JSON.stringify(this.state.cart));
   }
 
   handleCheckout() {
-    this.props.checkout(this.props.match.params.userId);
+    this.props.checkout(this.props.user.id);
     this.setState({ status: true });
+    //clear localStorage
+    //make backend request
   }
 
-  increment(evt) {
-    evt.preventDefault();
-    const parent = evt.target.parentElement;
-    const productId = Number(parent.getAttribute("accessiblekey"));
-    const body = {
-      product: productId,
-      change: "increase",
-      quantity: 1,
-    };
-    this.props.updateItem(this.props.match.params.userId, body);
-    //get it to rerender
+  increment(product) {
+    let newCart = [...this.state.cart];
+    let cartItem = newCart.find((item) => item.id === product.id);
+    cartItem.quantity++;
+    this.setState({ cart: newCart });
   }
 
-  decrement(evt) {
-    evt.preventDefault();
-    const parent = evt.target.parentElement;
-    const productId = Number(parent.getAttribute("accessiblekey"));
-    const body = {
-      product: productId,
-      change: "decrease",
-      quantity: 1,
-    };
-    this.props.updateItem(this.props.match.params.userId, body);
+  decrement(product) {
+    let newCart = [...this.state.cart];
+    let cartItem = newCart.find((item) => item.id === product.id);
+    if (cartItem.quantity === 0) return;
+    cartItem.quantity--;
+    this.setState({ cart: newCart });
   }
 
-  handleDelete(evt) {
-    evt.preventDefault();
-    const parent = evt.target.parentElement;
-    const productId = Number(parent.getAttribute("accessiblekey"));
-    const body = { product: productId };
-    this.props.deleteItem(this.props.match.params.userId, body);
+  handleDelete(product) {
+    let newCart = [...this.state.cart];
+    newCart = newCart.filter((item) => {
+      return item.id !== product.id;
+    });
+    this.setState({ cart: newCart });
   }
 
   render() {
@@ -74,26 +66,25 @@ class Cart extends React.Component {
           <h1>Your Order Is All Set! Come Again Next Time ~~</h1>
         ) : (
           <div>
-            {products.map((product, index) => {
+            {products.map((product) => {
               return (
-                <div
-                  key={product.id}
-                  accessiblekey={product.id}
-                  className="cartItem"
-                >
+                <div key={product.id} className="cartItem">
                   <img src={product.imageUrl} width="100" height="100"></img>
                   <Link to={`/products/${product.id}`}>
                     <p>{product.name}</p>
                   </Link>
                   <p>{`$ ${product.price}`}</p>
-                  <p>{`Quantity: ${this.props.cart[index].quantity}`}</p>
-                  <button type="button" onClick={this.increment}>
+                  <p>{`Quantity: ${product.quantity}`}</p>
+                  <button type="button" onClick={() => this.increment(product)}>
                     +
                   </button>
-                  <button type="button" onClick={this.decrement}>
+                  <button type="button" onClick={() => this.decrement(product)}>
                     -
                   </button>
-                  <button type="button" onClick={this.handleDelete}>
+                  <button
+                    type="button"
+                    onClick={() => this.handleDelete(product)}
+                  >
                     {" "}
                     DELETE ITEM
                   </button>
@@ -116,35 +107,30 @@ class Cart extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    cart: state.cart,
-    products: state.products,
+    // cart: state.cart,
+    // products: state.products,
     order: state.order,
-    cartItem: state.product,
+    // cartItem: state.product,
+    // user: state.auth,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadCart: (id) => {
-      return dispatch(fetchCart(id)).then((res) => {
-        return Promise.all(res.payload).then((payload) => {
-          return payload.map((item) => {
-            return dispatch(fetchSingleProduct(item.productId)).then((res) => {
-              return res.product;
-            });
-          });
-        });
-      });
-    },
-    fetchProduct: (productId) => dispatch(fetchSingleProduct(productId)),
+    // loadCart: (id) => {
+    //   return dispatch(fetchCart(id)).then((res) => {
+    //     return Promise.all(res.payload).then((payload) => {
+    //       return payload.map((item) => {
+    //         return dispatch(fetchSingleProduct(item.productId)).then((res) => {
+    //           return res.product;
+    //         });
+    //       });
+    //     });
+    //   });
+    // },
+    // fetchProduct: (productId) => dispatch(fetchSingleProduct(productId)),
     checkout: (id) => {
       dispatch(updateOrder(id));
-    },
-    updateItem: (id, body) => {
-      dispatch(updateCartItem(id, body));
-    },
-    deleteItem: (id, body) => {
-      dispatch(deleteCartItem(id, body));
     },
   };
 };

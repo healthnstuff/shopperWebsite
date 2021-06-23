@@ -4,7 +4,6 @@ import HomePage from "./components/HomePage";
 import NavigationBar from "./components/NavigationBar";
 
 class App extends React.Component {
-
   render() {
     return (
       <div id="app">
@@ -14,5 +13,6 @@ class App extends React.Component {
     );
   }
 }
+//props={this.localAdapter}
 
 export default App;
