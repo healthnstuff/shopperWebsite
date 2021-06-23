@@ -2,7 +2,7 @@ const router = require("express").Router();
 const {
   models: { User },
 } = require("../db");
-const { isLoggedIn } = require("../api/gateKeepingMiddleware");
+const { isLoggedIn, isAdmin } = require("../api/gateKeepingMiddleware");
 module.exports = router;
 
 //POST /auth/login assigns JWT token

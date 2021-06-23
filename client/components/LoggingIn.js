@@ -18,7 +18,7 @@ const LoggingIn = ({handleClick, isLoggedIn, name, id}) => (
           <h1>Welcome, {name}! </h1>
           <button className="navLink" onClick={handleClick}>Logout</button>
           {/* <Link to="/singleUser">Profile</Link> */}
-          <NavLink className="navLink" exact to={`/users/${id}`}>
+          <NavLink className="navLink" exact to={"/auth/me"}>
             <button>Profile</button>
           </NavLink>
           <Link to="/orderInfo/cart/:userId" className="cartIcon">
