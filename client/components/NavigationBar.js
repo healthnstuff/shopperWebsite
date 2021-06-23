@@ -16,6 +16,7 @@ import SingleProduct from "./SingleProduct";
 import { connect } from "react-redux";
 import Users from "./Users";
 import SingleUser from "./SingleUser";
+import {Signup} from "./AuthForm"
 
 const NavigationBar = ({ user }) => {
   return (
@@ -46,7 +47,7 @@ const NavigationBar = ({ user }) => {
          <Route exact path="/products" component={AllProducts} />
          <Route exact path="/products/:productId" component={SingleProduct} />
         <Route exact path="/users" component={Users} />
-         <Route exact path="/users/:id" component={SingleUser} />
+         <Route exact path={`/users/${user.id}`} component={SingleUser} />
         </Switch>
       </div>
     </Router>
