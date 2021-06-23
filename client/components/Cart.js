@@ -55,6 +55,7 @@ class Cart extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     const products = this.state.products;
     const isCheckedOut = this.state.status;
     return (
@@ -108,7 +109,7 @@ const mapStateToProps = (state) => {
     // products: state.products,
     order: state.order,
     // cartItem: state.product,
-    // user: state.auth,
+    user: state.auth,
   };
 };
 
