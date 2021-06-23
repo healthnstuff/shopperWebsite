@@ -9,6 +9,7 @@ class SingleProduct extends React.Component {
     super(props);
     const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
     this.state = { cart }
+    this.selectedValue = ""
     this.handleChange = this.handleChange.bind(this);
     this.addToCart = this.addToCart.bind(this);
   }
@@ -20,17 +21,17 @@ class SingleProduct extends React.Component {
     localStorage.setItem("cart", JSON.stringify(this.state.cart));
   }
   handleChange(e) {
-      this.setState({ ...this.state, value: e.target.value });
+      this.selectedValue = e.target.value; 
   }
   addToCart(product) {
     let newCart = [ ...this.state.cart ];
     let cartItem = newCart.find((item) => item.id === product.id);
     if (cartItem) {
-        cartItem.quantity += parseInt(this.state.value)
+        cartItem.quantity += parseInt(this.selectedValue)
     } else {
         cartItem = {
             ...product,
-            quantity: parseInt(this.state.value)
+            quantity: parseInt(this.selectedValue)
         }
         newCart.push(cartItem);
     }
@@ -47,7 +48,7 @@ class SingleProduct extends React.Component {
         <form onSubmit={() => this.addToCart(product)}>
           <label>
             Quantity:
-            <select value={this.state.value} onChange={this.handleChange}>
+            <select onChange={this.handleChange}>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -57,15 +58,6 @@ class SingleProduct extends React.Component {
           </label>
           <input type="submit" value="Add To Cart" />
         </form>
-        {/* <span>Quantity: </span>
-        <select>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-        <button>ADD TO CART</button> */}
       </div>
     );
   }
