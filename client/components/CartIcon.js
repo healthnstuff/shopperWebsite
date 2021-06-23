@@ -5,7 +5,7 @@ import React from "react";
 const CartIcon = () => {
   return (
     <IconContext.Provider
-      value={{ color: "orange", className: "cartIcon", size: "2em" }}
+      value={{ color: "#2b780a", className: "cartIcon", size: "3em" }}
     >
       <div>
         <FaShoppingCart />

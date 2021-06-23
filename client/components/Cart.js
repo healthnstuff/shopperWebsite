@@ -1,15 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchCart } from "../store/cart";
-import { fetchSingleProduct } from "../store/singleProduct";
+// import { fetchCart } from "../store/cart";
+// import { fetchSingleProduct } from "../store/singleProduct";
 import { updateOrder } from "../store/orderInfo";
-import { updateCartItem, deleteCartItem } from "../store/cartItem";
+// import { updateCartItem, deleteCartItem } from "../store/cartItem";
 import { Link } from "react-router-dom";
+
+const cartFromLocalStorage = localStorage.getItem("cart") || "[]";
 
 class Cart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { products: [], status: false };
+    this.state = { products: [], status: false, cart: cartFromLocalStorage };
     this.handleCheckout = this.handleCheckout.bind(this);
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
@@ -17,32 +19,20 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.cartAdapter.getCart())
-    // this.props.loadCart(this.props.match.params.userId).then((res) =>
-    //   res.map((item) =>
-    //     item.then((item) => {
-    //       this.setState({ products: [...this.state.products, item] });
-    //     })
-    //   )
-    // );
+    this.setState({ products: [...this.state.cart] });
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem("cart", JSON.stringify(this.state.cart));
   }
 
   handleCheckout() {
-    this.props.checkout(this.props.match.params.userId);
+    this.props.checkout(this.props.user.id);
     this.setState({ status: true });
   }
 
   increment(evt) {
     evt.preventDefault();
-    const parent = evt.target.parentElement;
-    const productId = Number(parent.getAttribute("accessiblekey"));
-    const body = {
-      product: productId,
-      change: "increase",
-      quantity: 1,
-    };
-    this.props.updateItem(this.props.match.params.userId, body);
-    //get it to rerender
   }
 
   decrement(evt) {
@@ -66,11 +56,14 @@ class Cart extends React.Component {
   }
 
   render() {
+    console.log("STATE", this.state);
     const products = this.state.products;
+    console.log(products.find((item) => item.id === 1));
+
     const isCheckedOut = this.state.status;
     return (
       <div>
-        {isCheckedOut ? (
+        {/* {isCheckedOut ? (
           <h1>Your Order Is All Set! Come Again Next Time ~~</h1>
         ) : (
           <div>
@@ -78,7 +71,6 @@ class Cart extends React.Component {
               return (
                 <div
                   key={product.id}
-                  accessiblekey={product.id}
                   className="cartItem"
                 >
                   <img src={product.imageUrl} width="100" height="100"></img>
@@ -108,7 +100,7 @@ class Cart extends React.Component {
               Check Out!{" "}
             </button>
           </div>
-        )}
+        )} */}
       </div>
     );
   }
@@ -120,6 +112,7 @@ const mapStateToProps = (state) => {
     products: state.products,
     order: state.order,
     cartItem: state.product,
+    user: state.auth,
   };
 };
 
@@ -139,12 +132,6 @@ const mapDispatchToProps = (dispatch) => {
     fetchProduct: (productId) => dispatch(fetchSingleProduct(productId)),
     checkout: (id) => {
       dispatch(updateOrder(id));
-    },
-    updateItem: (id, body) => {
-      dispatch(updateCartItem(id, body));
-    },
-    deleteItem: (id, body) => {
-      dispatch(deleteCartItem(id, body));
     },
   };
 };

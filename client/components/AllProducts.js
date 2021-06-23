@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchProducts } from "../store/products";
-import { createOrder } from "../store/orderInfo";
 import { Link } from "react-router-dom";
 
 const cartFromLocalStorage = localStorage.getItem("cart") || "[]";
@@ -23,7 +22,8 @@ class AllProducts extends React.Component {
   addToCart(product) {
     let newCart = [...this.state.cart];
     let cartItem = newCart.find((item) => item.id === product.id);
-    // console.log('cartItem = ', cartItem)
+    //first cartItem is undefined
+    // console.log("cartItem = ", cartItem);
     if (cartItem) {
       cartItem.quantity++;
     } else {
@@ -65,14 +65,12 @@ class AllProducts extends React.Component {
 const mapState = (state) => {
   return {
     products: state.products,
-    order: state.order,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     getProducts: () => dispatch(fetchProducts()),
-    createOrder: (id) => dispatch(createOrder(id)),
   };
 };
 
