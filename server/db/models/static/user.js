@@ -25,17 +25,9 @@ const User = db.define("user", {
   },
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
   },
   phoneNum: {
     // Valid formats:
@@ -47,8 +39,6 @@ const User = db.define("user", {
     // +31636363634
     // 075-63546725
     type: Sequelize.STRING,
-    allowNull: false,
-    notEmpty: true,
     unique: true,
     validate: {
       // isValidPhonNum: function (value) {
@@ -60,7 +50,6 @@ const User = db.define("user", {
       //   }
       //   return value;
       // },
-      notEmpty: true,
     },
   },
   isAdmin: {

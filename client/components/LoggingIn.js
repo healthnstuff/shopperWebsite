@@ -22,21 +22,30 @@ const LoggingIn = ({ logout, isLoggedIn, name, id }) => {
           <button className="navLink" onClick={logout}>
             Logout
           </button>
-          {/* <Link to="/singleUser">Profile</Link> */}
-          <NavLink exact to="/auth/me">
+          {console.log("user id", id)}
+          <NavLink exact to={`/users/${id}`}>
             <button className="navLink">Profile</button>
           </NavLink>
           <Switch>
             <Route exact path={`/orderInfo/cart/${id}`} component={Cart} />
-            <Route exact path="/auth/me" component={SingleUser} />
+            <Route exact path={`/users/${id}`} component={SingleUser} />
           </Switch>
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-            <Route path="/" component={Login} />
-            <Route path="/" component={Signup} />
-            <Route exact path={`/orderInfo/cart/${id}`} component={Cart} />
+            <NavLink exact to="/login">
+              <button>Login</button>
+            </NavLink>
+              <span>or</span>
+            <NavLink exact to="/signup">
+              <button>Signup</button>
+            </NavLink>
+            <Switch>
+              <Route path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
+            </Switch>
+            {/* <Route exact path={`/orderInfo/cart/${id}`} component={Cart} /> */}
         </div>
       )}
     </nav>
