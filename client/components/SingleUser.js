@@ -4,9 +4,13 @@ import { _getSingleUser } from "../store/users";
 
 class SingleUser extends Component {
   componentDidMount() {
-    this.props.loadUser(this.props.match.params.id);
+    let idParam = this.props.match.path.split("/")
+    let idParams = idParam[idParam.length - 1]
+    console.log("params", idParams )
+    this.props.loadUser(idParams);
   }
   render() {
+    console.log("user props", this.props.user)
     const { user } = this.props;
     return (
       <div>
@@ -30,8 +34,10 @@ const mapState = (state) => ({
   user: state.users,
 });
 
-const mapDispatch = (dispatch) => ({
-  loadUser: (id) => dispatch(_getSingleUser(id)),
-});
+const mapDispatch = (dispatch) => {
+  return {
+    loadUser: (id) => dispatch(_getSingleUser(id))
+  }
+};
 
 export default connect(mapState, mapDispatch)(SingleUser);

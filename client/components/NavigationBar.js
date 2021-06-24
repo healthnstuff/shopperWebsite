@@ -41,14 +41,12 @@ const NavigationBar = ({ user }) => {
         <button className="categoryButton" type="button">Tea</button>
       </div>
       <div>
-        <Switch>
          <Route exact path="/" component={HomePage} />
          <Route exact path={`/orderInfo/cart/${user.id}`} component={Cart} />
          <Route exact path="/products" component={AllProducts} />
          <Route exact path="/products/:productId" component={SingleProduct} />
-        <Route exact path="/users" component={Users} />
+          <Route exact path="/users" component={Users} />
          <Route exact path={`/users/${user.id}`} component={SingleUser} />
-        </Switch>
       </div>
     </Router>
   );
