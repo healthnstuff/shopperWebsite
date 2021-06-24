@@ -42,11 +42,11 @@ const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
           <div>
             {/* The navbar will show these links before you log in */}
             <NavLink exact to="/login">
-              <button>Login</button>
+              <button className="navLink">Login</button>
             </NavLink>
             <span>or</span>
             <NavLink exact to="/signup">
-              <button>Signup</button>
+              <button className="navLink">Signup</button>
             </NavLink>
             <Switch>
               <Route path="/login" component={Login} />
