@@ -20,7 +20,7 @@
 }
 
 .logo {
-  max-width: 80%;
+  max-width: 90%;
 }
 
 .postLogIn {
@@ -117,4 +117,35 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.cart {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.cartItem {
+  margin: 50px;
+  align-self: center;
+}
+
+.checkout {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkoutBtn {
+  align-self: center;
+  cursor: pointer;
+  transition: background-color 0.5s;
+  padding: 50px;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.checkoutBtn:hover {
+  background-color: #a55093;
+  color: white;
 }

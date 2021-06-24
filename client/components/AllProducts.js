@@ -7,6 +7,7 @@ import IndividualProduct from "./IndividualProduct";
 class AllProducts extends React.Component {
   constructor(props) {
     super(props);
+    //I worry that this is the issue causing the state to be set even when we clear it
     const cart = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
@@ -18,6 +19,7 @@ class AllProducts extends React.Component {
   }
 
   componentDidUpdate() {
+    console.log("updating local storage in cart")
     localStorage.setItem("cart", JSON.stringify(this.state.cart));
   }
 
@@ -34,38 +36,19 @@ class AllProducts extends React.Component {
       newCart.push(cartItem);
     }
     this.setState({ cart: newCart });
-    this.setState({ added: true }, () =>
-      setTimeout(() => this.setState({ added: false }), 1000)
-    );
   }
 
   render() {
+    const productsToRender = this.props.chosenProducts.length ? this.props.chosenProducts : this.props.products
     return (
       <div className="allProducts">
-        {this.props.products.map((product) => {
+        {productsToRender.map((product) => {
           return (
             <IndividualProduct
               product={product}
               addToCart={this.addToCart}
-              added={this.state.added}
               key={product.id}
             />
-            // <div key={product.id} className="product">
-            //   <Link to={`/products/${product.id}`}>
-            //     <div>
-            //       <img src={product.imageUrl} width="200" height="200" />
-            //       <p>Name: {product.name}</p>
-            //       <p>Price: {product.price}</p>
-            //     </div>
-            //   </Link>
-            //   <button
-            //     type="button"
-            //     className="addToCartBtn"
-            //     onClick={() => this.addToCart(product)}
-            //   >
-            //     {this.state.added ? "ADDED!" : "ADD TO CART"}
-            //   </button>
-            // </div>
           );
         })}
       </div>

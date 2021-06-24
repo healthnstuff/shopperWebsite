@@ -5,14 +5,17 @@ class IndividualProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = { added: false };
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({ added: this.props.added });
+  handleClick() {
+    this.setState({ added: true }, () => {
+      setTimeout(() => this.setState({ added: false }), 1000);
+      this.props.addToCart(this.props.product);
+    });
   }
 
   render() {
-    console.log("HERE", this.state.added);
     const product = this.props.product;
     return (
       <div key={product.id} className="product">
@@ -26,7 +29,7 @@ class IndividualProduct extends React.Component {
         <button
           type="button"
           className="addToCartBtn"
-          onClick={() => this.props.addToCart(product)}
+          onClick={this.handleClick}
         >
           {this.state.added ? "ADDED!" : "ADD TO CART"}
         </button>

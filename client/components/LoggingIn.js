@@ -1,6 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link, Route, NavLink, Switch, BrowserRouter as Router } from "react-router-dom";
+import {
+  Link,
+  Route,
+  NavLink,
+  Switch,
+  BrowserRouter as Router,
+} from "react-router-dom";
 import { logout } from "../store";
 import { Login, Signup } from "./AuthForm";
 import Routes from "../Routes";
@@ -11,46 +17,47 @@ import Cart from "./Cart";
 const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
   <Router>
     <div className="header">
-    <nav id="loggingIn">
-      {isLoggedIn ? (
-        <div className="postLogIn">
-          {/* The navbar will show these links after you log in */}
-          <h1 style={{ color: "#A55093", fontSize: "40px", margin: "10px" }}>
-            Welcome, {name || "friend"}!{" "}
-          </h1>
-          <button className="navLink" onClick={handleClick}>
-            Logout
-          </button>
-          {console.log("user id", id)}
-          <NavLink exact to={`/users/${id}`}>
-            <button className="navLink">Profile</button>
-          </NavLink>
-          <Switch>
-            <Route exact path={`/orderInfo/cart/${id}`} component={Cart} />
-            <Route exact path={`/users/${id}`} component={SingleUser} />
-          </Switch>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-            <NavLink exact to="/login">
-              <button>Login</button>
+      <nav id="loggingIn">
+        <NavLink to="/">
+          <img src="../logo.png" className="logo" />
+        </NavLink>
+        {isLoggedIn ? (
+          <div className="postLogIn">
+            {/* The navbar will show these links after you log in */}
+            <h1 style={{ color: "#A55093", fontSize: "40px", margin: "10px" }}>
+              Welcome, {name || "friend"}!{" "}
+            </h1>
+            <button className="navLink" onClick={handleClick}>
+              Logout
+            </button>
+            <NavLink exact to={`/users/${id}`}>
+              <button className="navLink">Profile</button>
             </NavLink>
-              <span>or</span>
+            <Switch>
+              <Route exact path={`/orderInfo/cart/${id}`} component={Cart} />
+              <Route exact path={`/users/${id}`} component={SingleUser} />
+            </Switch>
+          </div>
+        ) : (
+          <div>
+            {/* The navbar will show these links before you log in */}
+            <NavLink exact to="/login">
+              <button className="navLink">Login</button>
+            </NavLink>
+            <span>or</span>
             <NavLink exact to="/signup">
-              <button>Signup</button>
+              <button className="navLink">Signup</button>
             </NavLink>
             <Switch>
               <Route path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
             </Switch>
             {/* <Route exact path={`/orderInfo/cart/${id}`} component={Cart} /> */}
-        </div>
-      )}
-    </nav>
-  </div>
+          </div>
+        )}
+      </nav>
+    </div>
   </Router>
-  
 );
 
 /**
