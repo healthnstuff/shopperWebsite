@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Route, NavLink, BrowserRouter as Router } from "react-router-dom";
+import { Link, Route, NavLink, Switch, BrowserRouter as Router } from "react-router-dom";
 import { logout } from "../store";
 import { Login, Signup } from "./AuthForm";
 import Routes from "../Routes";
@@ -21,13 +21,14 @@ const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
           <button className="navLink" onClick={handleClick}>
             Logout
           </button>
-          {console.log("user id",id)}
+          {console.log("user id", id)}
           <NavLink exact to={`/users/${id}`}>
             <button className="navLink">Profile</button>
           </NavLink>
+          <Switch>
             <Route exact path={`/orderInfo/cart/${id}`} component={Cart} />
             <Route exact path={`/users/${id}`} component={SingleUser} />
-          
+          </Switch>
         </div>
       ) : (
         <div>
@@ -39,8 +40,11 @@ const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
             <NavLink exact to="/signup">
               <button>Signup</button>
             </NavLink>
+            <Switch>
               <Route path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
+            </Switch>
+            {/* <Route exact path={`/orderInfo/cart/${id}`} component={Cart} /> */}
         </div>
       )}
     </nav>
