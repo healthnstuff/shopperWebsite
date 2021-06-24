@@ -4,6 +4,7 @@ import { updateOrder, createOrder, getOrder } from "../store/orderInfo";
 import { Link } from "react-router-dom";
 import { fetchSingleProduct } from "../store/singleProduct";
 import { fetchCart } from "../store/cart";
+import { updateCartItem } from "../store/cartItem";
 
 class Cart extends React.Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class Cart extends React.Component {
       if (res.payload.some((order) => order.status === "open")) {
         this.combineCarts();
       } else {
-        //create OrderInfo
+        this.props.createOrder(this.props.user.id);
       }
     });
   }
@@ -83,10 +84,17 @@ class Cart extends React.Component {
   handleCheckout() {
     this.props.checkout(this.props.user.id);
     this.setState({ status: true });
-    localStorage.remoteItem("cart"); //not working
+    localStorage.removeItem("cart"); //not working
   }
 
   increment(product) {
+    //currently has to do one or the other
+    // const body = {
+    //   product: product.id,
+    //   change: "increase",
+    //   quantity: 1,
+    // };
+    // this.props.updateItem(this.props.user.id, body);
     let newCart = [...this.state.cart];
     let cartItem = newCart.find((item) => item.id === product.id);
     cartItem.quantity++;
@@ -94,6 +102,12 @@ class Cart extends React.Component {
   }
 
   decrement(product) {
+    // const body = {
+    //   product: product.id,
+    //   change: "decrease",
+    //   quantity: 1,
+    // };
+    // this.props.updateItem(this.props.user.id, body);
     let newCart = [...this.state.cart];
     let cartItem = newCart.find((item) => item.id === product.id);
     if (cartItem.quantity === 0) return;
@@ -112,13 +126,30 @@ class Cart extends React.Component {
   render() {
     const products = this.state.products;
     const isCheckedOut = this.state.status;
+    let total = 0;
     return (
       <div>
         {isCheckedOut ? (
-          <h1>Your Order Is All Set! Come Again Next Time ~~</h1>
-        ) : (
           <div>
+            <h1
+              style={{
+                fontSize: "40px",
+                textAlign: "center",
+                marginTop: "40px",
+              }}
+            >
+              Your Order Is All Set! Come Again Next Time ~~
+            </h1>
+            <img
+              src="https://i.pinimg.com/736x/e1/77/3a/e1773a423d85a263e99a76ba2bcaf78a.jpg"
+              alt="cute cartoon plant"
+              style={{ marginLeft: "300px" }}
+            />
+          </div>
+        ) : (
+          <div className="cart">
             {products.map((product) => {
+              total += product.price;
               return (
                 <div key={product.id} className="cartItem">
                   <img src={product.imageUrl} width="100" height="100"></img>
@@ -143,13 +174,23 @@ class Cart extends React.Component {
                 </div>
               );
             })}
-            <button
-              type="button"
-              className="checkoutBtn"
-              onClick={this.handleCheckout}
-            >
-              Check Out!{" "}
-            </button>
+            <div className="checkout">
+              <p
+                style={{
+                  fontSize: "40px",
+                  color: "#A55093",
+                  margin: "10px",
+                  fontWeight: "bold",
+                }}
+              >{`Your total is: ${total} USD.`}</p>
+              <button
+                type="button"
+                className="checkoutBtn"
+                onClick={this.handleCheckout}
+              >
+                Check Out!{" "}
+              </button>
+            </div>
           </div>
         )}
       </div>
@@ -191,6 +232,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     getOrder: (id) => {
       return dispatch(getOrder(id));
+    },
+    updateItem: (id, body) => {
+      dispatch(updateCartItem(id, body));
     },
   };
 };
