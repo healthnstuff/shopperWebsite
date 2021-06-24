@@ -6,8 +6,8 @@ const Product = db.define("product", {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true
-    }
+      notEmpty: true,
+    },
   },
   description: {
     type: Sequelize.TEXT,
@@ -16,7 +16,7 @@ const Product = db.define("product", {
     type: Sequelize.FLOAT,
     validate: {
       min: 0.01,
-      notEmpty: true
+      notEmpty: true,
     },
     allowNull: false,
   },
@@ -25,27 +25,28 @@ const Product = db.define("product", {
     allowNull: false,
     validate: {
       min: 0,
-      notEmpty: true
-    }
+      notEmpty: true,
+    },
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: 'https://www.planttherapy.com/mm5/graphics/00000001/yuzu_eo-5ml-front_960x960.jpg'
+    defaultValue:
+      "https://i.pinimg.com/736x/e1/77/3a/e1773a423d85a263e99a76ba2bcaf78a.jpg",
   },
 });
 
 // Adds num to the instance's current inventory value
 Product.prototype.increaseInventory = async function (num) {
   await this.increment({
-    inventory: num
+    inventory: num,
   });
-}
+};
 
 // Subtracts num from the instance's current inventory value
 Product.prototype.decreaseInventory = async function (num) {
   await this.decrement({
-    inventory: num
+    inventory: num,
   });
-}
+};
 
 module.exports = Product;

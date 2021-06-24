@@ -83,7 +83,7 @@ class Cart extends React.Component {
   handleCheckout() {
     this.props.checkout(this.props.user.id);
     this.setState({ status: true });
-    //
+    localStorage.remoteItem("cart"); //not working
   }
 
   increment(product) {

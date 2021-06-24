@@ -55,46 +55,46 @@ router.delete("/:id", isLoggedIn, isAdmin, async (req, res, next) => {
 
 // DELETE /api/products (bulk delete; admin only)
 router.delete("/", isLoggedIn, isAdmin, async (req, res, next) => {
-    try {
-        const query = req.body;
-        const n = await Product.destroy({
-            where: query
-        });
-        res.json(n);
-    } catch (err) {
-        next(err);
-    }
+  try {
+    const query = req.body;
+    const n = await Product.destroy({
+      where: query,
+    });
+    res.json(n);
+  } catch (err) {
+    next(err);
+  }
 });
 
 //api/products
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const products = await Product.findAll({
-        include: {
-            model: Category,
-            as: 'category'
-        }
-    })
-    res.json(products)
+      include: {
+        model: Category,
+        as: "category",
+      },
+    });
+    res.json(products);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 //api/products/:id
-router.get('/:id', async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const productById = await Product.findOne({
-        where: {
-            id: req.params.id
-        },
-        include: {
-            model: Category,
-            as: 'category'
-        }
-    })
-    res.json(productById)
+      where: {
+        id: req.params.id,
+      },
+      include: {
+        model: Category,
+        as: "category",
+      },
+    });
+    res.json(productById);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
