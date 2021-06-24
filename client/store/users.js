@@ -15,6 +15,7 @@ const getUsers = (users) => ({ type: GET_USERS, users });
  * THUNK CREATORS
  */
 export const _getSingleUser = (id) => async (dispatch) => {
+  console.log("thunk id", id)
   const token = window.localStorage.getItem('token');
   if (token) {
     const { data } = await axios.get(`/api/users/${id}`, {

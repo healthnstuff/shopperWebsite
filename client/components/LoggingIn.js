@@ -16,7 +16,7 @@ const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
         <div className="postLogIn">
           {/* The navbar will show these links after you log in */}
           <h1 style={{ color: "#A55093", fontSize: "40px", margin: "10px" }}>
-            Welcome, {name}!{" "}
+            Welcome, {name || "friend"}!{" "}
           </h1>
           <button className="navLink" onClick={handleClick}>
             Logout
@@ -59,7 +59,7 @@ const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
 const mapState = (state) => {
   // console.log("map state is being called", JSON.stringify(state))
   return {
-    isLoggedIn: !!state.auth.firstName,
+    isLoggedIn: !!state.auth.id,
     name: state.auth.firstName || "",
     id: state.auth.id || null,
   };
