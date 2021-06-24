@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { updateOrder, createOrder, getOrder } from "../store/orderInfo";
 import { Link } from "react-router-dom";
+import { fetchSingleProduct } from "../store/singleProduct";
+import { fetchCart } from "../store/cart";
 
 class Cart extends React.Component {
   constructor(props) {
@@ -9,7 +11,13 @@ class Cart extends React.Component {
     const cart = localStorage.getItem("cart")
       ? JSON.parse(localStorage.getItem("cart"))
       : [];
-    this.state = { products: [], status: false, cart };
+    cart.forEach((item) => (item.backendQuant = 0));
+    this.state = {
+      products: [],
+      status: false,
+      cart,
+      cartLength: cart.length,
+    };
     this.handleCheckout = this.handleCheckout.bind(this);
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
@@ -19,7 +27,6 @@ class Cart extends React.Component {
 
   componentDidMount() {
     this.setState({ products: [...this.state.cart] });
-    console.log("user id in componentDidMount = ", this.props.user.id);
     this.props.getOrder(this.props.user.id).then((res) => {
       if (res.payload.some((order) => order.status === "open")) {
         this.combineCarts();
@@ -31,18 +38,52 @@ class Cart extends React.Component {
 
   componentDidUpdate() {
     localStorage.setItem("cart", JSON.stringify(this.state.cart));
+    if (this.state.cart.length !== this.state.cartLength) {
+      this.setState(
+        {
+          products: [...this.state.cart],
+          cartLength: this.state.cart.length,
+        },
+        () => this.combineCarts()
+      );
+    }
   }
 
   combineCarts() {
-    console.log("PROPS", this.props);
-    console.log("LOCALSTORAGE", this.state.products);
+    this.props.loadCart(this.props.user.id).then((res) =>
+      res.map((item) =>
+        item.then((item) => {
+          if (this.state.products.some((product) => product.id === item.id)) {
+            let newProducts = [...this.state.products];
+            let productItem = newProducts.find(
+              (product) => product.id === item.id
+            );
+            let cartItem = this.state.cart.find(
+              (product) => product.id === item.id
+            );
+            if (cartItem) {
+              productItem.quantity =
+                productItem.quantity + item.quantity - cartItem.backendQuant;
+              cartItem.backendQuant = item.quantity;
+            } else {
+              productItem.quantity = item.quantity;
+            }
+            let newCart = [...this.state.cart];
+            this.setState({ products: newProducts, cart: newCart });
+          } else {
+            this.setState({
+              products: [...this.state.products, item],
+            });
+          }
+        })
+      )
+    );
   }
 
   handleCheckout() {
     this.props.checkout(this.props.user.id);
     this.setState({ status: true });
-    //clear localStorage
-    //make backend request
+    //
   }
 
   increment(product) {
@@ -65,8 +106,7 @@ class Cart extends React.Component {
     newCart = newCart.filter((item) => {
       return item.id !== product.id;
     });
-    this.setState({ cart: newCart });
-    //only one that doesn't rerender
+    this.setState({ products: newCart, cart: newCart });
   }
 
   render() {
@@ -118,10 +158,9 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("order in mapStateToProps = ", state.order);
   return {
     // cart: state.cart,
-    // products: state.products,
+    products: state.products,
     order: state.orders,
     // cartItem: state.product,
     user: state.auth,
@@ -130,18 +169,20 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // loadCart: (id) => {
-    //   return dispatch(fetchCart(id)).then((res) => {
-    //     return Promise.all(res.payload).then((payload) => {
-    //       return payload.map((item) => {
-    //         return dispatch(fetchSingleProduct(item.productId)).then((res) => {
-    //           return res.product;
-    //         });
-    //       });
-    //     });
-    //   });
-    // },
-    // fetchProduct: (productId) => dispatch(fetchSingleProduct(productId)),
+    loadCart: (id) => {
+      return dispatch(fetchCart(id)).then((res) => {
+        return Promise.all(res.payload).then((payload) => {
+          return payload.map((item) => {
+            const quantity = item.quantity;
+            return dispatch(fetchSingleProduct(item.productId)).then((res) => {
+              res.product["quantity"] = quantity;
+              return res.product;
+            });
+          });
+        });
+      });
+    },
+    fetchProduct: (productId) => dispatch(fetchSingleProduct(productId)),
     checkout: (id) => {
       dispatch(updateOrder(id));
     },

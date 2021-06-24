@@ -46,22 +46,6 @@ class AllProducts extends React.Component {
               addToCart={this.addToCart}
               key={product.id}
             />
-            // <div key={product.id} className="product">
-            //   <Link to={`/products/${product.id}`}>
-            //     <div>
-            //       <img src={product.imageUrl} width="200" height="200" />
-            //       <p>Name: {product.name}</p>
-            //       <p>Price: {product.price}</p>
-            //     </div>
-            //   </Link>
-            //   <button
-            //     type="button"
-            //     className="addToCartBtn"
-            //     onClick={() => this.addToCart(product)}
-            //   >
-            //     {this.state.added ? "ADDED!" : "ADD TO CART"}
-            //   </button>
-            // </div>
           );
         })}
       </div>
