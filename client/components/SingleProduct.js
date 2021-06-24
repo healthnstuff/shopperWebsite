@@ -37,7 +37,7 @@ class SingleProduct extends React.Component {
       };
       newCart.push(cartItem);
     }
-    this.setState({ ...this.state, cart: newCart });
+    this.setState({ cart: newCart });
   }
   render() {
     const product = this.props.singleProduct;

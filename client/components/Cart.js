@@ -18,6 +18,7 @@ class Cart extends React.Component {
 
   componentDidMount() {
     this.setState({ products: [...this.state.cart] });
+    console.log('user id in componentDidMount = ', this.props.user.id)
     this.props.getOrder(this.props.user.id);
   }
 
@@ -105,10 +106,11 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('order in mapStateToProps = ', state.order)
   return {
     // cart: state.cart,
     // products: state.products,
-    order: state.order,
+    order: state.orders,
     // cartItem: state.product,
     user: state.auth,
   };
