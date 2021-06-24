@@ -34,9 +34,6 @@ class AllProducts extends React.Component {
       newCart.push(cartItem);
     }
     this.setState({ cart: newCart });
-    this.setState({ added: true }, () =>
-      setTimeout(() => this.setState({ added: false }), 1000)
-    );
   }
 
   render() {
@@ -47,7 +44,6 @@ class AllProducts extends React.Component {
             <IndividualProduct
               product={product}
               addToCart={this.addToCart}
-              added={this.state.added}
               key={product.id}
             />
             // <div key={product.id} className="product">

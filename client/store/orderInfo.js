@@ -45,7 +45,7 @@ export const updateOrder = (id) => async (dispatch) => {
 };
 
 export const getOrder = (id) => async (dispatch) => {
-  console.log('id in getOrder thunk = ', id)
+  console.log("id in getOrder thunk = ", id);
   try {
     const token = window.localStorage.getItem(TOKEN);
     if (token) {
@@ -54,7 +54,7 @@ export const getOrder = (id) => async (dispatch) => {
           authorization: token,
         },
       });
-      dispatch(get_order(data));
+      return dispatch(get_order(data));
     }
   } catch (err) {
     console.error(err);

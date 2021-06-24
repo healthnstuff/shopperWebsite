@@ -14,16 +14,28 @@ class Cart extends React.Component {
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.combineCarts = this.combineCarts.bind(this);
   }
 
   componentDidMount() {
     this.setState({ products: [...this.state.cart] });
-    console.log('user id in componentDidMount = ', this.props.user.id)
-    this.props.getOrder(this.props.user.id);
+    console.log("user id in componentDidMount = ", this.props.user.id);
+    this.props.getOrder(this.props.user.id).then((res) => {
+      if (res.payload.some((order) => order.status === "open")) {
+        this.combineCarts();
+      } else {
+        //create OrderInfo
+      }
+    });
   }
 
   componentDidUpdate() {
     localStorage.setItem("cart", JSON.stringify(this.state.cart));
+  }
+
+  combineCarts() {
+    console.log("PROPS", this.props);
+    console.log("LOCALSTORAGE", this.state.products);
   }
 
   handleCheckout() {
@@ -106,7 +118,7 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('order in mapStateToProps = ', state.order)
+  console.log("order in mapStateToProps = ", state.order);
   return {
     // cart: state.cart,
     // products: state.products,
@@ -137,7 +149,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(createOrder(id));
     },
     getOrder: (id) => {
-      dispatch(getOrder(id));
+      return dispatch(getOrder(id));
     },
   };
 };
