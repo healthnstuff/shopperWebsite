@@ -30,6 +30,7 @@ const Product = db.define("product", {
   },
   imageUrl: {
     type: Sequelize.STRING,
+    defaultValue: 'https://www.planttherapy.com/mm5/graphics/00000001/yuzu_eo-5ml-front_960x960.jpg'
   },
 });
 
