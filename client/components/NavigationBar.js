@@ -4,11 +4,10 @@ import {
   Route,
   NavLink,
   Switch,
-  Link
+  Link,
 } from "react-router-dom";
 import Routes from "../Routes";
 import CartIcon from "./CartIcon";
-
 import HomePage from "./HomePage";
 import Cart from "./Cart";
 import AllProducts from "./AllProducts";
@@ -16,29 +15,36 @@ import SingleProduct from "./SingleProduct";
 import { connect } from "react-redux";
 import Users from "./Users";
 import SingleUser from "./SingleUser";
-import {Signup} from "./AuthForm"
+import { Signup } from "./AuthForm";
 
 const NavigationBar = ({ user }) => {
   return (
     <Router>
       <div id="navLinks">
-      <NavLink to="/">
-        <img src="healthnstuff_finalLogo.png" className="logo" />
-      </NavLink>
-      <Link to={`/orderInfo/cart/${user.id}`} className="cartIcon">
-        {" "}
-        <CartIcon />
-      </Link>
+        <Link to={`/orderInfo/cart/${user.id}`} className="cartIcon">
+          {" "}
+          <CartIcon />
+        </Link>
         <NavLink to="/products">
           <button className="categoryButton" type="button">
             All Products
           </button>
         </NavLink>
-        <button className="categoryButton" type="button">Essential Oils</button>
-        <button className="categoryButton" type="button">Supplements</button>
-        <button className="categoryButton" type="button">Vitamins</button>
-        <button className="categoryButton" type="button">Tonic</button>
-        <button className="categoryButton" type="button">Tea</button>
+        <button className="categoryButton" type="button">
+          Essential Oils
+        </button>
+        <button className="categoryButton" type="button">
+          Supplements
+        </button>
+        <button className="categoryButton" type="button">
+          Vitamins
+        </button>
+        <button className="categoryButton" type="button">
+          Tonic
+        </button>
+        <button className="categoryButton" type="button">
+          Tea
+        </button>
       </div>
       <div>
         <Switch>

@@ -18,6 +18,9 @@ const LoggingIn = ({ handleClick, isLoggedIn, name, id }) => (
   <Router>
     <div className="header">
       <nav id="loggingIn">
+        <NavLink to="/">
+          <img src="../logo.png" className="logo" />
+        </NavLink>
         {isLoggedIn ? (
           <div className="postLogIn">
             {/* The navbar will show these links after you log in */}
